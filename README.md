@@ -1,0 +1,66 @@
+# Конфигурация NixOS с оболочкой GNOME
+
+## Структура README
+1. ...
+2. ...
+3. ...
+
+## Архитектура файлов
+```
+
+TODO организовать визуально архитектуру конфигурации
+
+```
+
+## Параметры
+1. flake [путь]
+
+Нужен для нахождения точки фхода flake.nix и последующей сборки системы. Путь указывается до папки с точкой входа и именем хоста, которые прописаны в default.nix.
+
+```
+--flake .#maksim
+```
+
+2. ...
+
+## Проверка конфигурации
+Для проверки корректности конфигурации можно вывести список всех flake в директории по заданному пути.
+
+```
+>>> nix --extra-experimental-features flakes --extra-experimental-features nix-command flake show .
+
+path:/home/maksim/Desktop/nixos-config?lastModified=1779988771&narHash=sha256-F%2BTtVL5j%2BfjfgnOiRHzg2Viuvse/PQe4NXbrQ%2BmoGwY%3D
+└───nixosConfigurations
+    └───maksim: NixOS configuration
+```
+
+## Билд конфигурации
+Билд осуществяется под хостом maksim, с добавленными параметрами конфигурации Nix для разрешения пользования flakes.
+
+```
+>>> sudo env NIX_CONFIG="experimental-features = nix-command flakes" nixos-rebuild build --flake .#maksim
+
+Done. The new configuration is /nix/store/18ppbrvlhmjr8jba6gdp0ms58nis63s5-nixos-system-maksim-25.11.20260526.25f5383
+```
+
+## Проверка конфигурации в runtime test режиме
+```
+>>> sudo nixos-rebuild test --flake .#maksim
+
+building the system configuration...
+stopping the following units: accounts-daemon.service, avahi-daemon.service, avahi-daemon.socket
+activating the configuration...
+setting up /etc...
+reloading user units for maksim...
+restarting sysinit-reactivation.target
+reloading the following units: dbus.service
+restarting the following units: nix-daemon.service, polkit.service
+starting the following units: accounts-daemon.service, avahi-daemon.socket
+the following new units were started: NetworkManager-dispatcher.service, sysinit-reactivation.target, systemd-tmpfiles-resetup.service
+Done. The new configuration is /nix/store/18ppbrvlhmjr8jba6gdp0ms58nis63s5-nixos-system-maksim-25.11.20260526.25f5383
+```
+
+## Перекючение на готовую обновленную сборку
+```
+sudo nixos-rebuild switch --flake .#maksim
+```
