@@ -9,6 +9,22 @@
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
   	git
+  	sublime3
+  	docker
+  	filezilla
+  	github-desktop
+  	sqlitestudio
+  	postgresql
+  	pgadmin
+  	mongodb
+  	mongodb-compass
+  	# figma-linux
+  	obsidian
+  	postman
+  	python3
+  	onlyoffice-desktopeditors
+  	authenticator
+  	kitty
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
