@@ -5,7 +5,7 @@ let
 	# Read proxy connect data or NULL
 	secrets = if builtins.pathExists proxySecretPath
 						then import proxySecretPath
-						else null
+						else null;
 in {
   networking.hostName = "maksim";
 
@@ -15,7 +15,7 @@ in {
 			default = secrets.url;
 			noProxy = "127.0.0.1,localhost,internal.domain";
 		}
-		else {}
+		else {};
 
 	# Enable networking
 	networking.networkmanager.enable = true;
