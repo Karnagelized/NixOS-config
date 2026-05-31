@@ -15,7 +15,7 @@
   	github-desktop
   	sqlitestudio
   	postgresql
-  	pgadmin
+  	pgadmin4
   	mongodb
   	mongodb-compass
   	# figma-linux
