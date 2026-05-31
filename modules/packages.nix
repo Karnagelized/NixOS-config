@@ -16,7 +16,7 @@
   	sqlitestudio
   	postgresql
   	pgadmin4
-  	mongodb
+  	# mongodb Долгая загрузка
   	mongodb-compass
   	# figma-linux
   	obsidian
