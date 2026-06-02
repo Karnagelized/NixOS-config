@@ -6,6 +6,21 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
+    oh-my-zsh = {
+      enable = true;
+      theme = "sorin";
+
+      plugins = [
+        "git"
+        "sudo"
+        "docker"
+        "docker-compose"
+        "systemd"
+        "extract"
+        "colored-man-pages"
+      ];
+    };
+
     shellAliases = {
       # Nix
       nix-rebuild = "sudo nixos-rebuild switch --flake .#maksim";
