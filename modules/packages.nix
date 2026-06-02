@@ -31,8 +31,6 @@ let
 
   # Утилиты
   utilsPackages = with pkgs; [
-    # Для вывода информации в консоль
-    neofetch
     btop
   	docker
   	python3
