@@ -1,9 +1,9 @@
 { ... }:
 {
   imports = [
-    ././hosts/maksim/configs/git.config.nix
-    ././hosts/maksim/configs/zsh.config.nix
+    ./configs/git.config.nix
+    ./configs/zsh.config.nix
   ];
 
-  system.stateVersion = "25.11";
+  home.stateVersion = "25.11";
 }
