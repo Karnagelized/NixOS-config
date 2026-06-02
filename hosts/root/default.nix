@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports =
     [
@@ -17,13 +17,18 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Создание аккаунта Пользователя
   users.users.maksim = {
     isNormalUser = true;
     description = "Maksim";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.zsh;
   };
 
+  # Включаем zsh на системном уровне
+  programs.zsh.enable = true;
+
+  # Подключение экспериментальных функций
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # This value determines the NixOS release from which the default

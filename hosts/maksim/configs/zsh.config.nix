@@ -1,11 +1,11 @@
-{ pkgs, ... }:
+{ ... }:
 {
-  home.packages = with pkgs; [
-    zsh
-  ];
+  programs.zsh = {
+    enable = true;
 
-  home.shellAliases = {
-		nix-rebuild = "sudo nixos-rebuild switch --flake .#maksim";
-		nix-rebuild-test = "sudo nixos-rebuild test --flake .#maksim";
+    shellAliases = {
+      nix-rebuild = "sudo nixos-rebuild switch --flake .#maksim";
+      nix-rebuild-test = "sudo nixos-rebuild test --flake .#maksim";
+    };
   };
 }
