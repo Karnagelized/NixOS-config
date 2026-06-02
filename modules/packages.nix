@@ -1,30 +1,59 @@
 { pkgs, ... }:
 {
-  # Install firefox.
-  programs.firefox.enable = true;
+  imports = [
+    ./git/git.config.nix
+  ];
 
-  # Allow unfree packages
+  # Разрешение на установку не бесплатных пакетов
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile.
+  # Пакеты программ
   environment.systemPackages = with pkgs; [
   	git
   	sublime3
-  	docker
   	filezilla
   	github-desktop
+  	obsidian
+  	postman
+  	# figma-linux
+  	onlyoffice-desktopeditors
+  	authenticator
+  	# Переводчик
+  	dialect
+  	# Извлечение текста со скрина
+  	gnome-frog
+  	# Торрент
+  	fragments
+  ];
+
+  # Пакеты для работы с БД
+  environment.systemPackages = with pkgs; [
+  	# mongodb Долгая загрузка
+  	mongodb-compass
   	sqlitestudio
   	postgresql
   	pgadmin4
-  	# mongodb Долгая загрузка
-  	mongodb-compass
-  	# figma-linux
-  	obsidian
-  	postman
+  ];
+
+  # Утилиты
+  environment.systemPackages = with pkgs; [
+    # Для вывода информации в консоль
+    neofetch
+    btop
+  	docker
   	python3
-  	onlyoffice-desktopeditors
-  	authenticator
-  	kitty
+  ];
+
+  # Расширения
+  environment.systemPackages = with pkgs; [
+    # Буфер обмена
+    gnomeExtensions.clipboard-indicator
+    # Блюр панелей и т.д.
+    gnomeExtensions.blur-my-shell
+    # Кастомная нижняя панель
+    gnomeExtensions.dash-to-dock
+    # Закругление углов окон и панелей
+    gnomeExtensions.panel-corners
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
