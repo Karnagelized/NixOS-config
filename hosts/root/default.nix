@@ -11,6 +11,7 @@
       ../../modules/printing.nix
       ../../modules/sound.nix
       ../../modules/keyboard.nix
+      ../../modules/fonts.nix
     ];
 
   # Bootloader.

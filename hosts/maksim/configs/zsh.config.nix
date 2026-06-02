@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -8,7 +8,7 @@
 
     oh-my-zsh = {
       enable = true;
-      theme = "sorin";
+      theme = "";
 
       plugins = [
         "git"
@@ -20,6 +20,10 @@
         "colored-man-pages"
       ];
     };
+
+    initExtra = ''
+      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+    '';
 
     shellAliases = {
       # Nix
