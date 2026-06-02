@@ -3,7 +3,6 @@
 let
   # Пакеты программ
   programsPackages = with pkgs; [
-    git
   	sublime3
   	filezilla
   	github-desktop
@@ -49,10 +48,6 @@ let
     gnomeExtensions.dash-to-dock
   ];
 in {
-  imports = [
-    ./git/git.config.nix
-  ];
-
   # Разрешение на установку не бесплатных пакетов
   nixpkgs.config.allowUnfree = true;
 
