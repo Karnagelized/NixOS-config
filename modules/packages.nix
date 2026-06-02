@@ -1,15 +1,9 @@
 { pkgs, ... }:
-{
-  imports = [
-    ./git/git.config.nix
-  ];
 
-  # Разрешение на установку не бесплатных пакетов
-  nixpkgs.config.allowUnfree = true;
-
+let
   # Пакеты программ
-  environment.systemPackages = with pkgs; [
-  	git
+  programsPackages = with pkgs; [
+    git
   	sublime3
   	filezilla
   	github-desktop
@@ -27,7 +21,7 @@
   ];
 
   # Пакеты для работы с БД
-  environment.systemPackages = with pkgs; [
+  databasePackages = with pkgs; [
   	# mongodb Долгая загрузка
   	mongodb-compass
   	sqlitestudio
@@ -36,7 +30,7 @@
   ];
 
   # Утилиты
-  environment.systemPackages = with pkgs; [
+  utilsPackages = with pkgs; [
     # Для вывода информации в консоль
     neofetch
     btop
@@ -45,7 +39,7 @@
   ];
 
   # Расширения
-  environment.systemPackages = with pkgs; [
+  extensionsPackages = with pkgs; [
     # Буфер обмена
     gnomeExtensions.clipboard-indicator
     # Блюр панелей и т.д.
@@ -55,6 +49,20 @@
     # Закругление углов окон и панелей
     gnomeExtensions.panel-corners
   ];
+in {
+  imports = [
+    ./git/git.config.nix
+  ];
+
+  # Разрешение на установку не бесплатных пакетов
+  nixpkgs.config.allowUnfree = true;
+
+  # Слияние всех пакетов в одно окружение
+  environment.systemPackages =
+    programsPackages
+    ++ databasePackages
+    ++ utilsPackages
+    ++ extensionsPackages;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
