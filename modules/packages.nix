@@ -58,6 +58,24 @@ in {
     ++ utilsPackages
     ++ extensionsPackages;
 
+  # Отключение предустановленных пакетов
+  environment.gnome.excludePackages = with pkgs; [
+    # Экскурсии
+    gnome-tour
+    # Контакты
+    gnome-contacts
+    # Веб-браузер
+    epiphany
+    # Карты
+    gnome-maps
+    # Подключения
+    gnome-connections
+    # Справка
+    gnome-doc-utils
+    # XTerm
+    gnome-terminal
+  ];
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
