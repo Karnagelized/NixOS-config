@@ -7,10 +7,12 @@
   programs.git = {
     enable = true;
 
-    userName = "Antonov Maksim";
-    userEmail = "karnalize@mail.ru";
+    settings = {
+      user = {
+        email = "karnalize@mail.ru";
+        name = "Antonov Maksim";
+      };
 
-    extraConfig = {
       init = {
         defaultBranch = "main";
       };
