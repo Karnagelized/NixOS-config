@@ -18,6 +18,7 @@ let
   	gnome-frog
   	# Торрент
   	fragments
+  	chromium
   ];
 
   # Пакеты для работы с БД
@@ -46,8 +47,6 @@ let
     gnomeExtensions.blur-my-shell
     # Кастомная нижняя панель
     gnomeExtensions.dash-to-dock
-    # Закругление углов окон и панелей
-    gnomeExtensions.panel-corners
   ];
 in {
   imports = [
