@@ -46,6 +46,14 @@ let
     gnomeExtensions.dash-to-dock
     # Добавление скорости интернета на панель
     gnomeExtensions.internet-speed-meter
+    # Разворот окна на весь рабочий стол
+    gnomeExtensions.maximize-to-empty-workspace
+    # Датчики на панеле
+    gnomeExtensions.freon
+    # Настройки рабочего окружения
+    gnomeExtensions.just-perfection
+    # Отображение значения громкости
+    gnomeExtensions.osd-volume-number
   ];
 in {
   # Разрешение на установку не бесплатных пакетов
