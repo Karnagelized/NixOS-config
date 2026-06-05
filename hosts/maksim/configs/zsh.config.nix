@@ -3,7 +3,7 @@
   home.file.".p10k.zsh".source = ../../../utils/p10k.zsh;
 
   home.packages = with pkgs; [
-    neofetch
+    fastfetch
     bat
   ];
 
@@ -33,7 +33,7 @@
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-      neofetch
+      fastfetch
     '';
 
     shellAliases = {
