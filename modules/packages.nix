@@ -37,7 +37,7 @@ let
   ];
 
   # Расширения
-  extensionsPackages = [
+  extensionsPackages = with pkgs; [
     # Буфер обмена
     gnomeExtensions.clipboard-indicator
     # Блюр панелей и т.д.
