@@ -47,9 +47,9 @@ let
     # Добавление скорости интернета на панель
     gnomeExtensions.internet-speed-meter
     # Разворот окна на весь рабочий стол
-    gnomeExtensions.maximize-to-empty-workspace
+    # gnomeExtensions.maximize-to-empty-workspace не совместимо
     # Датчики на панеле
-    gnomeExtensions.freon
+    # gnomeExtensions.freon не совместимо
     # Настройки рабочего окружения
     gnomeExtensions.just-perfection
     # Отображение значения громкости
