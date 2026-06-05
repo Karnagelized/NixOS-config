@@ -37,13 +37,15 @@ let
   ];
 
   # Расширения
-  extensionsPackages = with pkgs; [
+  extensionsPackages = [
     # Буфер обмена
     gnomeExtensions.clipboard-indicator
     # Блюр панелей и т.д.
     gnomeExtensions.blur-my-shell
     # Кастомная нижняя панель
     gnomeExtensions.dash-to-dock
+    # Добавление скорости интернета на панель
+    gnomeExtensions.internet-speed-meter
   ];
 in {
   # Разрешение на установку не бесплатных пакетов
@@ -69,9 +71,9 @@ in {
     # Подключения
     gnome-connections
     # Справка
-    gnome-doc-utils
+    yelp
     # XTerm
-    gnome-terminal
+    xterm
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
