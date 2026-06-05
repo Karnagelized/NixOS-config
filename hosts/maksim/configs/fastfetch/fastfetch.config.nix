@@ -5,7 +5,6 @@
   	settings = {
   		logo = {
   			source = "nixos";
-  			color = "blue";
   		};
   		modules = [
   			"title"

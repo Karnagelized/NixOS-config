@@ -43,7 +43,7 @@
       nix-gens = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
       nix-gens-del = "sudo nix-collect-garbage -d";
       # Console
-      cls = "clear && neofetch && source ~/.p10k.zsh";
+      cls = "clear && fastfetch && source ~/.p10k.zsh";
       cat = "bat";
     };
   };
