@@ -14,10 +14,12 @@
   			"uptime"
   			"shell"
   			"resolution"
-  			"desktop"
-  			"wm"
+  			"de"
+  			"cpu"
+				"gpu"
   			"memory"
-  			"colors"
+  			"swap"
+  			"disk"
   		];
   	};
   };
