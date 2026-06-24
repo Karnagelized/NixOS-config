@@ -3,6 +3,8 @@
 let
   # Пакеты программ
   programsPackages = with pkgs; [
+  	# Получения файлов с использованием протоколов HTTP, HTTPS и FTP.
+  	wget
   	sublime3
   	filezilla
   	github-desktop
@@ -94,8 +96,12 @@ in {
     gnome-connections
     # Справка
     yelp
-    # XTerm
-    xterm
+    # Почта
+    geary
+    # Символы
+    gnome-characters
+    # Музыка
+    gnome.gnome-music
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
