@@ -6,4 +6,7 @@
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
+
+  # Включение поддержки Flatpak для установки приложений
+  services.flatpak.enable = true;
 }

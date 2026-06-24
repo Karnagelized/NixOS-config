@@ -22,7 +22,6 @@ let
   	fragments
   	# Хром
   	chromium
-  	flatpak
   ];
 
   # Пакеты для работы с БД
@@ -50,7 +49,7 @@ let
     # Кастомная нижняя панель
     gnomeExtensions.dash-to-dock
     # Добавление скорости интернета на панель
-    gnomeExtensions.internet-speed-meter
+    # gnomeExtensions.internet-speed-meter
     # Разворот окна на весь рабочий стол
     # gnomeExtensions.maximize-to-empty-workspace не совместимо
     # Датчики на панели задач
@@ -69,8 +68,6 @@ let
     gnomeExtensions.vitals
     # Погода на панели задач
     gnomeExtensions.weather-oclock
-    # Настройки быстрых переключателей
-    gnomeExtensions.quick-settings-tweaker
   ];
 in {
   # Разрешение на установку не бесплатных пакетов
