@@ -10,14 +10,19 @@ let
   	postman
   	# figma-linux
   	onlyoffice-desktopeditors
+  	# Приложения для работы с паролями
   	authenticator
   	# Переводчик
   	dialect
   	# Извлечение текста со скрина
   	gnome-frog
+  	# Настройки рабочего окружения
+  	gnome-tweaks
   	# Торрент
   	fragments
+  	# Хром
   	chromium
+  	flatpak
   ];
 
   # Пакеты для работы с БД
@@ -48,12 +53,24 @@ let
     gnomeExtensions.internet-speed-meter
     # Разворот окна на весь рабочий стол
     # gnomeExtensions.maximize-to-empty-workspace не совместимо
-    # Датчики на панеле
+    # Датчики на панели задач
     # gnomeExtensions.freon не совместимо
     # Настройки рабочего окружения
     gnomeExtensions.just-perfection
     # Отображение значения громкости
     gnomeExtensions.osd-volume-number
+    # Подключение Android устройств
+    gnomeExtensions.gsconnect
+    # Копирование эмодзи в буфер обмена
+    gnomeExtensions.emoji-copy
+    # Изменения эффекта открытия окон
+    gnomeExtensions.burn-my-windows
+    # Показ нагрузки на систему
+    gnomeExtensions.vitals
+    # Погода на панели задач
+    gnomeExtensions.weather-oclock
+    # Настройки быстрых переключателей
+    gnomeExtensions.quick-settings-tweaker
   ];
 in {
   # Разрешение на установку не бесплатных пакетов
