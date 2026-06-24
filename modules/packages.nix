@@ -101,7 +101,7 @@ in {
     # Символы
     gnome-characters
     # Музыка
-    gnome.gnome-music
+    gnome-music
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
