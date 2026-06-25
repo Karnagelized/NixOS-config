@@ -82,7 +82,7 @@ in {
     ++ utilsPackages
     ++ extensionsPackages;
 
-  # Отключение предустановленных пакетов
+  # Отключение предустановленных пакетов Gnome
   environment.gnome.excludePackages = with pkgs; [
     # Экскурсии
     gnome-tour
@@ -102,6 +102,11 @@ in {
     gnome-characters
     # Музыка
     gnome-music
+  ];
+
+  # Отключение предустановленных пакетов Сервера
+  services.xserver.excludePackages = with pkgs; [
+    xterm
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

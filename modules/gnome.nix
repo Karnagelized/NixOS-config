@@ -7,11 +7,9 @@
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
+	# Включение Hyprland
+	programs.hyprland.enable = true;
+
   # Включение поддержки Flatpak для установки приложений
   services.flatpak.enable = true;
-
-  # Отключение предустановленных пакетов GNOME
-  services.xserver.excludePackages = with pkgs; [
-    xterm
-  ];
 }
