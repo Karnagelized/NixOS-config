@@ -24,11 +24,13 @@ let
   	fragments
   	# Хром
   	google-chrome
+	# Аналог Proxyfier на Win10
+	clash-nyanpasu
   ];
 
   # Пакеты для работы с БД
   databasePackages = with pkgs; [
-  	# mongodb Долгая загрузка
+  	mongodb
   	mongodb-compass
   	sqlitestudio
   	postgresql
@@ -50,12 +52,10 @@ let
     gnomeExtensions.blur-my-shell
     # Кастомная нижняя панель
     gnomeExtensions.dash-to-dock
-    # Добавление скорости интернета на панель
-    # gnomeExtensions.internet-speed-meter
-    # Разворот окна на весь рабочий стол
-    # gnomeExtensions.maximize-to-empty-workspace не совместимо
-    # Датчики на панели задач
-    # gnomeExtensions.freon не совместимо
+    # Разворот окна на весь рабочий стол (Не совместимо)
+    # gnomeExtensions.maximize-to-empty-workspace
+    # Датчики на панели задач (Не совместимо)
+    # gnomeExtensions.freon
     # Настройки рабочего окружения
     gnomeExtensions.just-perfection
     # Отображение значения громкости
