@@ -23,7 +23,7 @@ let
   	# Торрент
   	fragments
   	# Хром
-  	chromium
+  	google-chrome
   ];
 
   # Пакеты для работы с БД
