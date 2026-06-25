@@ -30,7 +30,7 @@ let
 
   # Пакеты для работы с БД
   databasePackages = with pkgs; [
-  	mongodb
+  	mongodb-ce
   	mongodb-compass
   	sqlitestudio
   	postgresql
