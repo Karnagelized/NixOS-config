@@ -20,6 +20,9 @@ in {
 	# Enable networking
 	networking.networkmanager.enable = true;
 	
+	# Глобального прокси
+	services.v2raya.enable = true;
+	
 	# Enable the OpenSSH daemon.
 	# services.openssh.enable = true;
 
