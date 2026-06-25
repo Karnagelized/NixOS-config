@@ -24,8 +24,6 @@ let
   	fragments
   	# Хром
   	google-chrome
-	# Аналог Proxyfier на Win10
-	clash-nyanpasu
   ];
 
   # Пакеты для работы с БД
@@ -70,6 +68,8 @@ let
     gnomeExtensions.vitals
     # Погода на панели задач
     gnomeExtensions.weather-oclock
+    # Тайлинговый менеджер
+    gnomeExtensions.forge
   ];
 in {
   # Разрешение на установку не бесплатных пакетов
