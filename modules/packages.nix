@@ -5,7 +5,7 @@ let
   programsPackages = with pkgs; [
   	# Получения файлов с использованием протоколов HTTP, HTTPS и FTP.
   	wget
-  	sublime3
+  	zed-editor
   	filezilla
   	github-desktop
   	obsidian
@@ -24,6 +24,10 @@ let
   	fragments
   	# Хром
   	google-chrome
+  	# NodeJS
+  	elmPackages.nodejs
+  	figma-linux
+  	zoom-us
   ];
 
   # Пакеты для работы с БД
