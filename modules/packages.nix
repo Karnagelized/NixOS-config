@@ -28,6 +28,7 @@ let
   	elmPackages.nodejs
   	figma-linux
   	zoom-us
+    jetbrains.pycharm
   ];
 
   # Пакеты для работы с БД
