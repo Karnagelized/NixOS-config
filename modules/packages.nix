@@ -62,6 +62,7 @@ let
     gnomeExtensions.blur-my-shell
     # Кастомная нижняя панель
     gnomeExtensions.dash-to-dock
+    gnomeExtensions.dash-to-panel
     # Скрывает верхнюю панель при развороте на весь экран
     gnomeExtensions.hide-top-bar
     # Настройки рабочего окружения
@@ -80,8 +81,6 @@ let
     gnomeExtensions.fuzzy-application-search
     # Добавляет в левый верхний угол иконку с меню
     gnomeExtensions.logo-menu
-    # Переносит новые окна на новый рабочий стол
-    gnomeExtensions.maximize-to-empty-workspace-2025
   ];
 in {
   # Разрешение на установку не бесплатных пакетов
