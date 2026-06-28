@@ -48,6 +48,7 @@ let
   # Утилиты
   utilsPackages = with pkgs; [
     btop
+    usbutils
   	docker
   	python3
   	# NodeJS
