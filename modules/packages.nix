@@ -81,7 +81,7 @@ let
     # Добавляет в левый верхний угол иконку с меню
     gnomeExtensions.logo-menu
     # Переносит новые окна на новый рабочий стол
-    gnomeExtensions.screentospace
+    gnomeExtensions.maximize-to-empty-workspace-2025
   ];
 in {
   # Разрешение на установку не бесплатных пакетов
