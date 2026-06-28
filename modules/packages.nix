@@ -80,6 +80,8 @@ let
 in {
   # Разрешение на установку не бесплатных пакетов
   nixpkgs.config.allowUnfree = true;
+  # Разрешение запускать готовые скомпилированные программы из других дистрибутивов
+  programs.nix-ld.enable = true;
 
   # Слияние всех пакетов в одно окружение
   environment.systemPackages =
