@@ -70,8 +70,6 @@ let
     gnomeExtensions.vitals
     # Погода на панели задач
     gnomeExtensions.weather-oclock
-    # Тайлинговый менеджер
-    gnomeExtensions.forge
     # Нечеткий поиск приложений
     gnomeExtensions.fuzzy-application-search
     # Добавляет в левый верхний угол иконку с меню
