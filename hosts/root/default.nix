@@ -6,6 +6,7 @@
       ../../modules/nix.nix
       ../../modules/gnome.nix
       ../../modules/packages.nix
+      ../../modules/libs.nix
       ../../modules/network.nix
       ../../modules/location.nix
       ../../modules/printing.nix
