@@ -83,6 +83,8 @@ let
     gnomeExtensions.color-picker
     # Виджеты
     gnomeExtensions.desktop-clock
+    # Открытие приложений в полный экран на новом экране
+    gnomeExtensions.screentospace
   ];
 in {
   # Разрешение на установку не бесплатных пакетов
