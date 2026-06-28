@@ -1,6 +1,12 @@
 { pkgs, ... }:
 
 let
+  # Темы и иконки
+  themeAndIcon = with pkgs; [
+    # Иконки
+    reversal-icon-theme
+  ]
+
   # Пакеты программ
   programsPackages = with pkgs; [
   	# Получения файлов с использованием протоколов HTTP, HTTPS и FTP.
@@ -24,8 +30,6 @@ let
   	fragments
   	# Хром
   	google-chrome
-  	# NodeJS
-  	elmPackages.nodejs
   	figma-linux
   	zoom-us
   ];
@@ -44,6 +48,8 @@ let
     btop
   	docker
   	python3
+  	# NodeJS
+  	elmPackages.nodejs
   ];
 
   # Расширения
@@ -60,8 +66,6 @@ let
     gnomeExtensions.just-perfection
     # Отображение значения громкости
     gnomeExtensions.osd-volume-number
-    # Подключение Android устройств
-    gnomeExtensions.gsconnect
     # Копирование эмодзи в буфер обмена
     gnomeExtensions.emoji-copy
     # Изменения эффекта открытия окон
@@ -81,7 +85,8 @@ in {
 
   # Слияние всех пакетов в одно окружение
   environment.systemPackages =
-    programsPackages
+    themeAndIcon
+    ++ programsPackages
     ++ databasePackages
     ++ utilsPackages
     ++ extensionsPackages;
