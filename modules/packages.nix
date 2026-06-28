@@ -80,6 +80,8 @@ let
     gnomeExtensions.logo-menu
     # Color Picker
     gnomeExtensions.color-picker
+    # Виджеты
+    gnomeExtensions.desktop-clock
   ];
 in {
   # Разрешение на установку не бесплатных пакетов
