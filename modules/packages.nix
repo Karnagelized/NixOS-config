@@ -5,7 +5,7 @@ let
   themeAndIcon = with pkgs; [
     # Иконки
     reversal-icon-theme
-  ]
+  ];
 
   # Пакеты программ
   programsPackages = with pkgs; [
