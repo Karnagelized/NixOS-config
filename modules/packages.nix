@@ -28,7 +28,6 @@ let
   	elmPackages.nodejs
   	figma-linux
   	zoom-us
-    jetbrains.pycharm
   ];
 
   # Пакеты для работы с БД
@@ -55,10 +54,8 @@ let
     gnomeExtensions.blur-my-shell
     # Кастомная нижняя панель
     gnomeExtensions.dash-to-dock
-    # Разворот окна на весь рабочий стол (Не совместимо)
+    # Разворот окна на весь рабочий стол (Не совместимо с GNOME 49)
     # gnomeExtensions.maximize-to-empty-workspace
-    # Датчики на панели задач (Не совместимо)
-    # gnomeExtensions.freon
     # Настройки рабочего окружения
     gnomeExtensions.just-perfection
     # Отображение значения громкости
@@ -75,6 +72,10 @@ let
     gnomeExtensions.weather-oclock
     # Тайлинговый менеджер
     gnomeExtensions.forge
+    # Нечеткий поиск приложений
+    gnomeExtensions.fuzzy-application-search
+    # Добавляет в левый верхний угол иконку с меню
+    gnomeExtensions.logo-menu
   ];
 in {
   # Разрешение на установку не бесплатных пакетов
