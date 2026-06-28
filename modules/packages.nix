@@ -61,10 +61,7 @@ let
     # Блюр панелей и т.д.
     gnomeExtensions.blur-my-shell
     # Кастомная нижняя панель
-    gnomeExtensions.dash-to-dock
     gnomeExtensions.dash-to-panel
-    # Скрывает верхнюю панель при развороте на весь экран
-    gnomeExtensions.hide-top-bar
     # Настройки рабочего окружения
     gnomeExtensions.just-perfection
     # Отображение значения громкости
@@ -81,6 +78,8 @@ let
     gnomeExtensions.fuzzy-application-search
     # Добавляет в левый верхний угол иконку с меню
     gnomeExtensions.logo-menu
+    # Color Picker
+    gnomeExtensions.color-picker
   ];
 in {
   # Разрешение на установку не бесплатных пакетов
