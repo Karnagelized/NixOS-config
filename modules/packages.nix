@@ -5,6 +5,8 @@ let
   themeAndIcon = with pkgs; [
     # Иконки
     reversal-icon-theme
+    # Курсор
+    nordzy-cursor-theme
   ];
 
   # Пакеты программ
@@ -60,8 +62,8 @@ let
     gnomeExtensions.blur-my-shell
     # Кастомная нижняя панель
     gnomeExtensions.dash-to-dock
-    # Разворот окна на весь рабочий стол (Не совместимо с GNOME 49)
-    # gnomeExtensions.maximize-to-empty-workspace
+    # Скрывает верхнюю панель при развороте на весь экран
+    gnomeExtensions.hide-top-bar
     # Настройки рабочего окружения
     gnomeExtensions.just-perfection
     # Отображение значения громкости
@@ -78,6 +80,8 @@ let
     gnomeExtensions.fuzzy-application-search
     # Добавляет в левый верхний угол иконку с меню
     gnomeExtensions.logo-menu
+    # Переносит новые окна на новый рабочий стол
+    gnomeExtensions.screentospace
   ];
 in {
   # Разрешение на установку не бесплатных пакетов
