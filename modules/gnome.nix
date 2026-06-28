@@ -1,5 +1,10 @@
 { pkgs, ... }:
 {
+  # Включение службы fprintd для работы со сканером
+  services.fprintd.enable = true;
+  # Использование отпечатка пальца для подтверждения команд sudo в терминале
+  security.pam.services.sudo.fprintAuth = true;
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
