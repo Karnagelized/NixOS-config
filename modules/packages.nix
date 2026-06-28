@@ -82,6 +82,8 @@ let
     gnomeExtensions.color-picker
     # Виджеты
     gnomeExtensions.desktop-clock
+    # Виджет для отображения Gif и фотографий
+    gnomeExtensions.picture-desktop-widget
   ];
 in {
   # Разрешение на установку не бесплатных пакетов
