@@ -11,14 +11,12 @@ let
 
   # Пакеты программ
   programsPackages = with pkgs; [
-  	# Получения файлов с использованием протоколов HTTP, HTTPS и FTP.
-  	wget
   	zed-editor
   	filezilla
   	github-desktop
   	obsidian
   	postman
-  	# figma-linux
+    telegram-desktop
   	onlyoffice-desktopeditors
   	# Приложения для работы с паролями
   	authenticator
@@ -26,8 +24,6 @@ let
   	dialect
   	# Извлечение текста со скрина
   	gnome-frog
-  	# Настройки рабочего окружения
-  	gnome-tweaks
   	# Торрент
   	fragments
   	# Хром
@@ -37,17 +33,25 @@ let
   ];
 
   # Пакеты для работы с БД
-  databasePackages = with pkgs; [
-  	mongodb-ce
-  	mongodb-compass
-  	sqlitestudio
-  	postgresql
-  	pgadmin4
+  databasePackages = [
+  	pkgs.mongodb-ce
+  	pkgs.mongodb-compass
+  	pkgs.sqlitestudio
+    pkgs.postgresql
+    pkgs.pgadmin4-desktopmode
   ];
 
   # Утилиты
   utilsPackages = with pkgs; [
+    # Медиаплеер общего назначения, зависимость для Lofi
+    mpv
+   	# Получения файлов с использованием протоколов HTTP, HTTPS и FTP.
+   	wget
+   	# Настройки рабочего окружения
+   	gnome-tweaks
+    # Состояние желела в консоли
     btop
+    # Статистика по USB устройствам
     usbutils
   	docker
   	python3
@@ -71,8 +75,6 @@ let
     gnomeExtensions.emoji-copy
     # Изменения эффекта открытия окон
     gnomeExtensions.burn-my-windows
-    # Показ нагрузки на систему
-    gnomeExtensions.vitals
     # Погода на панели задач
     gnomeExtensions.weather-oclock
     # Нечеткий поиск приложений
@@ -83,6 +85,8 @@ let
     gnomeExtensions.color-picker
     # Виджеты
     gnomeExtensions.desktop-clock
+    # Lofi музыка
+    gnomeExtensions.quick-lofi
   ];
 in {
   # Разрешение на установку не бесплатных пакетов
