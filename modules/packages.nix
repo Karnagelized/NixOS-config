@@ -53,6 +53,7 @@ let
     btop
     # Статистика по USB устройствам
     usbutils
+    codex
   	docker
   	python3
   	# NodeJS
