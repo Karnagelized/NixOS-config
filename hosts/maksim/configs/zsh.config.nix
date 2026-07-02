@@ -1,7 +1,9 @@
 { pkgs, ... }:
 {
+  # Путь до файла конфигурации p10k.zsh
   home.file.".p10k.zsh".source = ../../../utils/p10k.zsh;
 
+  # Пакеты для zsh
   home.packages = with pkgs; [
     fastfetch
     bat
@@ -28,6 +30,7 @@
       ];
     };
 
+    # Первоначальная заставка
     initContent = ''
       export POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
@@ -36,6 +39,7 @@
       fastfetch
     '';
 
+    # Псевдонимы
     shellAliases = {
       # Nix
       nix-rebuild = "sudo nixos-rebuild switch --flake .#maksim";

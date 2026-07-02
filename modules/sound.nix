@@ -1,6 +1,6 @@
 { ... }:
 {
-  # Enable sound with pipewire.
+  # Включение поддержки звука в системе
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {

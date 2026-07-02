@@ -2,7 +2,7 @@
 {
   networking.hostName = "maksim";
 
-	# Enable networking
+	# Включение управления сетью
 	networking.networkmanager.enable = true;
 	
 	# Глобальный прокси

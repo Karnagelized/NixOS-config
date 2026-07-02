@@ -1,6 +1,6 @@
 { ... }:
 {
-  # Configure keymap in X11
+  # Конфигурация переключений раскладки в X11
   services.xserver.xkb = {
     layout = "ru,us";
     variant = "";

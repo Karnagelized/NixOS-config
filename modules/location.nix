@@ -1,9 +1,9 @@
 { ... }:
 {
-  # Set your time zone.
+  # Установка timezone
   time.timeZone = "Asia/Yekaterinburg";
 
-  # Select internationalisation properties.
+  # Установка кодировки
   i18n.defaultLocale = "ru_RU.UTF-8";
 
   i18n.extraLocaleSettings = {

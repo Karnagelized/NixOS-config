@@ -1,5 +1,5 @@
 { ... }:
 {
-  # Enable CUPS to print documents.
+  # Включение печати через CUPS
   services.printing.enable = true;
 }
