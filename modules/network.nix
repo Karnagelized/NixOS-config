@@ -1,26 +1,11 @@
 { ... }:
-let
-	proxySecretPath = ./. + "/secrets/proxy.nix";
-
-	# Read proxy connect data or NULL
-	secrets = if builtins.pathExists proxySecretPath
-						then import proxySecretPath
-						else null;
-in {
+{
   networking.hostName = "maksim";
-
-	# Proxy
-	networking.proxy = if secrets != null && secrets.url != ""
-		then {
-			default = secrets.url;
-			noProxy = "127.0.0.1,localhost,internal.domain";
-		}
-		else {};
 
 	# Enable networking
 	networking.networkmanager.enable = true;
 	
-	# Глобального прокси
+	# Глобальный прокси
 	services.v2raya.enable = true;
 	
 	# Enable the OpenSSH daemon.
