@@ -7,6 +7,7 @@
       ../../modules/gnome.nix
       ../../modules/packages.nix
       ../../modules/libs.nix
+      ../../modules/bluetooth.nix
       ../../modules/network.nix
       ../../modules/location.nix
       ../../modules/printing.nix
