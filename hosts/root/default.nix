@@ -14,6 +14,7 @@
       ../../modules/sound.nix
       ../../modules/keyboard.nix
       ../../modules/fonts.nix
+      ../../modules/docker.nix
     ];
 
   # Bootloader.
