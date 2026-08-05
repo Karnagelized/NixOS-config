@@ -1,0 +1,29 @@
+[/]
+create-initial-widget=false
+prefs-visible-page=''
+update-notifier-project-version=18
+widgets=[{'53bc52b1-04b6-490d-ac74-46a891dd2fed': <{'enabled': <true>}>}]
+
+[widget-data/53bc52b1-04b6-490d-ac74-46a891dd2fed]
+always-on-top=false
+anchor-point='Center_Left'
+convert-old-location-done=true
+elements=[{'f1d712aa-97f8-408b-b0ca-88276aad7c4c': <{'enabled': <true>}>}, {'6f132d6b-febf-45a8-990d-840197935e0d': <{'enabled': <true>}>}]
+location-data='{"monitorIndex":0,"relativeX":0.3697916666666667,"relativeY":0.13518518518518519}'
+lock-widget=true
+name='Виджет цифровых часов'
+show-background=false
+show-border=false
+vertical=true
+
+[widget-data/53bc52b1-04b6-490d-ac74-46a891dd2fed/element-data/6f132d6b-febf-45a8-990d-840197935e0d]
+date-format='%A, %d %B | %d.%m.%Y'
+font-size=20
+name='Область показа даты'
+shadow=(true, 'rgb(71,94,126)', 2, 2, 0, 4)
+
+[widget-data/53bc52b1-04b6-490d-ac74-46a891dd2fed/element-data/f1d712aa-97f8-408b-b0ca-88276aad7c4c]
+font-family-override=(true, 'Adwaita Sans')
+font-weight=400
+name='Область показа времени'
+shadow=(true, 'rgb(71,94,126)', 2, 2, 0, 4)
