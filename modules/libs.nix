@@ -8,11 +8,11 @@ let
     zlib
 
     # Библиотеки X11 для работы графического интерфейса (исправляет libXext.so.6)
-    xorg.libXext
-    xorg.libX11
-    xorg.libXrender
-    xorg.libXtst
-    xorg.libXi
+    libXext
+    libX11
+    libXrender
+    libXtst
+    libXi
 
     # Шрифты и рендеринг текста
     freetype
