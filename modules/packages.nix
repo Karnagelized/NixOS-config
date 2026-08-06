@@ -75,12 +75,8 @@ let
     gnomeExtensions.just-perfection
     # Отображение значения громкости
     gnomeExtensions.osd-volume-number
-    # Копирование эмодзи в буфер обмена
-    gnomeExtensions.emoji-copy
     # Изменения эффекта открытия окон
     gnomeExtensions.burn-my-windows
-    # Погода на панели задач
-    gnomeExtensions.weather-oclock
     # Нечеткий поиск приложений
     gnomeExtensions.fuzzy-application-search
     # Добавляет в левый верхний угол иконку с меню
