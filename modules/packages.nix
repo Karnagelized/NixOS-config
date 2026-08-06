@@ -30,8 +30,8 @@ let
   	google-chrome
   	figma-linux
   	zoom-us
-    # VPN Happ
-    (import ./happ.nix { inherit pkgs; })
+    # Proxy Util
+    clash-verge-rev
   ];
 
   # Пакеты для работы с БД
