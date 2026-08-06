@@ -30,8 +30,6 @@ let
   	google-chrome
   	figma-linux
   	zoom-us
-    # Proxy Util
-    clash-verge-rev
   ];
 
   # Пакеты для работы с БД
@@ -92,6 +90,10 @@ let
     gnomeExtensions.quick-lofi
   ];
 in {
+  imports = [ ./happ/happ-module.nix ];
+  # Happ client
+  services.happ.enable = true;
+
   # Разрешение на установку не бесплатных пакетов
   nixpkgs.config.allowUnfree = true;
 
