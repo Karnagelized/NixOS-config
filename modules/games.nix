@@ -13,4 +13,11 @@
   environment.sessionVariables = {
     SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS = "0";
   };
+
+  # Увеличиваем мягкое и жесткое значение дескрипторов
+  security.pam.loginLimits = [
+    { domain = "*"; type = "hard"; item = "nofile"; value = "1048576"; }
+    { domain = "*"; type = "soft"; item = "nofile"; value = "1048576"; }
+  ];
+
 }
