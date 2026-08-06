@@ -48,7 +48,6 @@
       nix-gens-del = "sudo nix-collect-garbage -d";
       # Console
       cls = "clear && fastfetch && source ~/.p10k.zsh";
-      clear = "cls";
       cat = "bat";
     };
   };
