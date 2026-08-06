@@ -15,6 +15,7 @@
       ../../modules/keyboard.nix
       ../../modules/fonts.nix
       ../../modules/docker.nix
+      ../../modules/steam.nix
     ];
 
   # Bootloader.

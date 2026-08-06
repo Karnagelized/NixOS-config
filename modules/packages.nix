@@ -30,6 +30,9 @@ let
   	google-chrome
   	figma-linux
   	zoom-us
+    steam
+    # Оверлей для проверки нагрузок CPU GPU RAM MEM
+    mangohud
   ];
 
   # Пакеты для работы с БД
