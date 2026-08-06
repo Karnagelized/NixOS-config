@@ -16,7 +16,7 @@
       ../../modules/fonts.nix
       ../../modules/docker.nix
       ../../modules/steam.nix
-      ../../modules/genshin.nix
+      ../../modules/games.nix
     ];
 
   # Bootloader.

@@ -8,4 +8,9 @@
 
   # Включаем лаунчер для Genshin Impact
   programs.anime-game-launcher.enable = true;
+
+  # Отключаем минимизацию окна при потере фокуса
+  environment.sessionVariables = {
+    SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS = "0";
+  };
 }
