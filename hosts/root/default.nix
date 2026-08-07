@@ -17,6 +17,8 @@
       ../../modules/docker.nix
       ../../modules/steam.nix
       ../../modules/games.nix
+      ../../modules/hardware.nix
+      ../../modules/binds.nix
     ];
 
   # Bootloader

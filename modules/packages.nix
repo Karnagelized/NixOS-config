@@ -30,7 +30,6 @@ let
   	google-chrome
   	figma-linux
   	zoom-us
-    steam
   ];
 
   # Пакеты для работы с БД
