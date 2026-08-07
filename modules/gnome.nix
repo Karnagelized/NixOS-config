@@ -17,7 +17,7 @@
   };
 
   # Устанавливаем 2-й монитор основным
-  environment.etc."gdm/monitors.xml".source = /home/maksim/.config/monitors.xml;
+  environment.etc."gdm/monitors.xml".source = ../utils/monitors.xml;
 
   # Для Nvidia карт
   services.xserver.videoDrivers = [ "nvidia" ];
