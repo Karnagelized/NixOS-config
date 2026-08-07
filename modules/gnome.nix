@@ -16,15 +16,18 @@
     enable32Bit = true;
   };
 
-  # Устанавливаем 2-й монитор основным
+  # Устанавливаем 2-й монитор основным для GDM
   environment.etc."gdm/monitors.xml".source = ../utils/monitors.xml;
+  systemd.tmpfiles.rules = [
+    "d /run/gdm/.config 0755 gdm gdm -"
+    "L+ /run/gdm/.config/monitors.xml - - - - /etc/gdm/monitors.xml"
+  ];
 
   # Для Nvidia карт
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.modesetting.enable = true;
   hardware.nvidia.nvidiaSettings = true;
   hardware.nvidia.open = true;
-
 
   # Для AMD карт
   # services.xserver.videoDrivers = [ "amdgpu" ];
