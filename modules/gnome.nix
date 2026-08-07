@@ -17,10 +17,7 @@
   };
 
   # Устанавливаем 2-й монитор основным
-  systemd.tmpfiles.rules = [
-    "d /run/gdm/.config 0711 gdm gdm -"
-    "L+ /run/gdm/.config/monitors.xml - - - - /home/maksim/.config/monitors.xml"
-  ];
+  environment.etc."gdm/monitors.xml".source = /home/maksim/.config/monitors.xml;
 
   # Для Nvidia карт
   services.xserver.videoDrivers = [ "nvidia" ];
