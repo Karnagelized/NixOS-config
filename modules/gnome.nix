@@ -16,11 +16,18 @@
     enable32Bit = true;
   };
 
+  # Устанавливаем 2-й монитор основным
+  systemd.tmpfiles.rules = [
+    "d /run/gdm/.config 0711 gdm gdm -"
+    "L+ /run/gdm/.config/monitors.xml - - - - /home/maksim/.config/monitors.xml"
+  ];
+
   # Для Nvidia карт
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.modesetting.enable = true;
   hardware.nvidia.nvidiaSettings = true;
   hardware.nvidia.open = true;
+
 
   # Для AMD карт
   # services.xserver.videoDrivers = [ "amdgpu" ];
