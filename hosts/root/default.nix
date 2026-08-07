@@ -19,7 +19,7 @@
       ../../modules/games.nix
     ];
 
-  # Bootloader.
+  # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -30,12 +30,14 @@
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
   };
+  # Отключаем sudo - командам не требуется sudo
+  security.sudo.wheelNeedsPassword = false;
 
   # Включаем zsh на системном уровне
   programs.zsh.enable = true;
 
   # Подключение экспериментальных функций
-	nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
