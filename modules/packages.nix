@@ -66,7 +66,7 @@ let
   # Расширения
   extensionsPackages = with pkgs; [
     # Буфер обмена
-    gnomeExtensions.clipboard-indicator
+    gnomeExtensions.copyous
     # Блюр панелей и т.д.
     gnomeExtensions.blur-my-shell
     # Кастомная нижняя панель
