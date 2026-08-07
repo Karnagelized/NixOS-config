@@ -33,6 +33,8 @@ let
     steam
     # Оверлей для проверки нагрузок CPU GPU RAM MEM
     mangohud
+    # Lofi Музыка
+    lowfi
   ];
 
   # Пакеты для работы с БД
@@ -85,8 +87,6 @@ let
     gnomeExtensions.color-picker
     # Виджеты
     gnomeExtensions.desktop-clock
-    # Lofi музыка
-    gnomeExtensions.quick-lofi
   ];
 in {
   imports = [ ./happ/happ-module.nix ];
