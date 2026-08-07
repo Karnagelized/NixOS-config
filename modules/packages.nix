@@ -31,10 +31,6 @@ let
   	figma-linux
   	zoom-us
     steam
-    # Оверлей для проверки нагрузок CPU GPU RAM MEM
-    mangohud
-    # Lofi Музыка
-    lowfi
   ];
 
   # Пакеты для работы с БД
@@ -60,9 +56,15 @@ let
     usbutils
     codex
   	docker
+    # UI для докера
+    lazydocker
   	python3
   	# NodeJS
   	elmPackages.nodejs
+    # Оверлей для проверки нагрузок CPU GPU RAM MEM
+    mangohud
+    # Lofi Музыка
+    lowfi
   ];
 
   # Расширения

@@ -50,6 +50,7 @@
       cls = "clear && fastfetch && source ~/.p10k.zsh";
       cat = "bat";
       lofi = "lowfi -s 10 -c -f 30 -m";
+      lzd = "lazydocker";
     };
   };
 }
