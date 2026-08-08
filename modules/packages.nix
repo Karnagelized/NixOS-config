@@ -106,6 +106,8 @@ let
     gnomeExtensions.grand-theft-focus
     # Убирает старые заголовки окон
     # gnomeExtensions.unite
+    # Добавляет пользовательские темы
+    gnomeExtensions.user-themes
   ];
 in {
   imports = [ ./happ/happ-module.nix ];
