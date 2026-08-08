@@ -9,6 +9,9 @@
     bat
   ];
 
+  # Альтернативный список lowfi через archive.org, если Chillhop/CDN недоступен.
+  home.file.".local/share/lowfi/archive.txt".source = "${pkgs.lowfi.src}/data/archive.txt";
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -49,7 +52,8 @@
       # Console
       cls = "clear && fastfetch && source ~/.p10k.zsh";
       cat = "bat";
-      lofi = "cls && lowfi -s 10 -c -f 30 -m";
+      lofi = "cls && lowfi -s 10 -c -f 30 -m -t archive";
+      clofi = "cls && lowfi -s 10 -c -f 30 -m -t chillhop";
       lzd = "lazydocker";
     };
   };
