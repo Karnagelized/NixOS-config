@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+set -u
+
+launch_detached() {
+  setsid "$@" >/dev/null 2>&1 &
+}
+
+launch_first() {
+  local app_name="$1"
+  shift
+
+  local command_name
+  for command_name in "$@"; do
+    if command -v "$command_name" >/dev/null 2>&1; then
+      launch_detached "$command_name"
+      return 0
+    fi
+  done
+
+  notify-send "Work layout" "Cannot find command for ${app_name}" >/dev/null 2>&1 || true
+  return 1
+}
+
+open_terminal_tabs() {
+  if command -v gnome-terminal >/dev/null 2>&1; then
+    launch_detached gnome-terminal --tab --tab --tab
+    return 0
+  fi
+
+  if command -v kgx >/dev/null 2>&1; then
+    launch_detached kgx
+    sleep 0.4
+    launch_detached kgx --tab
+    launch_detached kgx --tab
+    return 0
+  fi
+
+  notify-send "Work layout" "Cannot find a terminal application" >/dev/null 2>&1 || true
+  return 1
+}
+
+open_terminal_tabs
+launch_first "Happ" happ Happ
+launch_first "Telegram" Telegram telegram-desktop
+launch_first "Google Chrome" google-chrome-stable google-chrome chrome
+launch_first "PyCharm" pycharm-professional pycharm-community pycharm jetbrains-pycharm
+launch_first "Postman" postman Postman

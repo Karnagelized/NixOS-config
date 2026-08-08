@@ -90,6 +90,8 @@ let
     gnomeExtensions.color-picker
     # Виджеты
     gnomeExtensions.desktop-clock
+    # Привязка приложений по рабочим столам
+    gnomeExtensions.smart-auto-move-ng
   ];
 in {
   imports = [ ./happ/happ-module.nix ];

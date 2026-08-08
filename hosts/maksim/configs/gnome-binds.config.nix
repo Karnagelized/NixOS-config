@@ -1,5 +1,14 @@
-{ ... }:
+{ config, ... }:
+
+let
+  workLayoutScript = "${config.home.homeDirectory}/.local/bin/work-layout";
+in
 {
+  home.file.".local/bin/work-layout" = {
+    source = ../scripts/work-layout;
+    executable = true;
+  };
+
   dconf.enable = true;
 
   dconf.settings = {
@@ -7,6 +16,7 @@
       custom-keybindings = [
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
       ];
     };
 
@@ -20,6 +30,12 @@
       name = "Open Terminal";
       command = "kgx";
       binding = "<Super>t";
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+      name = "Open Work Layout";
+      command = workLayoutScript;
+      binding = "<Super>w";
     };
   };
 }
