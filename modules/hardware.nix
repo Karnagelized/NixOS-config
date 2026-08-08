@@ -9,6 +9,7 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.modesetting.enable = true;
   hardware.nvidia.nvidiaSettings = true;
+  hardware.nvidia.powerManagement.enable = true;
   hardware.nvidia.open = true;
 
   # Для AMD карт

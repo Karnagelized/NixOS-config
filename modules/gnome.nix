@@ -17,6 +17,24 @@
   services.desktopManager.gnome.enable = true;
   programs.dconf.enable = true;
 
+  # Отключаем автоматический сон на экране GDM
+  systemd.tmpfiles.rules = [
+    "d /var/lib/gdm/.config 0711 gdm gdm - -"
+  ];
+
+  programs.dconf.profiles.gdm = {
+    databases = [
+      {
+        settings = {
+          "org/gnome/settings-daemon/plugins/power" = {
+            "sleep-inactive-ac-type" = "nothing";
+            "sleep-inactive-battery-type" = "nothing";
+          };
+        };
+      }
+    ];
+  };
+
   # Включение поддержки Flatpak для установки приложений
   services.flatpak.enable = true;
 }
