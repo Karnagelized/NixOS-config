@@ -30,6 +30,10 @@ let
   	google-chrome
   	figma-linux
   	zoom-us
+    # Клиент для Samsung Buds
+    galaxy-buds-client
+    # Замена стандартного приложения с погодой
+    mousam
   ];
 
   # Пакеты для работы с БД
@@ -66,6 +70,10 @@ let
     mangohud
     # Lofi Музыка
     lowfi
+    # Закругленные окна приложений
+    picom-pijulius
+    # Кастомный бар
+    eww
   ];
 
   # Расширения
@@ -92,6 +100,12 @@ let
     gnomeExtensions.desktop-clock
     # Привязка приложений по рабочим столам
     gnomeExtensions.smart-auto-move-ng
+    # Вынес аудио настроек в меню
+    gnomeExtensions.quick-settings-audio-panel
+    # Убирает уведомление "Окно готово"
+    gnomeExtensions.grand-theft-focus
+    # Убирает старые заголовки окон
+    gnomeExtensions.unite
   ];
 in {
   imports = [ ./happ/happ-module.nix ];
@@ -129,6 +143,8 @@ in {
     gnome-characters
     # Музыка
     gnome-music
+    # Погода
+    gnome-weather
   ];
 
   # Отключение предустановленных пакетов Сервера
