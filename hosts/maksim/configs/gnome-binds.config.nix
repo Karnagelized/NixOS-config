@@ -32,10 +32,11 @@ in
       binding = "<Super>t";
     };
 
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
-      name = "Open Work Layout";
-      command = workLayoutScript;
-      binding = "<Super><Shift>w";
-    };
+    # Отключено до момента улучшений
+    #"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+    #  name = "Open Work Layout";
+    #  command = workLayoutScript;
+    #  binding = "<Super><Shift>w";
+    #};
   };
 }
