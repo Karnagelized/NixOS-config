@@ -35,7 +35,7 @@ in
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
       name = "Open Work Layout";
       command = workLayoutScript;
-      binding = "<Super>w";
+      binding = "<Super><Shift>w";
     };
   };
 }

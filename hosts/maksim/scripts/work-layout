@@ -23,15 +23,23 @@ launch_first() {
 }
 
 open_terminal_tabs() {
+  local lofi_tab_command='if command -v lofi >/dev/null 2>&1; then lofi; elif command -v lowfi >/dev/null 2>&1; then lowfi; else echo "lofi command not found"; fi; exec "${SHELL:-bash}"'
+  local projects_dir="/home/maksim/Desktop/Projects"
+  local projects_tab_command="cd \"$projects_dir\"; exec \"\${SHELL:-bash}\""
+
   if command -v gnome-terminal >/dev/null 2>&1; then
-    launch_detached gnome-terminal --tab --tab --tab
+    launch_detached gnome-terminal \
+      --tab -- "${SHELL:-bash}" -lc "$lofi_tab_command" \
+      --tab --working-directory="$projects_dir" \
+      --tab \
+      --tab
     return 0
   fi
 
   if command -v kgx >/dev/null 2>&1; then
-    launch_detached kgx
+    launch_detached kgx -e "${SHELL:-bash}" -lc "$lofi_tab_command"
     sleep 0.4
-    launch_detached kgx --tab
+    launch_detached kgx --tab -e "${SHELL:-bash}" -lc "$projects_tab_command"
     launch_detached kgx --tab
     return 0
   fi
@@ -44,5 +52,5 @@ open_terminal_tabs
 launch_first "Happ" happ Happ
 launch_first "Telegram" Telegram telegram-desktop
 launch_first "Google Chrome" google-chrome-stable google-chrome chrome
-launch_first "PyCharm" pycharm-professional pycharm-community pycharm jetbrains-pycharm
+launch_first "PyCharm" /home/maksim/Desktop/Programs/pycharm-2025.1.3.1/bin/pycharm.sh pycharm-professional pycharm-community pycharm jetbrains-pycharm
 launch_first "Postman" postman Postman
