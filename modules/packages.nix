@@ -71,9 +71,9 @@ let
     # Lofi Музыка
     lowfi
     # Закругленные окна приложений
-    picom-pijulius
+    picom
     # Кастомный бар
-    eww
+    # eww
   ];
 
   # Расширения
@@ -105,7 +105,7 @@ let
     # Убирает уведомление "Окно готово"
     gnomeExtensions.grand-theft-focus
     # Убирает старые заголовки окон
-    gnomeExtensions.unite
+    # gnomeExtensions.unite
   ];
 in {
   imports = [ ./happ/happ-module.nix ];
