@@ -73,7 +73,7 @@ let
     # Закругленные окна приложений
     # picom
     # Кастомный бар
-    # eww
+    eww
   ];
 
   # Расширения
@@ -108,6 +108,8 @@ let
     # gnomeExtensions.unite
     # Добавляет пользовательские темы
     gnomeExtensions.user-themes
+    # Тайлинговое расширение для гридовой сетки
+    gnomeExtensions.simple-tiling
   ];
 in {
   imports = [ ./happ/happ-module.nix ];
