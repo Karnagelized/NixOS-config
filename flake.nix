@@ -1,20 +1,23 @@
 {
 	description = "Кастомный Flake для Maksim NixOS";
 
-	inputs = {
+  inputs = {
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
 
-        home-manager = {
-          url = "github:nix-community/home-manager/release-26.05";
-          inputs.nixpkgs.follows = "nixpkgs";
-        };
+    home-manager = {
+      url = "github:nix-community/home-manager/release-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # AAGL Для лаунчера Genshin Impact
     aagl.url = "github:ezKEa/aagl-gtk-on-nix/release-26.05";
     aagl.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Смарт очистка билдов системы
+    nix-gc-env.url = "github:Julow/nix-gc-env";
 	};
 
-	outputs = { nixpkgs, home-manager, aagl, ... }:
+	outputs = { nixpkgs, home-manager, aagl, nix-gc-env, ... }:
 	{
 		nixosConfigurations.maksim = nixpkgs.lib.nixosSystem {
 			system = "x86_64-linux";
@@ -30,6 +33,8 @@
         }
 
         aagl.nixosModules.default
+
+        nix-gc-env.nixosModules.default
     	];
 		};
 	};
