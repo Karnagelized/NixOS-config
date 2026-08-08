@@ -99,7 +99,8 @@ let
     # Виджеты
     gnomeExtensions.desktop-clock
     # Привязка приложений по рабочим столам
-    gnomeExtensions.smart-auto-move-ng
+    # (Отключено из-за неудобств)
+    # gnomeExtensions.smart-auto-move-ng
     # Вынес аудио настроек в меню
     gnomeExtensions.quick-settings-audio-panel
     # Убирает уведомление "Окно готово"
@@ -109,7 +110,7 @@ let
     # Добавляет пользовательские темы
     gnomeExtensions.user-themes
     # Тайлинговое расширение для гридовой сетки
-    gnomeExtensions.simple-tiling
+    gnomeExtensions.tiling-shell
   ];
 in {
   imports = [ ./happ/happ-module.nix ];
