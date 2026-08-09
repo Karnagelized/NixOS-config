@@ -71,10 +71,6 @@ let
     mangohud
     # Lofi Музыка
     lowfi
-    # Закругленные окна приложений
-    # picom
-    # Кастомный бар
-    eww
   ];
 
   # Расширения
@@ -111,7 +107,7 @@ let
     # Добавляет пользовательские темы
     gnomeExtensions.user-themes
     # Тайлинговое расширение для гридовой сетки
-    gnomeExtensions.tiling-shell
+    # gnomeExtensions.tiling-shell
   ];
 in {
   imports = [ ./happ/happ-module.nix ];

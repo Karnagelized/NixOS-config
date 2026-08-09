@@ -31,6 +31,7 @@
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
   };
+
   # Отключаем sudo - командам не требуется sudo
   security.sudo.wheelNeedsPassword = false;
 
