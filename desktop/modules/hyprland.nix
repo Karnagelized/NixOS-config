@@ -8,6 +8,11 @@
     xwayland.enable = true;
   };
 
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+  };
+
   # Нужно для file picker, screen sharing, Flatpak/порталов.
   xdg.portal = {
     enable = true;
