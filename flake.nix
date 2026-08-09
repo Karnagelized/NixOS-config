@@ -3,6 +3,8 @@
 
   inputs = {
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    # Стабильную ветку 25.11
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
@@ -17,10 +19,18 @@
     nix-gc-env.url = "github:Julow/nix-gc-env";
 	};
 
-	outputs = { nixpkgs, home-manager, aagl, nix-gc-env, ... }:
+	outputs = { nixpkgs, nixpkgs-stable, home-manager, aagl, nix-gc-env, ... }:
 	{
 		nixosConfigurations.maksim = nixpkgs.lib.nixosSystem {
 			system = "x86_64-linux";
+
+      # Передаем стабильный срез пакетов во все модули системы
+      specialArgs = {
+        pkgs-stable = import nixpkgs-stable {
+          system = "x86_64-linux";
+          config.allowUnfree = true; # Разрешаем несвободные пакеты (MongoDB)
+        };
+      };
 
     	modules = [
     		./hosts/root

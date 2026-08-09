@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-stable, ... }:
 
 let
   # Темы и иконки
@@ -39,7 +39,7 @@ let
   # Пакеты для работы с БД
   databasePackages = [
   	pkgs.mongodb-ce
-  	pkgs.mongodb-compass
+  	pkgs-stable.mongodb-compass
   	pkgs.sqlitestudio
     pkgs.postgresql
     pkgs.pgadmin4-desktopmode
