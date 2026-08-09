@@ -26,19 +26,19 @@ desktop
 └── README.md
 ```
 
-* `base:`
+`base:`
 * `hardware-configuration.nix` - Конфигурация томов домашнего ПК
 
-* `configs:`
+`configs:`
 * `fastfetch.config.nix` - Конфигурация для fastfetch
 * `git.config.nix` - Конфигурация для Git
 * `gnome-binds.config.nix` - Конфигурация для кастомных шоркадов GNOME
 * `zsh.config.nix` - Конфигурация для zsh
 
-* `exports:`
+`exports:`
 * `p10k.zsh` - Экспорт конфигурации для плагина p10k.zsh
 
-* `modules:`
+`modules:`
 * `games.nix ` - Отвечает за хранение конфигурации игр
 * `hardware.nix ` - Отвечает за хранение конфигурации железа (Процессор, видеокарта и прочее)
 * `hyprland.config.nix` - Отвечает за хранение конфигурации Hyprland
@@ -81,3 +81,4 @@ desktop
 
 ## Настройка расширений
 [//]: # (TODO сделать декларативным установку всех конфигураций расширений)
+Отсутствуют

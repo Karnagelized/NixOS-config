@@ -85,11 +85,11 @@ NixOS-Config/
 └── flake.nix
 ```
 
-* `/:`
+`/:`
 * `flake.nix` - точка входа flake конфигурации
 * `flake.lock` - сохранения зависимостей flake сборок
 
-* `common:`
+`common:`
 * `bluetooth.nix` - Модуль настройки блютуза 
 * `docker.nix` - Модуль настройки докера
 * `fonts.nix` - Модуль настройки шрифтов
@@ -101,22 +101,22 @@ NixOS-Config/
 * `services.nix` - Модуль настройки сервисов (FlatPak)
 * `sound.nix` - Модуль настройки звуков
 
-* `common/happ:`
+`common/happ:`
 * `happ-module.nix` - модуль Happ клиента
 * `happ.nix` - установщик Happ клиента
 
-* `hosts/maksim:`
+`hosts/maksim:`
 * `default.desktop.nix` - Пользовательские настройки для Desktop профиля
 * `default.laptop.nix` - Пользовательские настройки для Laptop профиля
 
-* `hosts/root:`
+`hosts/root:`
 * `default.desktop.nix` - Системные настройки для Desktop профиля
 * `default.laptop.nix` - Системные настройки для Laptop профиля
 
-* `images:`
+`images:`
 * `background.jpg` - Фотография на задний фон рабочего экрана
 
-* `plugins/exports:`
+`plugins/exports:`
 * `dashToPanel-config` - Бэкап конфигурации плагина `dashToPanel`
 * `desktop-widget` - Бэкап конфигурации плагина `desktop-widget`
 
@@ -134,6 +134,7 @@ NixOS-Config/
 
 ## Шаг 2 - `Установщик NixOS`
 * Когда будет выполнен вход в установщик, если хотите прочитать надписи, нужно двигать стрелочками вверх-вниз, иначе система загрузится по первой строке.
+
 Вставляем флешку в ПК, входим в BOOT меню и выбираем флешку с установщиком NixOS.
 После появляется окно с выбором оболочки. Текущая конфигурация под настройку `GNOME LTS`.
 

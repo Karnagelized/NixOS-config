@@ -27,27 +27,27 @@ laptop
 └── README.md
 ```
 
-* `base:`
+`base:`
 * `hardware-configuration.nix` - Конфигурация томов ноутбука
 
-* `configs:`
+`configs:`
 * `fastfetch.config.nix` - Конфигурация для fastfetch
 * `git.config.nix` - Конфигурация для Git
 * `gnome-binds.config.nix` - Конфигурация для кастомных шоркадов GNOME
 * `zsh.config.nix` - Конфигурация для zsh
 
-* `exports:`
+`exports:`
 * `dashToPanel-config` - Экспорт конфигурации для плагина dashToPanel
 * `desktop-widget` - Экспорт конфигурации для плагина desktop-widget
 * `p10k.zsh` - Экспорт конфигурации для плагина p10k.zsh
 
-* `modules:`
+`modules:`
 * `gnome.nix ` - Отвечает за хранение GNOME конфигурации
 * `hardware.nix ` - Отвечает за хранение конфигурации железа (Процессор, видеокарта и прочее)
 * `keyboard.nix` - Отвечает за хранение конфигурации клавиатуры
 * `packages.nix` - Отвечает за установку необходимого ПО и расширений для пользования GNOME
 
-* `scripts:`
+`scripts:`
 * `work-layout` - Отвечает за открытие приложений для работы
 
 
