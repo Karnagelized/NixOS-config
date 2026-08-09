@@ -13,7 +13,6 @@ let
   programsPackages = with pkgs; [
   	zed-editor
   	filezilla
-  	github-desktop
   	obsidian
   	postman
     telegram-desktop
@@ -67,8 +66,6 @@ let
   	python313Packages.pip
   	# NodeJS
   	elmPackages.nodejs
-    # Оверлей для проверки нагрузок CPU GPU RAM MEM
-    mangohud
     # Lofi Музыка
     lowfi
   ];
@@ -95,23 +92,19 @@ let
     gnomeExtensions.color-picker
     # Виджеты
     gnomeExtensions.desktop-clock
-    # Привязка приложений по рабочим столам
-    # (Отключено из-за неудобств)
-    # gnomeExtensions.smart-auto-move-ng
     # Вынес аудио настроек в меню
     gnomeExtensions.quick-settings-audio-panel
     # Убирает уведомление "Окно готово"
     gnomeExtensions.grand-theft-focus
-    # Убирает старые заголовки окон
-    # gnomeExtensions.unite
     # Добавляет пользовательские темы
     gnomeExtensions.user-themes
-    # Тайлинговое расширение для гридовой сетки
-    # gnomeExtensions.tiling-shell
   ];
 in {
-  imports = [ ./happ/happ-module.nix ];
-  # Happ client
+  imports = [
+    ../../common/happ/happ-module.nix
+  ];
+
+  # Happ клиент
   services.happ.enable = true;
 
   # Разрешение на установку не бесплатных пакетов
@@ -153,12 +146,4 @@ in {
   services.xserver.excludePackages = with pkgs; [
     xterm
   ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
 }

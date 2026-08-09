@@ -20,32 +20,39 @@
 	};
 
 	outputs = { nixpkgs, nixpkgs-stable, home-manager, aagl, nix-gc-env, ... }:
-	{
-		nixosConfigurations.maksim = nixpkgs.lib.nixosSystem {
-			system = "x86_64-linux";
+    let
+      system = "x86_64-linux";
 
-      # Передаем стабильный срез пакетов во все модули системы
-      specialArgs = {
-        pkgs-stable = import nixpkgs-stable {
-          system = "x86_64-linux";
-          config.allowUnfree = true; # Разрешаем несвободные пакеты (MongoDB)
+      # !!! Важно поменять тип системы
+      # Ноутбук -> laptop
+      # ПК -> desktop
+      hostType = "desktop";
+    in {
+      nixosConfigurations.maksim = nixpkgs.lib.nixosSystem {
+        inherit system;
+
+        # Передаем стабильный срез пакетов во все модули системы
+        specialArgs = {
+          pkgs-stable = import nixpkgs-stable {
+            system = "x86_64-linux";
+            config.allowUnfree = true; # Разрешаем несвободные пакеты (MongoDB)
+          };
         };
+
+        modules = [
+          ./hosts/root/default.${hostType}.nix
+
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.users.maksim = import ./hosts/maksim/default.${hostType}.nix;
+          }
+
+          aagl.nixosModules.default
+
+          nix-gc-env.nixosModules.default
+        ];
       };
-
-    	modules = [
-    		./hosts/root
-
-        home-manager.nixosModules.home-manager {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-
-          home-manager.users.maksim = import ./hosts/maksim/default.nix;
-        }
-
-        aagl.nixosModules.default
-
-        nix-gc-env.nixosModules.default
-    	];
-		};
-	};
+    };
 }

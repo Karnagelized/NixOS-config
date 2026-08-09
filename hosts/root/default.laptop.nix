@@ -2,22 +2,26 @@
 {
   imports =
     [
-      ./hardware-configuration.nix
-      ../../modules/nix.nix
-      ../../modules/gnome.nix
-      ../../modules/packages.nix
-      ../../modules/libs.nix
-      ../../modules/bluetooth.nix
-      ../../modules/network.nix
-      ../../modules/location.nix
-      ../../modules/printing.nix
-      ../../modules/sound.nix
-      ../../modules/keyboard.nix
-      ../../modules/fonts.nix
-      ../../modules/docker.nix
-      ../../modules/steam.nix
-      ../../modules/games.nix
-      ../../modules/hardware.nix
+      # Монтирование дисков
+      ../../laptop/base/hardware-configuration.nix
+
+      # Общие настройки NixOS системы
+      ../../common/nix.nix
+      ../../common/location.nix
+      ../../common/printing.nix
+      ../../common/fonts.nix
+      ../../common/sound.nix
+      ../../common/bluetooth.nix
+      ../../common/network.nix
+      ../../common/docker.nix
+      ../../common/services.nix
+      ../../common/libs.nix
+
+      # Зависимости под конкретную DE
+      ../../laptop/modules/gnome.nix
+      ../../laptop/modules/hardware.nix
+      ../../laptop/modules/packages.nix
+      ../../laptop/modules/keyboard.nix
     ];
 
   # Bootloader
