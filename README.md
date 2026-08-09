@@ -8,18 +8,18 @@
 
 
 ## Архитектура файлов
-Актуальна на момент `05.08.2026`
+Актуальна на момент `09.08.2026`
 ```
 NixOS-Config/
-├── base
-│   ├── configuration.nix
-│   └── hardware-configuration.nix
 ├── hosts
 │   ├── maksim
 │   │   ├── configs
 │   │   │   ├── fastfetch.config.nix
 │   │   │   ├── git.config.nix
+│   │   │   ├── gnome-binds.config.nix
 │   │   │   └── zsh.config.nix
+│   │   ├── scripts
+│   │   │   └── work-layout
 │   │   └── default.nix
 │   └── root
 │       ├── default.nix
@@ -35,6 +35,7 @@ NixOS-Config/
 │   ├── fonts.nix
 │   ├── games.nix
 │   ├── gnome.nix
+│   ├── hardware.nix
 │   ├── keyboard.nix
 │   ├── libs.nix
 │   ├── location.nix
@@ -49,10 +50,10 @@ NixOS-Config/
 │   ├── desktop-widget
 │   └── p10k.zsh
 ├── README.md
-├── directory-structure.md
 ├── flake.lock
 └── flake.nix
 ```
+
 
 # Установка NixOS
 ## Шаг 1 - `Создание образа NixOS`
@@ -223,19 +224,19 @@ nix-rebuild-test
 
 
 ## Laptop
-Для работы необходимо закомментировать в `hosts/root/default.nix` строчки с `game.nix` и `steam.nix`, а также 
-закомментировать строчку `steam` в `packages.nix`. Закомментировать строчки во `flake.nix`, связанные с 
-`AAGL Для лаунчера Genshin Impact`.
+Для работы необходимо закомментировать в `hosts/root/default.nix` строчки с `games.nix`. Закомментировать 
+строчки во `flake.nix`, связанные с `AAGL Для лаунчера Genshin Impact`.
 
 ```
 inputs = {
   ...
+  # !!! Эти строчки закомментировать
   # AAGL Для лаунчера Genshin Impact
   # aagl.url = "github:ezKEa/aagl-gtk-on-nix/release-26.05";
   # aagl.inputs.nixpkgs.follows = "nixpkgs";
 };
 
-# Убрать aagl из нижней строчки
+# !!! Убрать aagl из нижней строчки
 outputs = { nixpkgs, home-manager, ... }:
 {
 	nixosConfigurations.maksim = nixpkgs.lib.nixosSystem {
@@ -243,7 +244,7 @@ outputs = { nixpkgs, home-manager, ... }:
 			
    	modules = [
       ...
-      # Эту строчку закомментировать
+      # !!! Эту строчку закомментировать
       # aagl.nixosModules.default
       ];
     };
