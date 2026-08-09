@@ -64,6 +64,7 @@ let
     # UI для докера
     lazydocker
   	python3
+  	python313Packages.pip
   	# NodeJS
   	elmPackages.nodejs
     # Оверлей для проверки нагрузок CPU GPU RAM MEM
