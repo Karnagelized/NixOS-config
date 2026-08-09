@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   # Путь до файла конфигурации p10k.zsh
-  home.file.".p10k.zsh".source = ../../../utils/p10k.zsh;
+  home.file.".p10k.zsh".source = ../exports/p10k.zsh;
 
   # Пакеты для zsh
   home.packages = with pkgs; [
