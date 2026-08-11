@@ -1,0 +1,56 @@
+;; ============== ;;
+;; Отдел виджетов ;;
+;; ============== ;;
+;; Bar Widgets ;;
+(defwidget bar []
+	(box :class "eww_bar"
+		 :orientation "v"
+		 :vexpand "false"
+		 :hexpand "false"
+(left)
+;(center)
+;(right)
+))
+
+;; Bar Widgets ;;
+(defwidget left []
+	(box :class "eww_bar"
+		 :orientation "v"
+		 :vexpand "false"
+		 :hexpand "false"
+(time)
+))
+
+
+;; Clock Widgets ;;
+(defwidget time []
+	(box	:orientation "v"
+			:class "time"
+	(label `date +%H:%M`)
+			;:valign "end"
+	;(button	:onclick "scripts/popup calendar"
+	;		:class "time-hour" hour)
+	;(button	:onclick "scripts/popup calendar"
+	;		:class "time-min"  min)))
+))
+;(defpoll hour	:interval "1s"	"date '+%H'")
+;(defpoll min	:interval "1s"	"date '+%M'")
+
+
+;; ============= ;;
+;; Windows отдел ;;
+;; ============= ;;
+
+(defwindow bar
+    :monitor 0
+    :geometry (
+        geometry :x "0%"
+        ;:y "20px"
+        :width "95%"
+        ;:height "40px"
+        :anchor "top center"
+    )
+    :stacking "fg"
+    ;:reserve (struts :distance "40px" :side "top")
+    :wm-ignore false
+(bar))

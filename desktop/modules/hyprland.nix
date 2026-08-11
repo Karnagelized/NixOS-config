@@ -66,23 +66,20 @@
     # Графический агент аутентификации
     polkit_gnome
     # CLI для уведомлений eww/widgets
-    libnotify
+    # libnotify
     # Получение погодных данных для eww
-    curl
+    # curl
     # JSON parser для оригинальных eww weather/quotes scripts
-    jq
+    # jq
     # ALSA mixer, используется оригинальными eww volume scripts
-    alsa-utils
+    # alsa-utils
     # MPD client, используется оригинальным dashboard music widget
-    mpc
+    # mpc
     # Обложки треков MPD в dashboard
-    ffmpeg
-    # Todo/appointments widgets из оригинального dashboard
-    todo-txt-cli
-    calcurse
+    # ffmpeg
     # Блокировка и bspc-команды, ожидаемые оригинальным Tokyo eww
-    betterlockscreen
-    bspwm
+    # betterlockscreen
+    # bspwm
     # Файловый менеджер
     nautilus
   ];
