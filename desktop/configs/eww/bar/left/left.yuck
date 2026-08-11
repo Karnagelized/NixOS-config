@@ -1,0 +1,145 @@
+;; ========================= ;;
+;; Левая часть верхнего меню ;;
+;; ========================= ;;
+(defwidget left []
+	(box
+	    :class "bar-left"
+		:space-evenly false
+		:halign "start"
+; Иконка
+(icon)
+; Запуск приложений и ссылок
+(links)
+))
+
+
+;; ================ ;;
+;; Виджеты | Иконка ;;
+;; ================ ;;
+(defwidget icon []
+    (box
+        :class "bar-icon"
+
+        (label :text "󱄅")
+    )
+)
+
+
+;; ============================= ;;
+;; Виджеты | Приложения и ссылки ;;
+;; ============================= ;;
+(defwidget links []
+    (box
+        :class "links"
+        :space-evenly false
+
+        ; Приложения
+        (telegram)
+        (pycharm)
+        (postman)
+        ; Разделитель
+        (separator)
+        ; Ссылки
+        (github)
+        (weeek)
+        (work)
+    )
+)
+
+
+;; =========================================== ;;
+;; Виджеты | Приложения и ссылки -> Приложения ;;
+;; =========================================== ;;
+; Открытие приложение "Telegram" по иконке
+(defwidget telegram []
+    (eventbox
+        :onclick "Telegram &"
+
+        (box
+            :class "icon-box telegram"
+
+            (label :text "")
+        )
+    )
+)
+
+; Открытие приложение "PyCharm" по иконке
+(defwidget pycharm []
+    (eventbox
+        :onclick "~/Desktop/Programs/pycharm-2025.1.3.1/bin/pycharm.sh &"
+
+        (box
+            :class "icon-box pycharm"
+
+            (label :text "󰅬")
+        )
+    )
+)
+
+; Открытие приложение "Postman" по иконке
+(defwidget postman []
+    (eventbox
+        :onclick "postman &"
+
+        (box
+            :class "icon-box postman"
+
+            (label :text "")
+        )
+    )
+)
+
+
+;; ============================================ ;;
+;; Виджеты | Приложения и ссылки -> Разделитель ;;
+;; ============================================ ;;
+(defwidget separator []
+    (box
+        :class "separator"
+
+        (label :text "|")
+    )
+)
+
+
+;; ======================================= ;;
+;; Виджеты | Приложения и ссылки -> Ссылки ;;
+;; ======================================= ;;
+; Открытие ссылки "GitHub" по иконке
+(defwidget github []
+    (eventbox
+        :onclick "xdg-open 'https://github.com/Karnagelized' &"
+
+        (box
+            :class "icon-box github"
+
+            (label :text "")
+        )
+    )
+)
+
+; Открытие ссылки "Weeek" по иконке
+(defwidget weeek []
+    (eventbox
+        :onclick "xdg-open 'https://app.weeek.net/' &"
+
+        (box
+            :class "icon-box weeek"
+
+            (label :text "")
+        )
+    )
+)
+
+; Открытие ссылок "GitLab + Palne" по иконке
+(defwidget work []
+    (eventbox
+        :onclick "xdg-open 'https://plane.shaligula.ru/shaligula/' && xdg-open 'https://git.shaligula.ru/' & "
+
+        (box
+            :class "icon-box work"
+
+            (label :text "")
+        )
+    )
+)

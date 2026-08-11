@@ -1,0 +1,30 @@
+$gray: #565f89;
+$blue: #5fc1f2;
+$purple: #68c0c8;
+
+.workspaces-container {
+    padding: 2px 10px;
+}
+
+.ws-dot {
+    label {
+        font-family: "JetBrainsMono Nerd Font";
+        font-size: 20px;
+        transition:
+            color 0.2s ease,
+            font-size 0.2s ease;
+    }
+
+    &.empty label {
+        color: $gray;
+    }
+
+    &.active label {
+        color: $purple;
+    }
+
+    &:hover label {
+        color: $blue;
+        font-size: 23px;
+    }
+}

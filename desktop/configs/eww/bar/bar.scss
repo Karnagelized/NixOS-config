@@ -1,21 +1,25 @@
-// Variable Color's
-$background: #1a1b26;
-$foreground: #a9b1d6;
+@import "./left/left.scss";
+@import "./center/center.scss";
+@import "./right/right.scss";
+
+// // Variable Color's
+// $background: #1a1b26;
+// $foreground: #a9b1d6;
 
 $black: #24283b;
-$gray: #565f89;
-$red: #f7768e;
-$green: #73daca;
-$yellow: #e0af68;
-$blue: #7aa2f7;
-$magenta: #bb9af7;
-$cyan: #7dcfff;
-$white: $foreground;
+// $gray: #565f89;
+// // $red: #f7768e;
+// // $green: #73daca;
+// // $yellow: #e0af68;
+// // $blue: #7aa2f7;
+// // $magenta: #bb9af7;
+// // $cyan: #7dcfff;
+// // $white: $foreground;
+// $blue: #5fc1f2;
+// $purple: #68c0c8;
 
 .bar {
-    margin: 10px;
-    //width: 100%;
     background-color: $black;
-    color: red;
-    border-radius: 5%;
+    border-radius: 10px;
+    padding: 2px 10px;
 }

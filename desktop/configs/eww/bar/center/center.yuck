@@ -1,0 +1,35 @@
+;; ======================================== ;;
+;; Переменные и слушатели центрального меню ;;
+;; ======================================== ;;
+(deflisten workspaces_data :initial "[]" "/home/maksim/Desktop/Projects/NixOS-Config/desktop/configs/eww/bar/scripts/workspaces.sh")
+
+;; =============================== ;;
+;; Центральная часть верхнего меню ;;
+;; =============================== ;;
+(defwidget center []
+	(box
+	    :class "bar-center"
+		:space-evenly false
+		:halign "center"
+; Рабочие пространства
+(workspace)
+))
+
+;; Виджет списка рабочих столов
+(defwidget workspace []
+    (box
+        :class "workspaces-container"
+        :space-evenly false
+        :spacing 8
+
+        (for ws in workspaces_data
+            (eventbox
+                :cursor "pointer"
+                :onclick "hyprctl dispatch workspace ${ws.id}"
+
+                (box
+                    :class "ws-dot ${ws.active ? 'active' : 'empty'}"
+
+                    (label
+                        :text {ws.active ? "" : ""}
+))))))
