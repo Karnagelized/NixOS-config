@@ -2,7 +2,6 @@
 
 (defwidget bar []
   (centerbox :orientation "h" :class "bar"
-    (box :halign "start" "")
     (box :halign "center" "Hyprland")
     (box :halign "end" clock)))
 
