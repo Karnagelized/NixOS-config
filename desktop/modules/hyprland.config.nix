@@ -1,6 +1,9 @@
 { pkgs, ... }:
 
 {
+  xdg.configFile."eww/eww.yuck".source = ../configs/eww/eww.yuck;
+  xdg.configFile."eww/eww.scss".source = ../configs/eww/eww.css;
+
   wayland.windowManager.hyprland = {
     enable = true;
     configType = "hyprlang";
@@ -8,6 +11,11 @@
     settings = {
       "$terminal" = "kitty";
       "$menu" = "rofi -show drun";
+
+      monitor = [
+        "DP-1, 1920x1080@75, 0x0, 1"
+        "HDMI-A-1, 1920x1080@75, 19200x0, 1"
+      ];
 
       input = {
         kb_layout = "us,ru";
@@ -33,7 +41,8 @@
       ];
 
       exec-once = [
-        "waybar"
+        "eww daemon"
+        "eww open bar"
         "mako"
         "hyprpaper"
         "nm-applet"
