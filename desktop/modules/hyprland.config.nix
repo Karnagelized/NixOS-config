@@ -26,7 +26,6 @@
         "4, monitor:HDMI-A-1, persistent:true"
         "5, monitor:HDMI-A-1, persistent:true"
         "6, monitor:HDMI-A-1, persistent:true"
-
         "7, monitor:DP-1, default:true, persistent:true"
       ];
 
@@ -37,12 +36,24 @@
         touchpad.natural_scroll = true;
       };
 
+      preload = [
+        "/home/maksim/Desktop/Projects/NixOS-Config/images/background.jpg"
+      ];
+
+      wallpaper = [
+        {
+          monitor = "";
+          path = "/home/maksim/Desktop/Projects/NixOS-Config/images/background.jpg";
+        }
+      ];
+
       bind = [
         "SUPER, T, exec, $terminal"
         "SUPER, R, exec, $menu"
         "SUPER, E, exec, nautilus"
         "SUPER, Q, killactive"
         "SUPER, F, fullscreen"
+        "SUPER SHIFT, F, fullscreenstate"
         "SUPER SHIFT, E, exit"
 
         "SUPER, 1, workspace, 1"
