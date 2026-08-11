@@ -23,6 +23,15 @@
 
   security.polkit.enable = true;
 
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    font-awesome
+    comic-mono
+    material-icons
+    material-design-icons
+    feather
+  ];
+
   environment.systemPackages = with pkgs; [
     # Терминал
     kitty
@@ -56,6 +65,24 @@
     networkmanagerapplet
     # Графический агент аутентификации
     polkit_gnome
+    # CLI для уведомлений eww/widgets
+    libnotify
+    # Получение погодных данных для eww
+    curl
+    # JSON parser для оригинальных eww weather/quotes scripts
+    jq
+    # ALSA mixer, используется оригинальными eww volume scripts
+    alsa-utils
+    # MPD client, используется оригинальным dashboard music widget
+    mpc
+    # Обложки треков MPD в dashboard
+    ffmpeg
+    # Todo/appointments widgets из оригинального dashboard
+    todo-txt-cli
+    calcurse
+    # Блокировка и bspc-команды, ожидаемые оригинальным Tokyo eww
+    betterlockscreen
+    bspwm
     # Файловый менеджер
     nautilus
   ];

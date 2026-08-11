@@ -1,8 +1,24 @@
 { pkgs, ... }:
 
 {
-  xdg.configFile."eww/eww.yuck".source = ../configs/eww/eww.yuck;
-  xdg.configFile."eww/eww.scss".source = ../configs/eww/eww.css;
+  xdg.configFile."eww" = {
+    source = ../configs/eww;
+    recursive = true;
+  };
+  xdg.configFile."rofi" = {
+    source = ../configs/rofi-tokyo;
+    recursive = true;
+  };
+
+  home.file.".local/bin/eww".source = "${pkgs.eww}/bin/eww";
+  home.file.".local/bin/dashboard" = {
+    source = ../configs/eww-bin/dashboard;
+    executable = true;
+  };
+  home.file.".local/bin/launcher" = {
+    source = ../configs/eww-bin/launcher;
+    executable = true;
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -41,8 +57,9 @@
       ];
 
       exec-once = [
-        "eww daemon"
-        "eww open bar"
+        "eww -c ~/.config/eww/bar daemon"
+        "eww -c ~/.config/eww/bar open bar"
+        "eww -c ~/.config/eww/dashboard daemon"
         "mako"
         "hyprpaper"
         "nm-applet"
