@@ -1,0 +1,40 @@
+$blue: #5fc1f2;
+$light-blue: #68c0c8;
+$red: #f7768e;
+$green: #9ece6a;
+$yellow: #e0af68;
+
+.bar-right {
+    margin-left: 10px;
+}
+
+.right-links {
+    padding: 0 4px;
+}
+
+.right-action-button {
+    font-size: 24px;
+    // border: 2px green solid;
+
+    label {
+        // border: 2px red solid;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+}
+
+.right-separator {
+    margin-left: 8px;
+}
+
+.power {
+    color: $red;
+}
+
+.reboot {
+    color: $green;
+}
+
+.lock {
+    color: orange;
+}

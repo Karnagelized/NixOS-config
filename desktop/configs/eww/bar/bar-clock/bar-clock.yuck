@@ -8,7 +8,7 @@
 ;; =============================== ;;
 ;; Центральная часть верхнего меню ;;
 ;; =============================== ;;
-(defwidget center []
+(defwidget center-clock []
 	(box
 	    :class "bar-center"
 		:space-evenly false

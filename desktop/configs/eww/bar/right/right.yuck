@@ -2,34 +2,116 @@
 ;; Правая часть верхнего меню ;;
 ;; ========================== ;;
 (defwidget right []
-	(box
-	    :class "bar-left"
-		:space-evenly false
-		:halign "end"
-; Запуск приложений и ссылок
-(right-links)
+    (box
+        :class "bar-right"
+        :space-evenly false
+        :halign "end"
+
+        (right-links)
 ))
 
 
-
-;; ============================= ;;
-;; Виджеты | Приложения и ссылки ;;
-;; ============================= ;;
+;; ======== ;;
+;; Виджеты  ;;
+;; ======== ;;
 (defwidget right-links []
     (box
-        :class "links"
+        :class "links right-links"
         :space-evenly false
+        :halign "end"
 
-        (box)
-        ; Приложения
-        (telegram)
-        (pycharm)
-        (postman)
+        ; Системные приложения
+        (mixer-button)
+        (wifi-button)
+        (bluetooth)
         ; Разделитель
-        (separator)
-        ; Ссылки
-        (github)
-        (weeek)
-        (work)
-    )
-)
+        (right-separator)
+        ; Действия с системой
+        (lock-button)
+        (reboot-button)
+        (power-button)
+))
+
+
+;; ============================== ;;
+;; Виджеты | Системные приложения ;;
+;; ============================== ;;
+; Аудио
+(defwidget mixer-button []
+    (eventbox
+        :onclick "/home/maksim/Desktop/Projects/NixOS-Config/desktop/configs/eww/bar/scripts/right-system-action.sh audio"
+
+        (box
+            :class "icon-box right-action-button mixer"
+
+            (label :text "")
+)))
+
+; WIFI
+(defwidget wifi-button []
+    (eventbox
+        :onclick "/home/maksim/Desktop/Projects/NixOS-Config/desktop/configs/eww/bar/scripts/right-system-action.sh wifi"
+
+        (box
+            :class "icon-box right-action-button wifi"
+
+            (label :text "󰖩")
+)))
+
+
+;; ============================================ ;;
+;; Виджеты | Динамические кнопки -> Разделитель ;;
+;; ============================================ ;;
+(defwidget right-separator []
+    (box
+        :class "separator right-separator"
+
+        (label :text "|")
+))
+
+
+;; ============================= ;;
+;; Виджеты | Действия с системой ;;
+;; ============================= ;;
+; Заблокировать
+(defwidget lock-button []
+    (eventbox
+        :onrightclick "/home/maksim/Desktop/Projects/NixOS-Config/desktop/configs/eww/bar/scripts/right-system-action.sh lock"
+
+        (box
+            :class "icon-box right-action-button lock"
+
+            (label :text "")
+)))
+
+; Перезагрузка
+(defwidget reboot-button []
+    (eventbox
+        :onrightclick "/home/maksim/Desktop/Projects/NixOS-Config/desktop/configs/eww/bar/scripts/right-system-action.sh reboot"
+
+        (box
+            :class "icon-box right-action-button reboot"
+
+            (label :text "")
+)))
+
+; Выключение
+(defwidget power-button []
+    (eventbox
+        :onrightclick "/home/maksim/Desktop/Projects/NixOS-Config/desktop/configs/eww/bar/scripts/right-system-action.sh poweroff"
+
+        (box
+            :class "icon-box right-action-button power"
+
+            (label :text "")
+)))
+
+(deflisten bluetooth_status :initial "" "/home/maksim/Desktop/Projects/NixOS-Config/desktop/configs/eww/bar/scripts/bluetooth.sh")
+
+
+(defwidget bluetooth []
+  (eventbox
+      :cursor "pointer"
+      :onclick "blueman-manager &"
+
+    (label :class "bt-icon" :text bluetooth_status)))

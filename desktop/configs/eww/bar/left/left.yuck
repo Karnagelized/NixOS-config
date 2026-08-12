@@ -6,10 +6,11 @@
 	    :class "bar-left"
 		:space-evenly false
 		:halign "start"
-; Иконка
-(icon)
-; Запуск приложений и ссылок
-(left-links)
+
+		; Иконка
+        (icon)
+        ; Запуск приложений и ссылок
+        (left-links)
 ))
 
 
@@ -21,8 +22,7 @@
         :class "bar-icon"
 
         (label :text "󱄅")
-    )
-)
+))
 
 
 ;; ============================= ;;
@@ -43,8 +43,7 @@
         (github)
         (weeek)
         (work)
-    )
-)
+))
 
 
 ;; =========================================== ;;
@@ -59,9 +58,7 @@
             :class "icon-box telegram"
 
             (label :text "")
-        )
-    )
-)
+)))
 
 ; Открытие приложение "PyCharm" по иконке
 (defwidget pycharm []
@@ -72,9 +69,7 @@
             :class "icon-box pycharm"
 
             (label :text "󰅬")
-        )
-    )
-)
+)))
 
 ; Открытие приложение "Postman" по иконке
 (defwidget postman []
@@ -85,9 +80,7 @@
             :class "icon-box postman"
 
             (label :text "")
-        )
-    )
-)
+)))
 
 
 ;; ============================================ ;;
@@ -98,8 +91,7 @@
         :class "separator"
 
         (label :text "|")
-    )
-)
+))
 
 
 ;; ======================================= ;;
@@ -114,9 +106,7 @@
             :class "icon-box github"
 
             (label :text "")
-        )
-    )
-)
+)))
 
 ; Открытие ссылки "Weeek" по иконке
 (defwidget weeek []
@@ -127,9 +117,7 @@
             :class "icon-box weeek"
 
             (label :text "")
-        )
-    )
-)
+)))
 
 ; Открытие ссылок "GitLab + Palne" по иконке
 (defwidget work []
@@ -140,6 +128,4 @@
             :class "icon-box work"
 
             (label :text "")
-        )
-    )
-)
+)))

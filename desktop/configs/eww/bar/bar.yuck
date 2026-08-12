@@ -1,6 +1,6 @@
 (include "./bar/left/left.yuck")
-(include "./bar/center/center.yuck")
 (include "./bar/right/right.yuck")
+(include "./bar/bar-clock/bar-clock.yuck")
 
 
 ;; ============== ;;
@@ -11,11 +11,20 @@
 	(centerbox
 	    :class "bar"
 		:orientation "h"
+
 		(left)
-		(center)
+		(box)
 		(right)
 ))
 
+; Верхнее меню
+(defwidget clock []
+	(box
+	    :class "bar-clock"
+		:orientation "h"
+
+		(center-clock)
+))
 
 ;; ========== ;;
 ;; Отдел окон ;;
@@ -31,6 +40,21 @@
     )
     :exclusive true
     :stacking "fg"
-    :reserve (struts :distance "40px" :side "top")
-    :wm-ignore false
-(bar))
+    :reserve (struts :distance "50px" :side "top")
+
+    (bar)
+)
+
+(defwindow bar-clock
+    :monitor 0
+    :geometry (
+        geometry
+        :y "-45px"
+        :height "40px"
+        :anchor "top center"
+    )
+    :wm-ignore true
+    :stacking "overlay"
+
+    (clock)
+)

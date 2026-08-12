@@ -13,6 +13,8 @@
     wayland.enable = true;
   };
 
+  services.blueman.enable = true;
+
   # Нужно для file picker, screen sharing, Flatpak/порталов.
   xdg.portal = {
     enable = true;
@@ -82,5 +84,7 @@
     # bspwm
     # Файловый менеджер
     nautilus
+    # Управление блютузом
+    blueman
   ];
 }
