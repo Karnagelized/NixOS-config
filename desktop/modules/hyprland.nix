@@ -64,7 +64,7 @@
     # Графический микшер громкости
     pavucontrol
     # Графический доступ к настройкам параметров сети
-    networkmanagerapplet
+    nmgui
     # Графический агент аутентификации
     polkit_gnome
     # CLI для уведомлений eww/widgets
@@ -85,6 +85,6 @@
     # Файловый менеджер
     nautilus
     # Управление блютузом
-    blueman
+    overskride
   ];
 }

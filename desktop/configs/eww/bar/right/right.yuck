@@ -64,7 +64,7 @@
 ; Bluetooth
 (defwidget bluetooth []
   (eventbox
-      :onclick "blueman-manager &"
+      :onclick "overskride &"
 
     (label :class "icon-box bt-icon" :text bluetooth_status)))
 

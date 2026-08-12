@@ -19,12 +19,6 @@ case "$1" in
         pavucontrol
         ;;
     wifi)
-        if command -v nm-connection-editor >/dev/null 2>&1; then
-            nm-connection-editor
-        elif command -v nm-applet >/dev/null 2>&1; then
-            nm-applet
-        else
-            kitty -e nmtui
-        fi
+        nmgui
         ;;
 esac
