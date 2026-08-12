@@ -1,3 +1,6 @@
+(deflisten bluetooth_status :initial "" "/home/maksim/Desktop/Projects/NixOS-Config/desktop/configs/eww/bar/scripts/bluetooth.sh")
+
+
 ;; ========================== ;;
 ;; Правая часть верхнего меню ;;
 ;; ========================== ;;
@@ -58,6 +61,13 @@
             (label :text "󰖩")
 )))
 
+; Bluetooth
+(defwidget bluetooth []
+  (eventbox
+      :onclick "blueman-manager &"
+
+    (label :class "icon-box bt-icon" :text bluetooth_status)))
+
 
 ;; ============================================ ;;
 ;; Виджеты | Динамические кнопки -> Разделитель ;;
@@ -105,13 +115,3 @@
 
             (label :text "")
 )))
-
-(deflisten bluetooth_status :initial "" "/home/maksim/Desktop/Projects/NixOS-Config/desktop/configs/eww/bar/scripts/bluetooth.sh")
-
-
-(defwidget bluetooth []
-  (eventbox
-      :cursor "pointer"
-      :onclick "blueman-manager &"
-
-    (label :class "bt-icon" :text bluetooth_status)))
