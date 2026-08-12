@@ -36,16 +36,11 @@
         touchpad.natural_scroll = true;
       };
 
-      preload = [
-        "/home/maksim/Desktop/Projects/NixOS-Config/images/background.jpg"
-      ];
-
-      wallpaper = [
-        {
-          monitor = "";
-          path = "/home/maksim/Desktop/Projects/NixOS-Config/images/background.jpg";
-        }
-      ];
+      xdg.configFile."hypr/hyprpaper.conf".text = ''
+        preload = /home/maksim/Desktop/Projects/NixOS-Config/images/background.jpg
+        wallpaper = , /home/maksim/Desktop/Projects/NixOS-Config/images/background.jpg
+        splash = false
+      '';
 
       bind = [
         "SUPER, T, exec, $terminal"
@@ -85,6 +80,7 @@
       ];
 
       exec-once = [
+        "eww open bar"
         "mako"
         "hyprpaper"
         "nm-applet"
