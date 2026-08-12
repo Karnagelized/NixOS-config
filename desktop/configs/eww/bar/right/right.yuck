@@ -1,0 +1,35 @@
+;; ========================== ;;
+;; Правая часть верхнего меню ;;
+;; ========================== ;;
+(defwidget right []
+	(box
+	    :class "bar-left"
+		:space-evenly false
+		:halign "end"
+; Запуск приложений и ссылок
+(right-links)
+))
+
+
+
+;; ============================= ;;
+;; Виджеты | Приложения и ссылки ;;
+;; ============================= ;;
+(defwidget right-links []
+    (box
+        :class "links"
+        :space-evenly false
+
+        (box)
+        ; Приложения
+        (telegram)
+        (pycharm)
+        (postman)
+        ; Разделитель
+        (separator)
+        ; Ссылки
+        (github)
+        (weeek)
+        (work)
+    )
+)

@@ -9,7 +9,7 @@
 ; Иконка
 (icon)
 ; Запуск приложений и ссылок
-(links)
+(left-links)
 ))
 
 
@@ -28,7 +28,7 @@
 ;; ============================= ;;
 ;; Виджеты | Приложения и ссылки ;;
 ;; ============================= ;;
-(defwidget links []
+(defwidget left-links []
     (box
         :class "links"
         :space-evenly false

@@ -58,7 +58,6 @@
         "SUPER, E, exec, nautilus"
         "SUPER, Q, killactive"
         "SUPER, F, fullscreen"
-        "SUPER SHIFT, F, fullscreenstate"
         "SUPER SHIFT, E, exit"
 
         "SUPER, 1, workspace, 1"

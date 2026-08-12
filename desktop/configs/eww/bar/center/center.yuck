@@ -1,7 +1,9 @@
 ;; ======================================== ;;
 ;; Переменные и слушатели центрального меню ;;
 ;; ======================================== ;;
-(deflisten workspaces_data :initial "[]" "/home/maksim/Desktop/Projects/NixOS-Config/desktop/configs/eww/bar/scripts/workspaces.sh")
+(defpoll current_time :interval "1s" "date '+%H:%M'")
+(defpoll current_seconds :interval "1s" "date '+:%S'")
+
 
 ;; =============================== ;;
 ;; Центральная часть верхнего меню ;;
@@ -11,25 +13,17 @@
 	    :class "bar-center"
 		:space-evenly false
 		:halign "center"
-; Рабочие пространства
-(workspace)
-))
 
-;; Виджет списка рабочих столов
-(defwidget workspace []
-    (box
-        :class "workspaces-container"
-        :space-evenly false
-        :spacing 8
+			(eventbox
+			    :class "center-clock"
 
-        (for ws in workspaces_data
-            (eventbox
-                :cursor "pointer"
-                :onclick "hyprctl dispatch workspace ${ws.id}"
+				(box
+			        :space-evenly false
 
-                (box
-                    :class "ws-dot ${ws.active ? 'active' : 'empty'}"
-
-                    (label
-                        :text {ws.active ? "" : ""}
-))))))
+					(label
+				        :text current_time
+				    )
+				    (label
+				        :class "center-clock-seconds"
+				        :text current_seconds
+)))))
