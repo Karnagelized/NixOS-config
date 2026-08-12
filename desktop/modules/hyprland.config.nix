@@ -6,6 +6,22 @@
     recursive = true;
   };
 
+  services.hyprpaper = {
+    enable = true;
+
+    settings = {
+      splash = false;
+
+      wallpaper = [
+        {
+          monitor = "";
+          path = "/home/maksim/Desktop/Projects/NixOS-Config/images/background.jpg";
+          fit_mode = "cover";
+        }
+      ];
+    };
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     configType = "hyprlang";
@@ -35,12 +51,6 @@
         follow_mouse = 1;
         touchpad.natural_scroll = true;
       };
-
-      xdg.configFile."hypr/hyprpaper.conf".text = ''
-        preload = /home/maksim/Desktop/Projects/NixOS-Config/images/background.jpg
-        wallpaper = , /home/maksim/Desktop/Projects/NixOS-Config/images/background.jpg
-        splash = false
-      '';
 
       bind = [
         "SUPER, T, exec, $terminal"
@@ -82,7 +92,6 @@
       exec-once = [
         "eww open bar"
         "mako"
-        "hyprpaper"
         "nm-applet"
         "/run/current-system/sw/libexec/polkit-gnome-authentication-agent-1"
       ];
