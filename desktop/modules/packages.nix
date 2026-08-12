@@ -1,4 +1,4 @@
-{ pkgs, pkgs-stable, ... }:
+{ pkgs, pkgs-stable, inputs, ... }:
 
 let
   # Темы и иконки
@@ -118,7 +118,10 @@ in {
     themeAndIcon
     ++ programsPackages
     ++ databasePackages
-    ++ utilsPackages;
+    ++ utilsPackages
+    ++ [
+      inputs.quickshell.packages.${pkgs.system}.default
+    ];
 #    ++ extensionsPackages;
 
   # Отключение предустановленных пакетов Gnome
