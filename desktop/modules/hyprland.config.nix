@@ -52,6 +52,12 @@
         touchpad.natural_scroll = true;
       };
 
+      windowrulev2 = [
+        "center, class:^jetbrains-(?!toolbox), title:^(?!JetBrains Toolbox).*$"
+        "forceinput, class:^jetbrains-(?!toolbox)"
+        "stayfocused, class:^jetbrains-(?!toolbox), floating:1"
+      ];
+
       bind = [
         "SUPER, T, exec, $terminal"
         "SUPER, R, exec, $menu"
