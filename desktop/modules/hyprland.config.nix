@@ -52,11 +52,20 @@
         touchpad.natural_scroll = true;
       };
 
-      windowrulev2 = [
-        "center, class:^jetbrains-(?!toolbox), title:^(?!JetBrains Toolbox).*$"
-        "forceinput, class:^jetbrains-(?!toolbox)"
-        "stayfocused, class:^jetbrains-(?!toolbox), floating:1"
-      ];
+#      windowrule = [
+#        # 1. Разрешаем плавать только полноценным окнам JetBrains (у которых ЕСТЬ заголовок)
+#        "float on, match:class ^jetbrains-.*, match:title ^(?!\\s*$).+"
+#
+#        # 2. Переносим на HDMI-A-1 только диалоговые окна
+#        "monitor HDMI-A-1, match:class ^jetbrains-.*, match:title ^(?!\\s*$).+"
+#
+#        # 3. Центрируем ТОЛЬКО окна с текстом в заголовке
+#        "center on, match:class ^jetbrains-.*, match:title ^(?!\\s*$).+"
+#
+#        # 4. Для мелких всплывающих элементов без заголовка (меню, подсказки)
+#        # отключаем принудительный первоначальный фокус, чтобы они не ломали ввод текста
+#        "no_initial_focus on, match:class ^jetbrains-.*, match:title ^\\s*$"
+#      ];
 
       bind = [
         "SUPER, T, exec, $terminal"

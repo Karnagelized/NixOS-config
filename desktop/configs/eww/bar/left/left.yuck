@@ -63,7 +63,7 @@
 ; Открытие приложение "PyCharm" по иконке
 (defwidget pycharm []
     (eventbox
-        :onclick "~/Desktop/Programs/pycharm-2025.1.3.1/bin/pycharm.sh &"
+        :onclick "pycharm &"
 
         (box
             :class "icon-box pycharm"

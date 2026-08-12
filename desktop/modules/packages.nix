@@ -17,6 +17,7 @@ let
   	postman
     telegram-desktop
   	onlyoffice-desktopeditors
+    jetbrains.pycharm
   	# Приложения для работы с паролями
   	authenticator
   	# Переводчик
