@@ -196,8 +196,8 @@ Item {
     // STATE MANAGEMENT & DATA
     // -------------------------------------------------------------------------
     property int currentTab: 1
-    property var tabNames: ["Settings", "System", "Matugen", "About"]
-    property var tabIcons: ["", "", "󰏘", ""]
+    property var tabNames: ["Settings", "System", "Binds", "Matugen", "About"]
+    property var tabIcons: ["", "", "󰌌", "󰏘", ""]
 
     property real introBase: 0.0
     property real introSidebar: 0.0
@@ -367,54 +367,44 @@ Item {
                 
                 Item {
                     Layout.fillWidth: true
-                    Layout.preferredHeight: root.s(60)
-                    
+                    Layout.preferredHeight: root.s(48)
+
                     RowLayout {
                         anchors.fill: parent
                         spacing: root.s(12)
-                        
+
                         Rectangle {
                             Layout.alignment: Qt.AlignVCenter
                             width: root.s(36)
                             height: root.s(36)
                             radius: root.s(10)
                             color: root.ambientPurple
-                            Text { 
+                            Text {
                                 anchors.centerIn: parent
                                 text: ""
                                 font.family: "Iosevka Nerd Font"
                                 font.pixelSize: root.s(20)
-                                color: root.base 
+                                color: root.base
                             }
                         }
-                        
-                        ColumnLayout {
+
+                        Text {
+                            text: "Imperative"
+                            font.family: "JetBrains Mono"
+                            font.weight: Font.Black
+                            font.pixelSize: root.s(15)
+                            color: root.text
+                            Layout.fillWidth: true
                             Layout.alignment: Qt.AlignVCenter
-                            spacing: root.s(2)
-                            Text { 
-                                text: "Imperative"
-                                font.family: "JetBrains Mono"
-                                font.weight: Font.Black
-                                font.pixelSize: root.s(15)
-                                color: root.text
-                                Layout.alignment: Qt.AlignLeft 
-                            }
-                            Text { 
-                                text: "v" + (root.dotsVersion !== "Loading..." ? root.dotsVersion : "...")
-                                font.family: "JetBrains Mono"
-                                font.pixelSize: root.s(11)
-                                color: root.subtext0
-                                Layout.alignment: Qt.AlignLeft 
-                            }
                         }
                     }
                 }
 
-                Rectangle { 
+                Rectangle {
                     Layout.fillWidth: true
                     height: 1
                     color: Qt.alpha(root.surface1, 0.5)
-                    Layout.bottomMargin: root.s(10) 
+                    Layout.bottomMargin: root.s(10)
                 }
 
                 // --- MORPHING TABS LOGIC ---
@@ -465,6 +455,7 @@ Item {
                                     Behavior on color { ColorAnimation { duration: 150 } }
 
                                     RowLayout {
+                                        id: tabRow
                                         anchors.fill: parent
                                         anchors.leftMargin: root.s(15)
                                         spacing: root.s(12)
@@ -472,7 +463,7 @@ Item {
                                         // The "Slide Right" text effect from snippet 2
                                         property real contentShift: parent.isActive ? root.s(6) : 0
                                         Behavior on contentShift { NumberAnimation { duration: 400; easing.type: Easing.OutExpo } }
-                                        transform: Translate { x: contentShift }
+                                        transform: Translate { x: tabRow.contentShift }
                                         
                                         Item {
                                             Layout.preferredWidth: root.s(24)
@@ -639,13 +630,14 @@ Item {
             // TAB 1: SYSTEM OVERVIEW
             // ------------------------------------------
             Item {
+                id: systemTab
                 anchors.fill: parent
                 visible: root.currentTab === 1
                 opacity: visible ? 1.0 : 0.0
                 property real slideY: visible ? 0 : root.s(10)
                 
                 Behavior on slideY { NumberAnimation { duration: 250; easing.type: Easing.OutQuart } }
-                transform: Translate { y: slideY }
+                transform: Translate { y: systemTab.slideY }
                 Behavior on opacity { NumberAnimation { duration: 250 } }
 
                 ListModel {
@@ -951,16 +943,275 @@ Item {
             }
 
             // ------------------------------------------
-            // TAB 2: MATUGEN ENGINE
+            // TAB 2: KEYBINDS
             // ------------------------------------------
             Item {
+                id: keybindTab
                 anchors.fill: parent
                 visible: root.currentTab === 2
                 opacity: visible ? 1.0 : 0.0
                 property real slideY: visible ? 0 : root.s(10)
+
+                Behavior on slideY { NumberAnimation { duration: 250; easing.type: Easing.OutQuart } }
+                transform: Translate { y: keybindTab.slideY }
+                Behavior on opacity { NumberAnimation { duration: 250 } }
+
+                property var bindSections: [
+                    {
+                        title: "Основное",
+                        icon: "󰘳",
+                        color: "blue",
+                        binds: [
+                            { key: "Super + T", desc: "Открыть терминал Kitty" },
+                            { key: "Super + R", desc: "Открыть меню приложений Rofi" },
+                            { key: "Super + E", desc: "Открыть файловый менеджер Nautilus" },
+                            { key: "Super + Q", desc: "Закрыть активное окно" },
+                            { key: "Super + F", desc: "Переключить полноэкранный режим" },
+                            { key: "Super + L", desc: "Заблокировать экран" },
+                            { key: "Super + Shift + E", desc: "Открыть выход из сессии" }
+                        ]
+                    },
+                    {
+                        title: "Рабочие области",
+                        icon: "󰧨",
+                        color: "mauve",
+                        binds: [
+                            { key: "Super + 1..6", desc: "Перейти на рабочую область 1-6" },
+                            { key: "Super + Shift + 1..6", desc: "Переместить активное окно на рабочую область 1-6" },
+                            { key: "Super + Ctrl + Left", desc: "Перейти на предыдущую рабочую область" },
+                            { key: "Super + Ctrl + Right", desc: "Перейти на следующую рабочую область" }
+                        ]
+                    },
+                    {
+                        title: "Окна",
+                        icon: "󰖲",
+                        color: "green",
+                        binds: [
+                            { key: "Super + Left", desc: "Переместить фокус на окно слева" },
+                            { key: "Super + Down", desc: "Переместить фокус на окно снизу" },
+                            { key: "Super + Up", desc: "Переместить фокус на окно сверху" },
+                            { key: "Super + Right", desc: "Переместить фокус на окно справа" },
+                            { key: "Super + Shift + Left", desc: "Сдвинуть активное окно влево" },
+                            { key: "Super + Shift + Down", desc: "Сдвинуть активное окно вниз" },
+                            { key: "Super + Shift + Up", desc: "Сдвинуть активное окно вверх" },
+                            { key: "Super + Shift + Right", desc: "Сдвинуть активное окно вправо" }
+                        ]
+                    },
+                    {
+                        title: "Панели topbar",
+                        icon: "󰕮",
+                        color: "peach",
+                        binds: [
+                            { key: "Super + D", desc: "Открыть встроенный лаунчер приложений" },
+                            { key: "Super + C", desc: "Открыть менеджер буфера обмена" },
+                            { key: "Super + M", desc: "Открыть панель мониторов" },
+                            { key: "Super + Shift + S", desc: "Открыть настройки Quickshell" },
+                            { key: "Super + B", desc: "Открыть панель батареи и питания" },
+                            { key: "Super + W", desc: "Открыть выбор обоев" },
+                            { key: "Super + S", desc: "Открыть календарь" },
+                            { key: "Super + N", desc: "Открыть сеть и Bluetooth" },
+                            { key: "Super + Shift + T", desc: "Открыть Focus Time" },
+                            { key: "Super + V", desc: "Открыть панель звука" },
+                            { key: "Super + H", desc: "Открыть этот справочник" }
+                        ]
+                    },
+                    {
+                        title: "Скриншоты",
+                        icon: "󰄀",
+                        color: "yellow",
+                        binds: [
+                            { key: "Print", desc: "Открыть панель скриншота и записи" },
+                            { key: "Shift + Print", desc: "Открыть скриншот с режимом редактирования" },
+                            { key: "Super + Print", desc: "Сделать скриншот всего экрана" },
+                            { key: "Super + Shift + Print", desc: "Сделать скриншот всего экрана и открыть редактор" }
+                        ]
+                    },
+                    {
+                        title: "Медиа и устройства",
+                        icon: "󰝚",
+                        color: "pink",
+                        binds: [
+                            { key: "Mic Mute", desc: "Включить или выключить микрофон" },
+                            { key: "Audio Mute", desc: "Включить или выключить звук" },
+                            { key: "Audio Play", desc: "Пауза или продолжение воспроизведения" },
+                            { key: "Audio Pause", desc: "Пауза или продолжение воспроизведения" },
+                            { key: "Volume Down", desc: "Уменьшить громкость" },
+                            { key: "Volume Up", desc: "Увеличить громкость" },
+                            { key: "Brightness Down", desc: "Уменьшить яркость" },
+                            { key: "Brightness Up", desc: "Увеличить яркость" }
+                        ]
+                    }
+                ]
+
+                ColumnLayout {
+                    anchors.fill: parent
+                    anchors.topMargin: root.s(15)
+                    anchors.leftMargin: root.s(20)
+                    anchors.rightMargin: root.s(20)
+                    anchors.bottomMargin: root.s(20)
+                    spacing: root.s(14)
+
+                    Text {
+                        text: "Горячие клавиши"
+                        font.family: "JetBrains Mono"
+                        font.weight: Font.Black
+                        font.pixelSize: root.s(28)
+                        color: root.text
+                        Layout.alignment: Qt.AlignVCenter
+                    }
+
+                    Text {
+                        text: "Текущие бинды Hyprland из системной конфигурации."
+                        font.family: "JetBrains Mono"
+                        font.pixelSize: root.s(13)
+                        color: root.subtext0
+                        Layout.fillWidth: true
+                        wrapMode: Text.WordWrap
+                    }
+
+                    Flickable {
+                        id: bindsFlickable
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        clip: true
+                        contentWidth: width
+                        contentHeight: bindsColumn.implicitHeight + root.s(8)
+                        boundsBehavior: Flickable.StopAtBounds
+
+                        ScrollBar.vertical: ScrollBar {
+                            policy: ScrollBar.AsNeeded
+                            active: true
+                        }
+
+                        ColumnLayout {
+                            id: bindsColumn
+                            width: bindsFlickable.width - root.s(8)
+                            spacing: root.s(14)
+
+                            Repeater {
+                                model: keybindTab.bindSections
+
+                                Rectangle {
+                                    id: sectionCard
+                                    property string sectionColor: modelData.color
+                                    Layout.fillWidth: true
+                                    Layout.preferredHeight: root.s(58) + (modelData.binds.length * root.s(48))
+                                    radius: root.s(12)
+                                    color: sectionHover.hovered ? Qt.alpha(root[sectionColor], 0.08) : Qt.alpha(root.surface0, 0.4)
+                                    border.color: sectionHover.hovered ? Qt.alpha(root[sectionColor], 0.9) : root.surface1
+                                    border.width: 1
+                                    clip: true
+
+                                    Behavior on color { ColorAnimation { duration: 200 } }
+                                    Behavior on border.color { ColorAnimation { duration: 200 } }
+
+                                    ColumnLayout {
+                                        anchors.fill: parent
+                                        anchors.margins: root.s(12)
+                                        spacing: root.s(8)
+
+                                        RowLayout {
+                                            Layout.fillWidth: true
+                                            spacing: root.s(10)
+
+                                            Text {
+                                                text: modelData.icon
+                                                font.family: "Iosevka Nerd Font"
+                                                font.pixelSize: root.s(20)
+                                                color: root[sectionCard.sectionColor]
+                                                Layout.alignment: Qt.AlignVCenter
+                                            }
+
+                                            Text {
+                                                text: modelData.title
+                                                font.family: "JetBrains Mono"
+                                                font.weight: Font.Black
+                                                font.pixelSize: root.s(15)
+                                                color: root.text
+                                                Layout.fillWidth: true
+                                                Layout.alignment: Qt.AlignVCenter
+                                            }
+                                        }
+
+                                        Repeater {
+                                            model: modelData.binds
+
+                                            Rectangle {
+                                                Layout.fillWidth: true
+                                                Layout.preferredHeight: root.s(40)
+                                                radius: root.s(8)
+                                                color: bindRowMa.containsMouse ? Qt.alpha(root[sectionCard.sectionColor], 0.11) : Qt.alpha(root.base, 0.34)
+                                                border.color: bindRowMa.containsMouse ? Qt.alpha(root[sectionCard.sectionColor], 0.45) : Qt.alpha(root.surface1, 0.55)
+                                                border.width: 1
+
+                                                Behavior on color { ColorAnimation { duration: 150 } }
+                                                Behavior on border.color { ColorAnimation { duration: 150 } }
+
+                                                RowLayout {
+                                                    anchors.fill: parent
+                                                    anchors.leftMargin: root.s(10)
+                                                    anchors.rightMargin: root.s(10)
+                                                    spacing: root.s(12)
+
+                                                    Rectangle {
+                                                        Layout.preferredWidth: root.s(170)
+                                                        Layout.preferredHeight: root.s(26)
+                                                        Layout.alignment: Qt.AlignVCenter
+                                                        radius: root.s(7)
+                                                        color: Qt.alpha(root[sectionCard.sectionColor], 0.15)
+                                                        border.color: Qt.alpha(root[sectionCard.sectionColor], 0.55)
+                                                        border.width: 1
+
+                                                        Text {
+                                                            anchors.centerIn: parent
+                                                            width: parent.width - root.s(12)
+                                                            text: modelData.key
+                                                            elide: Text.ElideRight
+                                                            horizontalAlignment: Text.AlignHCenter
+                                                            font.family: "JetBrains Mono"
+                                                            font.weight: Font.Bold
+                                                            font.pixelSize: root.s(10)
+                                                            color: root[sectionCard.sectionColor]
+                                                        }
+                                                    }
+
+                                                    Text {
+                                                        Layout.fillWidth: true
+                                                        text: modelData.desc
+                                                        elide: Text.ElideRight
+                                                        font.family: "JetBrains Mono"
+                                                        font.weight: Font.Medium
+                                                        font.pixelSize: root.s(12)
+                                                        color: root.text
+                                                        Layout.alignment: Qt.AlignVCenter
+                                                    }
+                                                }
+
+                                                MouseArea { id: bindRowMa; anchors.fill: parent; hoverEnabled: true }
+                                            }
+                                        }
+                                    }
+
+                                    HoverHandler { id: sectionHover }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // ------------------------------------------
+            // TAB 3: MATUGEN ENGINE
+            // ------------------------------------------
+            Item {
+                id: matugenTab
+                anchors.fill: parent
+                visible: root.currentTab === 3
+                opacity: visible ? 1.0 : 0.0
+                property real slideY: visible ? 0 : root.s(10)
                 
                 Behavior on slideY { NumberAnimation { duration: 250; easing.type: Easing.OutQuart } }
-                transform: Translate { y: slideY }
+                transform: Translate { y: matugenTab.slideY }
                 Behavior on opacity { NumberAnimation { duration: 250 } }
 
                 ColumnLayout {
@@ -1019,13 +1270,13 @@ Item {
                                             y: parent.height / 2 - root.s(3)
                                             SequentialAnimation on x { 
                                                 loops: Animation.Infinite
-                                                running: root.currentTab === 2
+                                                running: root.currentTab === 3
                                                 PauseAnimation { duration: index * 400 }
                                                 NumberAnimation { from: 0; to: parent.width; duration: 1200; easing.type: Easing.InOutSine } 
                                             } 
                                             SequentialAnimation on opacity { 
                                                 loops: Animation.Infinite
-                                                running: root.currentTab === 2
+                                                running: root.currentTab === 3
                                                 PauseAnimation { duration: index * 400 }
                                                 NumberAnimation { from: 0; to: 1; duration: 300 }
                                                 PauseAnimation { duration: 600 }
@@ -1046,7 +1297,7 @@ Item {
                                 
                                 SequentialAnimation on border.width { 
                                     loops: Animation.Infinite
-                                    running: root.currentTab === 2
+                                    running: root.currentTab === 3
                                     NumberAnimation { from: root.s(1); to: root.s(4); duration: 1000; easing.type: Easing.InOutSine }
                                     NumberAnimation { from: root.s(4); to: root.s(1); duration: 1000; easing.type: Easing.InOutSine } 
                                 }
@@ -1068,7 +1319,7 @@ Item {
                                                 color: modelData
                                                 SequentialAnimation on scale { 
                                                     loops: Animation.Infinite
-                                                    running: root.currentTab === 2
+                                                    running: root.currentTab === 3
                                                     PauseAnimation { duration: index * 150 }
                                                     NumberAnimation { to: 1.3; duration: 300; easing.type: Easing.OutQuart }
                                                     NumberAnimation { to: 1.0; duration: 400; easing.type: Easing.OutQuart }
@@ -1097,13 +1348,13 @@ Item {
                                             y: parent.height / 2 - root.s(3)
                                             SequentialAnimation on x { 
                                                 loops: Animation.Infinite
-                                                running: root.currentTab === 2
+                                                running: root.currentTab === 3
                                                 PauseAnimation { duration: index * 400 }
                                                 NumberAnimation { from: 0; to: parent.width; duration: 1200; easing.type: Easing.InOutSine } 
                                             } 
                                             SequentialAnimation on opacity { 
                                                 loops: Animation.Infinite
-                                                running: root.currentTab === 2
+                                                running: root.currentTab === 3
                                                 PauseAnimation { duration: index * 400 }
                                                 NumberAnimation { from: 0; to: 1; duration: 300 }
                                                 PauseAnimation { duration: 600 }
@@ -1180,16 +1431,17 @@ Item {
             }
 
             // ------------------------------------------
-            // TAB 3: ABOUT
+            // TAB 4: ABOUT
             // ------------------------------------------
             Item {
+                id: aboutTab
                 anchors.fill: parent
-                visible: root.currentTab === 3
+                visible: root.currentTab === 4
                 opacity: visible ? 1.0 : 0.0
                 property real slideY: visible ? 0 : root.s(10)
                 
                 Behavior on slideY { NumberAnimation { duration: 250; easing.type: Easing.OutQuart } }
-                transform: Translate { y: slideY }
+                transform: Translate { y: aboutTab.slideY }
                 Behavior on opacity { NumberAnimation { duration: 250 } }
 
                 RowLayout {
