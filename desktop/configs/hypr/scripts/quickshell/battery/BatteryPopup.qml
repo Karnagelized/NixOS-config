@@ -87,12 +87,14 @@ Item {
     readonly property color teal: _theme.teal
     readonly property color sapphire: _theme.sapphire
     readonly property color blue: _theme.blue
+    readonly property color desktopPowerColor: "#a6e88d"
 
     // -------------------------------------------------------------------------
     // STATE & POLLING
     // -------------------------------------------------------------------------
-    property int batCapacity: 0
-    property string batStatus: "Unknown"
+    property int batCapacity: 100
+    property string batStatus: "Full"
+    property bool isDesktop: false
     property string powerProfile: "balanced"
     
     property int upHours: 0
@@ -100,7 +102,6 @@ Item {
 
     property real sysVolume: 0
     property bool sysMuted: false
-    property real sysBrightness: 0
     
     property string currentUserName: ""
     
@@ -121,15 +122,14 @@ Item {
 
     // Anti-Jitter Sync States
     property bool isDraggingVol: false
-    property bool isDraggingBri: false
 
     Timer { id: volSyncDelay; interval: 800; onTriggered: window.isDraggingVol = false; triggeredOnStart: true; }
-    Timer { id: briSyncDelay; interval: 800; onTriggered: window.isDraggingBri = false; triggeredOnStart: true; }
 
-    readonly property bool isCharging: batStatus === "Charging"
+    readonly property bool isCharging: isDesktop || batStatus === "Charging" || batStatus === "Full"
 
     // Unified hue for Battery
     readonly property color batColorStart: {
+        if (isDesktop) return window.desktopPowerColor;
         if (isCharging) return window.green;
         if (batCapacity >= 70) return window.blue;
         if (batCapacity >= 30) return window.yellow;
@@ -148,13 +148,14 @@ Item {
     // Ambient Blobs - Based strictly on aesthetic pairs derived from battery state
     readonly property color ambientPrimary: window.batColorStart
     readonly property color ambientSecondary: {
+        if (isDesktop) return window.teal;
         if (isCharging) return window.sapphire;
         if (batCapacity >= 70) return window.mauve;
         if (batCapacity >= 30) return window.peach;
         return window.maroon; 
     }
 
-    property real animCapacity: 0
+    property real animCapacity: 100
     Behavior on animCapacity { NumberAnimation { duration: 1200; easing.type: Easing.OutQuint } }
     
     onAnimCapacityChanged: batCanvas.requestPaint()
@@ -184,20 +185,30 @@ Item {
     }
 
     Process {
+        id: chassisDetector
+        running: true
+        command: ["bash", "-c", "if ls /sys/class/power_supply/BAT* 1> /dev/null 2>&1; then echo 'laptop'; else echo 'desktop'; fi"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                window.isDesktop = (this.text.trim() === "desktop");
+            }
+        }
+    }
+
+    Process {
         id: sysPoller
         command: ["bash", "-c", 
-            "cat /sys/class/power_supply/BAT*/capacity 2>/dev/null | head -n1 || echo '0'; " +
-            "cat /sys/class/power_supply/BAT*/status 2>/dev/null | head -n1 || echo 'Unknown'; " +
+            "if ls /sys/class/power_supply/BAT* 1> /dev/null 2>&1; then cat /sys/class/power_supply/BAT*/capacity 2>/dev/null | head -n1; else echo '100'; fi; " +
+            "if ls /sys/class/power_supply/BAT* 1> /dev/null 2>&1; then cat /sys/class/power_supply/BAT*/status 2>/dev/null | head -n1; else echo 'Full'; fi; " +
             "powerprofilesctl get 2>/dev/null || echo 'balanced'; " +
             "awk '{print int($1/3600)\"h \"int(($1%3600)/60)\"m\"}' /proc/uptime 2>/dev/null || echo '0h 0m'; " +
-            "wpctl get-volume @DEFAULT_AUDIO_SINK@ 2>/dev/null | awk '{print int($2*100), ($3==\"[MUTED]\"?\"off\":\"on\")}' || echo '0 on'; " +
-            "brightnessctl -m 2>/dev/null | awk -F, '{print substr($4, 1, length($4)-1)}' || echo '0'"
+            "wpctl get-volume @DEFAULT_AUDIO_SINK@ 2>/dev/null | awk '{print int($2*100), ($3==\"[MUTED]\"?\"off\":\"on\")}' || echo '0 on'"
         ]
         running: true
         stdout: StdioCollector {
             onStreamFinished: {
                 let lines = this.text.trim().split("\n");
-                if (lines.length >= 6) {
+                if (lines.length >= 5) {
                     if (window.batCapacity !== parseInt(lines[0])) {
                         window.batCapacity = parseInt(lines[0]);
                         window.animCapacity = window.batCapacity;
@@ -215,10 +226,6 @@ Item {
                         let volParts = (lines[4] || "0 on").trim().split(" ");
                         window.sysVolume = parseInt(volParts[0]) || 0;
                         window.sysMuted = (volParts[1] === "off");
-                    }
-                    
-                    if (!window.isDraggingBri) {
-                        window.sysBrightness = parseInt(lines[5]) || 0;
                     }
                 }
             }
@@ -979,7 +986,7 @@ Item {
                             radius: width / 2
                             z: 1
                             
-                            property bool isDangerState: !window.isCharging && window.batCapacity < 15
+                            property bool isDangerState: !window.isDesktop && !window.isCharging && window.batCapacity < 15
                             
                             SequentialAnimation on scale {
                                 loops: Animation.Infinite
@@ -1145,6 +1152,7 @@ Item {
                                             font.family: "Iosevka Nerd Font"
                                             font.pixelSize: window.s(28)
                                             color: window.batColorStart
+                                            visible: !window.isDesktop
                                             text: window.isCharging ? "󰂄" : (window.batCapacity > 20 ? "󰁹" : "󰂃")
                                             Behavior on color { ColorAnimation { duration: 400 } }
                                         }
@@ -1153,8 +1161,8 @@ Item {
                                             font.family: "JetBrains Mono"
                                             font.weight: Font.Black
                                             font.pixelSize: window.s(54)
-                                            color: window.text
-                                            text: Math.round(window.animCapacity) + "%" 
+                                            color: window.isDesktop ? window.desktopPowerColor : window.text
+                                            text: window.isDesktop ? "∞" : Math.round(window.animCapacity) + "%"
                                         }
                                     }
 
@@ -1164,11 +1172,13 @@ Item {
                                         font.weight: Font.Bold
                                         font.pixelSize: window.s(13)
                                         
-                                        color: window.isCharging 
-                                                ? Qt.tint(window.green, Qt.rgba(1, 1, 1, parent.textPulse * 0.4)) 
+                                        color: window.isDesktop
+                                                ? Qt.tint(window.desktopPowerColor, Qt.rgba(1, 1, 1, parent.textPulse * 0.35))
+                                                : window.isCharging
+                                                ? Qt.tint(window.green, Qt.rgba(1, 1, 1, parent.textPulse * 0.4))
                                                 : (centralCore.isDangerState ? Qt.tint(window.red, Qt.rgba(1, 1, 1, parent.textPulse * 0.3)) : window.subtext0)
                                         
-                                        text: window.batStatus.toUpperCase()
+                                        text: window.isDesktop ? "DESKTOP" : window.batStatus.toUpperCase()
                                         Behavior on color { ColorAnimation { duration: 300 } }
                                     }
                                 }
@@ -1192,10 +1202,10 @@ Item {
                             anchors.margins: window.s(25)
                             spacing: window.s(15)
 
-                            // 1. HARDWARE CONTROLS DOCK (Sliders)
+                            // 1. HARDWARE CONTROLS DOCK
                             Rectangle {
                                 Layout.fillWidth: true
-                                Layout.preferredHeight: window.s(96)
+                                Layout.preferredHeight: window.s(58)
                                 radius: window.s(14)
                                 color: window.surface0
                                 border.color: window.surface1
@@ -1208,82 +1218,6 @@ Item {
                                     anchors.fill: parent
                                     anchors.margins: window.s(14)
                                     spacing: window.s(12)
-
-                                    // Brightness Slider
-                                    RowLayout {
-                                        Layout.fillWidth: true
-                                        spacing: window.s(15)
-
-                                        Item {
-                                            Layout.preferredWidth: window.s(32)
-                                            Layout.preferredHeight: window.s(32)
-                                            Text {
-                                                anchors.centerIn: parent
-                                                text: window.sysBrightness > 66 ? "󰃠" : (window.sysBrightness > 33 ? "󰃟" : "󰃞")
-                                                font.family: "Iosevka Nerd Font"
-                                                font.pixelSize: window.s(22)
-                                                color: window.ambientPrimary
-                                                Behavior on color { ColorAnimation { duration: 200 } }
-                                            }
-                                        }
-
-                                        Item {
-                                            Layout.fillWidth: true
-                                            height: window.s(18)
-                                            
-                                            Timer {
-                                                id: briCmdThrottle
-                                                interval: 50
-                                                property int targetPct: -1
-                                                onTriggered: {
-                                                    if (targetPct >= 0) {
-                                                        Quickshell.execDetached(["brightnessctl", "set", targetPct + "%"]);
-                                                        targetPct = -1;
-                                                    }
-                                                }
-                                            }
-
-                                            Rectangle {
-                                                anchors.fill: parent
-                                                radius: window.s(9)
-                                                color: window.surface1
-                                                border.color: window.surface2
-                                                border.width: 1
-                                                clip: true
-
-                                                Rectangle {
-                                                    height: parent.height
-                                                    width: parent.width * (window.sysBrightness / 100)
-                                                    radius: window.s(9)
-                                                    opacity: briMa.containsMouse ? 1.0 : 0.85
-                                                    Behavior on opacity { NumberAnimation { duration: 200 } }
-                                                    Behavior on width { enabled: !window.isDraggingBri; NumberAnimation { duration: 200; easing.type: Easing.OutQuint } }
-
-                                                    gradient: Gradient {
-                                                        orientation: Gradient.Horizontal
-                                                        GradientStop { position: 0.0; color: window.batColorStart; Behavior on color { ColorAnimation { duration: 300 } } }
-                                                        GradientStop { position: 1.0; color: window.batColorEnd; Behavior on color { ColorAnimation { duration: 300 } } }
-                                                    }
-                                                }
-                                            }
-                                            MouseArea {
-                                                id: briMa
-                                                anchors.fill: parent
-                                                hoverEnabled: true
-                                                cursorShape: Qt.PointingHandCursor
-                                                onPressed: (mouse) => { briSyncDelay.stop(); window.isDraggingBri = true; updateBri(mouse.x); }
-                                                onPositionChanged: (mouse) => { if (pressed) updateBri(mouse.x); }
-                                                onReleased: { briSyncDelay.restart(); }
-                                                
-                                                function updateBri(mx) {
-                                                    let pct = Math.max(0, Math.min(100, Math.round((mx / width) * 100)));
-                                                    window.sysBrightness = pct; 
-                                                    briCmdThrottle.targetPct = pct;
-                                                    if (!briCmdThrottle.running) briCmdThrottle.start();
-                                                }
-                                            }
-                                        }
-                                    }
 
                                     // Volume Slider
                                     RowLayout {
