@@ -104,7 +104,6 @@
       ];
 
       exec-once = [
-        "eww open bar"
         "mako"
         "nm-applet"
         "/run/current-system/sw/libexec/polkit-gnome-authentication-agent-1"

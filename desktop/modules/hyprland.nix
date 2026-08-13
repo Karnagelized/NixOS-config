@@ -35,6 +35,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    obs-studio
     # Терминал
     kitty
     # Оконный переключатель
