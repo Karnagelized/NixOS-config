@@ -20,7 +20,23 @@ ENV_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/quickshell/weather.env"
 # API Settings
 # Load environment variables silently
 if [ -f "$ENV_FILE" ]; then
-    export $(grep -v '^#' "$ENV_FILE" | xargs)
+    while IFS='=' read -r key value; do
+        key="${key#"${key%%[![:space:]]*}"}"
+        key="${key%"${key##*[![:space:]]}"}"
+
+        if [[ -z "$key" || "$key" == \#* || ! "$key" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]]; then
+            continue
+        fi
+
+        value="${value#"${value%%[![:space:]]*}"}"
+        value="${value%"${value##*[![:space:]]}"}"
+        value="${value%\"}"
+        value="${value#\"}"
+        value="${value%\'}"
+        value="${value#\'}"
+
+        export "$key=$value"
+    done < "$ENV_FILE"
 fi
 
 # API Settings from .env
@@ -298,36 +314,36 @@ elif [[ "$1" == "--nav" ]]; then
     fi
 
 elif [[ "$1" == "--icon" ]]; then
-    cat "$json_file" | jq -r '.forecast[0].icon'
+    jq -r '.forecast[0].icon' "$json_file" 2>/dev/null
 
 elif [[ "$1" == "--temp" ]]; then 
-    t=$(cat "$json_file" | jq -r '.forecast[0].max')
+    t=$(jq -r '.forecast[0].max' "$json_file" 2>/dev/null)
     echo "${t}${UNIT_SYM}"
 
 elif [[ "$1" == "--hex" ]]; then 
-    cat "$json_file" | jq -r '.forecast[0].hex'
+    jq -r '.forecast[0].hex' "$json_file" 2>/dev/null
 
 elif [[ "$1" == "--current-icon" ]]; then
-    icon=$(cat "$json_file" | jq -r '.current_icon // empty')
+    icon=$(jq -r '.current_icon // empty' "$json_file" 2>/dev/null)
     if [[ -z "$icon" || "$icon" == "null" ]]; then 
         get_data
-        icon=$(cat "$json_file" | jq -r '.current_icon')
+        icon=$(jq -r '.current_icon' "$json_file" 2>/dev/null)
     fi
     echo "$icon"
 
 elif [[ "$1" == "--current-temp" ]]; then 
-    t=$(cat "$json_file" | jq -r '.current_temp // empty')
+    t=$(jq -r '.current_temp // empty' "$json_file" 2>/dev/null)
     if [[ -z "$t" || "$t" == "null" ]]; then 
         get_data
-        t=$(cat "$json_file" | jq -r '.current_temp')
+        t=$(jq -r '.current_temp' "$json_file" 2>/dev/null)
     fi
     echo "${t}${UNIT_SYM}"
 
 elif [[ "$1" == "--current-hex" ]]; then
-    hex=$(cat "$json_file" | jq -r '.current_hex // empty')
+    hex=$(jq -r '.current_hex // empty' "$json_file" 2>/dev/null)
     if [[ -z "$hex" || "$hex" == "null" ]]; then 
         get_data
-        hex=$(cat "$json_file" | jq -r '.current_hex')
+        hex=$(jq -r '.current_hex' "$json_file" 2>/dev/null)
     fi
     echo "$hex"
 fi

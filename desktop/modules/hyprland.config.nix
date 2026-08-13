@@ -15,6 +15,28 @@ in
     recursive = true;
   };
 
+  xdg.configFile."rofi/config.rasi" = {
+    force = true;
+    text = ''
+      configuration {
+          modi:                       "drun,filebrowser,window";
+          show-icons:                 true;
+          display-drun:               "";
+          display-window:             "";
+          display-filebrowser:        "";
+          drun-display-format:        "{name}";
+          window-format:              "{w} · {c} · {t}";
+
+          hover-select:               true;
+          me-select-entry:            "";
+          me-accept-entry:            "MousePrimary";
+          case-sensitive:             false;
+      }
+
+      @theme "theme.rasi"
+    '';
+  };
+
   xdg.configFile."swayosd/style.css".text = ''
     window {
       border-radius: 8px;
@@ -218,12 +240,12 @@ in
 #      ];
 
       layerrule = [
-        "noanim, ^(volume_osd)$"
-        "noanim, ^(brightness_osd)$"
-        "noanim, hyprpicker"
-        "noanim, qsdock"
-        "blur, ext-session-lock"
-        "ignorealpha 0.2, ext-session-lock"
+        "no_anim on, match:namespace ^(volume_osd)$"
+        "no_anim on, match:namespace ^(brightness_osd)$"
+        "no_anim on, match:namespace hyprpicker"
+        "no_anim on, match:namespace qsdock"
+        "blur on, match:namespace ext-session-lock"
+        "ignore_alpha 0.2, match:namespace ext-session-lock"
       ];
 
       bind = [
