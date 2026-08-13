@@ -33,7 +33,99 @@ in
           case-sensitive:             false;
       }
 
-      @theme "theme.rasi"
+      @theme "${config.home.homeDirectory}/.config/rofi/theme.rasi"
+    '';
+  };
+
+  xdg.configFile."rofi/theme.rasi" = {
+    force = true;
+    text = ''
+      * {
+          bg:                 #1e1e2e;
+          bg-alt:             #181825;
+          fg:                 #cdd6f4;
+          muted:              #a6adc8;
+          border:             #89b4fa;
+          selected-bg:        #89b4fa;
+          selected-fg:        #11111b;
+          urgent:             #f38ba8;
+
+          font:               "JetBrains Mono 12";
+          border-radius:      8px;
+      }
+
+      window {
+          width:              720px;
+          border:             2px;
+          border-color:       @border;
+          border-radius:      @border-radius;
+          background-color:   @bg;
+      }
+
+      mainbox {
+          padding:            12px;
+          spacing:            10px;
+          background-color:   transparent;
+      }
+
+      inputbar {
+          padding:            10px 12px;
+          border-radius:      6px;
+          background-color:   @bg-alt;
+          text-color:         @fg;
+          children:           [ prompt, entry ];
+      }
+
+      prompt {
+          padding:            0 10px 0 0;
+          text-color:         @border;
+      }
+
+      entry {
+          placeholder:        "Search";
+          placeholder-color:  @muted;
+          text-color:         @fg;
+      }
+
+      listview {
+          lines:              8;
+          columns:            1;
+          fixed-height:       true;
+          spacing:            4px;
+          background-color:   transparent;
+      }
+
+      element {
+          padding:            9px 10px;
+          border-radius:      6px;
+          text-color:         @fg;
+          background-color:   transparent;
+      }
+
+      element selected {
+          text-color:         @selected-fg;
+          background-color:   @selected-bg;
+      }
+
+      element-icon {
+          size:               24px;
+          margin:             0 10px 0 0;
+      }
+
+      element-text {
+          text-color:         inherit;
+      }
+
+      message {
+          padding:            8px;
+          border-radius:      6px;
+          background-color:   @bg-alt;
+          text-color:         @fg;
+      }
+
+      textbox {
+          text-color:         @fg;
+      }
     '';
   };
 

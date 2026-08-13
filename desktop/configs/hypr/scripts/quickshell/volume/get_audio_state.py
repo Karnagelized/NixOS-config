@@ -3,6 +3,8 @@ import subprocess
 import json
 import sys
 
+bt_name_cache = {}
+
 def run_cmd(cmd):
     try:
         return subprocess.check_output(cmd, shell=True, stderr=subprocess.DEVNULL).decode('utf-8')
@@ -18,8 +20,63 @@ def parse_pactl(output):
 def get_valid_string(*args):
     """Safely return the first valid string that isn't 'null' or empty."""
     for arg in args:
-        if arg and str(arg).strip().lower() not in ["null", "none", ""]:
-            return str(arg)
+        value = str(arg).strip().strip('"').strip()
+        if value and value.lower() not in ["null", "(null)", "none", ""]:
+            return value
+    return ""
+
+def human_node_type(node_name):
+    if node_name.startswith("bluez_output"):
+        return "Bluetooth Output"
+    if node_name.startswith("bluez_input"):
+        return "Bluetooth Input"
+    if node_name.startswith("alsa_output"):
+        return "System Output"
+    if node_name.startswith("alsa_input"):
+        return "System Input"
+    return "Audio Device"
+
+def get_active_port_description(node):
+    active_port = get_valid_string(node.get("active_port"))
+    for port in node.get("ports", []):
+        if get_valid_string(port.get("name")) == active_port:
+            return get_valid_string(port.get("description"), port.get("type"))
+    return ""
+
+def get_bluetooth_name(props):
+    address = get_valid_string(props.get("api.bluez5.address"), props.get("device.string"))
+    if not address:
+        return ""
+    if address in bt_name_cache:
+        return bt_name_cache[address]
+
+    bt_name = ""
+    try:
+        out = subprocess.check_output(
+            ["bluetoothctl", "info", address],
+            stderr=subprocess.DEVNULL
+        ).decode("utf-8", errors="replace")
+        values = {}
+        for line in out.splitlines():
+            if ":" not in line:
+                continue
+            key, value = line.split(":", 1)
+            values[key.strip()] = value.strip()
+        bt_name = get_valid_string(values.get("Alias"), values.get("Name"))
+    except:
+        pass
+
+    bt_name_cache[address] = bt_name
+    return bt_name
+
+def format_profile_name(profile):
+    profile = get_valid_string(profile)
+    if profile == "a2dp-sink":
+        return "A2DP Output"
+    if profile == "headset-head-unit":
+        return "Headset"
+    if profile:
+        return profile.replace("-", " ").title()
     return ""
 
 def get_wpctl_default(node_target):
@@ -67,14 +124,32 @@ def get_data():
             display_name = get_valid_string(props.get("application.name"), props.get("application.process.binary"), "Unknown App")
             sub_desc = get_valid_string(props.get("media.name"), props.get("window.title"), props.get("media.role"), "Audio Stream")
         else:
-            display_name = get_valid_string(props.get("device.description"), n.get("name"), "Unknown Device")
-            sub_desc = get_valid_string(n.get("name"), "Unknown")
+            node_name = get_valid_string(n.get("name"))
+            bt_name = get_bluetooth_name(props)
+            display_name = get_valid_string(
+                props.get("node.description"),
+                props.get("node.nick"),
+                props.get("device.alias"),
+                bt_name,
+                n.get("description"),
+                props.get("device.description"),
+                props.get("device.product.name"),
+                props.get("alsa.card_name"),
+                human_node_type(node_name)
+            )
+            sub_desc = get_valid_string(
+                props.get("device.profile.description"),
+                get_active_port_description(n),
+                format_profile_name(props.get("api.bluez5.profile")),
+                human_node_type(node_name)
+            )
 
         icon = get_valid_string(props.get("application.icon_name"), props.get("device.icon_name"), "audio-card")
         
         return {
             "id": str(n.get("index")),
             "name": sub_desc,
+            "node_name": get_valid_string(n.get("name")),
             "description": display_name,
             "volume": vol,
             "mute": bool(n.get("mute", False)),
