@@ -190,8 +190,9 @@ PanelWindow {
                     border.width: 1
                     clip: true
 
-                    property color blob1Color: contentWrapper.blobPalette1[index % 5]
-                    property color blob2Color: contentWrapper.blobPalette2[index % 5]
+                    property int paletteIndex: Math.max(0, index) % contentWrapper.blobPalette1.length
+                    property color blob1Color: contentWrapper.blobPalette1[paletteIndex] || _theme.mauve
+                    property color blob2Color: contentWrapper.blobPalette2[paletteIndex] || _theme.blue
 
                     Rectangle {
                         width: parent.width * 0.7; height: width; radius: width / 2

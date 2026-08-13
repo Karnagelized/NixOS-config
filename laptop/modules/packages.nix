@@ -13,7 +13,6 @@ let
   programsPackages = with pkgs; [
   	zed-editor
   	filezilla
-  	obsidian
   	postman
     telegram-desktop
   	onlyoffice-desktopeditors

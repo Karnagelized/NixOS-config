@@ -316,7 +316,6 @@ in
       ];
 
       exec-once = [
-        "mako"
         "nm-applet"
         "/run/current-system/sw/libexec/polkit-gnome-authentication-agent-1"
         "playerctld"
