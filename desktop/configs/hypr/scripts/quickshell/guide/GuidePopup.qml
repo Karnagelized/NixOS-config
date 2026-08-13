@@ -74,33 +74,6 @@ Item {
         currentTab = prev;
         event.accepted = true;
     }
-    Keys.onLeftPressed: {
-        if (currentTab === 2) { 
-            if (selectedModuleIndex > 0) {
-                selectedModuleIndex--;
-                modulesList.positionViewAtIndex(selectedModuleIndex, ListView.Contain);
-            }
-            event.accepted = true;
-        }
-    }
-    Keys.onRightPressed: {
-        if (currentTab === 2) { 
-            if (selectedModuleIndex < modulesDataModel.count - 1) {
-                selectedModuleIndex++;
-                modulesList.positionViewAtIndex(selectedModuleIndex, ListView.Contain);
-            }
-            event.accepted = true;
-        }
-    }
-    Keys.onReturnPressed: {
-        if (currentTab === 2) { 
-            let target = modulesDataModel.get(selectedModuleIndex).target;
-            Quickshell.execDetached(["bash", Quickshell.env("HOME") + "/.config/hypr/scripts/qs_manager.sh", "toggle", target]);
-            event.accepted = true;
-        }
-    }
-    Keys.onEnterPressed: { Keys.onReturnPressed(event); }
-
     MatugenColors { id: _theme }
     // -------------------------------------------------------------------------
     // COLORS
@@ -223,26 +196,12 @@ Item {
     // STATE MANAGEMENT & DATA
     // -------------------------------------------------------------------------
     property int currentTab: 1
-    property int selectedModuleIndex: 0
-    property var tabNames: ["Settings", "System", "Modules", "Matugen", "About"]
-    property var tabIcons: ["", "", "󰣆", "󰏘", ""]
+    property var tabNames: ["Settings", "System", "Matugen", "About"]
+    property var tabIcons: ["", "", "󰏘", ""]
 
     property real introBase: 0.0
     property real introSidebar: 0.0
     property real introContent: 0.0
-
-    ListModel {
-        id: modulesDataModel
-        ListElement { title: "Calendar & Weather"; target: "calendar"; icon: ""; desc: "Dual-sync calendar with live \nOpenWeatherMap integration."; preview: "previews/preview_calendar.png" }
-        ListElement { title: "Media & Lyrics"; target: "music"; icon: "󰎆"; desc: "PlayerCtl integration, Cava \nvisualizer, and live lyrics."; preview: "previews/preview_music.png" }
-        ListElement { title: "Battery & Power"; target: "battery"; icon: "󰁹"; desc: "Uptime tracking, power profiles, \nand battery health metrics."; preview: "previews/preview_battery.png" }
-        ListElement { title: "Network Hub"; target: "network"; icon: "󰤨"; desc: "Wi-Fi and Bluetooth connection \nmanagement via nmcli/bluez."; preview: "previews/preview_network.png" }
-        ListElement { title: "FocusTime"; target: "focustime"; icon: "󰄉"; desc: "Built-in Pomodoro timer daemon \nwith session tracking."; preview: "previews/preview_focustime.png" }
-        ListElement { title: "Volume Mixer"; target: "volume"; icon: "󰕾"; desc: "Pipewire integration for I/O \nvolume and stream routing."; preview: "previews/preview_volume.png" }
-        ListElement { title: "Wallpaper Picker"; target: "wallpaper"; icon: ""; desc: "Live awww backend rendering \nwith Matugen color generation."; preview: "previews/preview_wallpaper.png" }
-        ListElement { title: "Monitors"; target: "monitors"; icon: "󰍹"; desc: "Quick display management."; preview: "previews/preview_monitors.png" }
-        ListElement { title: "Stewart AI"; target: "stewart"; icon: "󰚩"; desc: "Voice assistant integration.\n(Reserved for future, currently disabled)"; preview: "previews/preview_stewart.png" }
-    }
 
     Component.onCompleted: { 
         startupSequence.start(); 
@@ -422,7 +381,7 @@ Item {
                             color: root.ambientPurple
                             Text { 
                                 anchors.centerIn: parent
-                                text: "󰣇"
+                                text: ""
                                 font.family: "Iosevka Nerd Font"
                                 font.pixelSize: root.s(20)
                                 color: root.base 
@@ -711,7 +670,7 @@ Item {
                     Rectangle {
                         id: sysBox
                         Layout.fillWidth: true
-                        Layout.preferredHeight: root.s(180)
+                        Layout.preferredHeight: root.s(250)
                         radius: root.s(16)
                         color: sysBoxMa.containsMouse ? Qt.alpha(root.surface0, 0.7) : Qt.alpha(root.surface0, 0.4)
                         border.color: sysBoxMa.containsMouse ? root.ambientBlue : root.surface1
@@ -873,163 +832,53 @@ Item {
                                     }
                                 }
                                 
-                                RowLayout {
-                                    spacing: root.s(15)
-                                    RowLayout { 
-                                        spacing: root.s(6)
-                                        Text { text: ""; font.family: "Iosevka Nerd Font"; font.pixelSize: root.s(16); color: root.green } 
-                                        Text { 
-                                            text: root.sysCPU
-                                            font.family: "JetBrains Mono"
-                                            font.weight: Font.Medium
-                                            font.pixelSize: root.s(12)
-                                            color: root.subtext0
-                                            elide: Text.ElideRight
-                                            Layout.maximumWidth: root.s(220) 
-                                        } 
-                                    }
-                                    RowLayout { 
-                                        spacing: root.s(6)
-                                        Text { text: "󰢮"; font.family: "Iosevka Nerd Font"; font.pixelSize: root.s(16); color: root.yellow } 
-                                        Text { 
-                                            text: root.sysGPU
-                                            font.family: "JetBrains Mono"
-                                            font.weight: Font.Medium
-                                            font.pixelSize: root.s(12)
-                                            color: root.subtext0
-                                            elide: Text.ElideRight
-                                            Layout.maximumWidth: root.s(220) 
-                                        } 
-                                    }
-                                }
-                            }
-                        }
-                        MouseArea { id: sysBoxMa; anchors.fill: parent; hoverEnabled: true }
-                    }
-
-                    // AUTHOR BLOCK
-                    Rectangle {
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: root.s(50)
-                        radius: root.s(10)
-                        color: authorMa.containsMouse ? Qt.alpha(root.surface1, 0.6) : Qt.alpha(root.surface0, 0.4)
-                        border.color: authorMa.containsMouse ? root.mauve : root.surface1
-                        border.width: 1
-                        scale: authorMa.pressed ? 0.98 : (authorMa.containsMouse ? 1.01 : 1.0)
-                        
-                        Behavior on scale { NumberAnimation { duration: 250; easing.type: Easing.OutBack } }
-                        Behavior on color { ColorAnimation { duration: 200 } }
-                        Behavior on border.color { ColorAnimation { duration: 200 } }
-
-                        RowLayout {
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-                            anchors.margins: root.s(12)
-                            spacing: root.s(15)
-                            
-                            Rectangle { 
-                                Layout.alignment: Qt.AlignVCenter
-                                width: root.s(32)
-                                height: root.s(32)
-                                radius: root.s(8)
-                                color: root.surface0
-                                border.color: root.surface2
-                                border.width: 1
-                                Text { anchors.centerIn: parent; text: ""; font.family: "Iosevka Nerd Font"; font.pixelSize: root.s(20); color: root.text } 
-                            }
-                            
-                            Row {
-                                Layout.alignment: Qt.AlignVCenter
-                                spacing: root.s(1)
-                                Repeater {
-                                    model: [ { l: "i", c: root.red }, { l: "l", c: root.peach }, { l: "y", c: root.yellow }, { l: "a", c: root.green }, { l: "m", c: root.sapphire }, { l: "i", c: root.blue }, { l: "r", c: root.mauve }, { l: "o", c: root.pink } ]
-                                    Text { 
-                                        text: modelData.l
-                                        font.family: "JetBrains Mono"
-                                        font.weight: Font.Black
-                                        font.pixelSize: root.s(14)
-                                        color: modelData.c
-                                        property real hoverOffset: authorMa.containsMouse ? root.s(-3) : 0
-                                        transform: Translate { y: hoverOffset }
-                                        Behavior on hoverOffset { NumberAnimation { duration: 300 + (index * 35); easing.type: Easing.OutBack } } 
-                                    }
-                                }
-                            }
-                            
-                            Item { Layout.fillWidth: true }
-                            
-                            Rectangle { 
-                                Layout.alignment: Qt.AlignVCenter
-                                width: root.s(28)
-                                height: root.s(28)
-                                radius: root.s(6)
-                                color: authorMa.containsMouse ? root.surface1 : "transparent"
-                                Text { 
-                                    anchors.centerIn: parent
-                                    text: ""
-                                    font.family: "Iosevka Nerd Font"
-                                    font.pixelSize: root.s(14)
-                                    color: authorMa.containsMouse ? root.mauve : root.subtext0
-                                    Behavior on color { ColorAnimation { duration: 150 } } 
-                                } 
-                            }
-                        }
-                        MouseArea { 
-                            id: authorMa
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: Quickshell.execDetached(["xdg-open", "https://github.com/ilyamiro/nixos-configuration"]) 
-                        }
-                    }
-
-                    // MODULES AND QUICK LINKS ROW
-                    RowLayout {
-                        Layout.fillWidth: true
-                        spacing: root.s(15)
-                        
-                        Repeater {
-                            model: [ 
-                                { name: "Settings", icon: "", color: "mauve", targetTab: 0, isToggle: true }, 
-                                { name: "Modules", icon: "󰣆", color: "blue", targetTab: 2, isToggle: false } 
-                            ]
-                            
-                            Rectangle {
-                                Layout.fillWidth: true
-                                Layout.preferredHeight: root.s(44)
-                                radius: root.s(8)
-                                color: navBtnMa.containsMouse ? Qt.alpha(root[modelData.color], 0.15) : Qt.alpha(root.surface0, 0.4)
-                                border.color: navBtnMa.containsMouse ? root[modelData.color] : root.surface1
-                                border.width: 1
-                                scale: navBtnMa.pressed ? 0.95 : 1.0
-                                
-                                Behavior on scale { NumberAnimation { duration: 150; easing.type: Easing.OutQuart } }
-                                Behavior on color { ColorAnimation { duration: 200 } }
-                                Behavior on border.color { ColorAnimation { duration: 200 } }
-                                
-                                RowLayout { 
-                                    anchors.centerIn: parent
+                                ColumnLayout {
+                                    Layout.fillWidth: true
                                     spacing: root.s(10)
-                                    Text { text: modelData.icon; font.family: "Iosevka Nerd Font"; font.pixelSize: root.s(16); color: root[modelData.color] } 
-                                    Text { text: modelData.name; font.family: "JetBrains Mono"; font.weight: Font.Bold; font.pixelSize: root.s(13); color: root.text } 
-                                }
-                                
-                                MouseArea { 
-                                    id: navBtnMa
-                                    anchors.fill: parent
-                                    hoverEnabled: true
-                                    cursorShape: Qt.PointingHandCursor
-                                    onClicked: {
-                                        if (modelData.isToggle) {
-                                            Quickshell.execDetached(["bash", Quickshell.env("HOME") + "/.config/hypr/scripts/qs_manager.sh", "toggle", "settings"]);
-                                        } else {
-                                            root.currentTab = modelData.targetTab;
+
+                                    RowLayout {
+                                        Layout.fillWidth: true
+                                        spacing: root.s(10)
+                                        Text { text: ""; font.family: "Iosevka Nerd Font"; font.pixelSize: root.s(18); color: root.green; Layout.alignment: Qt.AlignTop }
+                                        ColumnLayout {
+                                            Layout.fillWidth: true
+                                            spacing: root.s(2)
+                                            Text { text: "CPU"; font.family: "JetBrains Mono"; font.weight: Font.Black; font.pixelSize: root.s(10); color: root.green }
+                                            Text {
+                                                text: root.sysCPU
+                                                font.family: "JetBrains Mono"
+                                                font.weight: Font.Medium
+                                                font.pixelSize: root.s(12)
+                                                color: root.subtext0
+                                                wrapMode: Text.WordWrap
+                                                Layout.fillWidth: true
+                                            }
+                                        }
+                                    }
+
+                                    RowLayout {
+                                        Layout.fillWidth: true
+                                        spacing: root.s(10)
+                                        Text { text: "󰢮"; font.family: "Iosevka Nerd Font"; font.pixelSize: root.s(18); color: root.yellow; Layout.alignment: Qt.AlignTop }
+                                        ColumnLayout {
+                                            Layout.fillWidth: true
+                                            spacing: root.s(2)
+                                            Text { text: "GPU"; font.family: "JetBrains Mono"; font.weight: Font.Black; font.pixelSize: root.s(10); color: root.yellow }
+                                            Text {
+                                                text: root.sysGPU
+                                                font.family: "JetBrains Mono"
+                                                font.weight: Font.Medium
+                                                font.pixelSize: root.s(12)
+                                                color: root.subtext0
+                                                wrapMode: Text.WordWrap
+                                                Layout.fillWidth: true
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
+                        MouseArea { id: sysBoxMa; anchors.fill: parent; hoverEnabled: true }
                     }
 
                     Text { 
@@ -1102,205 +951,11 @@ Item {
             }
 
             // ------------------------------------------
-            // TAB 2: MODULES
+            // TAB 2: MATUGEN ENGINE
             // ------------------------------------------
             Item {
                 anchors.fill: parent
                 visible: root.currentTab === 2
-                opacity: visible ? 1.0 : 0.0
-                property real slideY: visible ? 0 : root.s(10)
-                
-                Behavior on slideY { NumberAnimation { duration: 250; easing.type: Easing.OutQuart } }
-                transform: Translate { y: slideY }
-                Behavior on opacity { NumberAnimation { duration: 250 } }
-
-                ColumnLayout {
-                    anchors.fill: parent
-                    anchors.topMargin: root.s(15)
-                    anchors.leftMargin: root.s(20)
-                    anchors.rightMargin: root.s(20)
-                    anchors.bottomMargin: root.s(20)
-                    spacing: root.s(20)
-
-                    RowLayout {
-                        Layout.fillWidth: true
-                        
-                        ColumnLayout {
-                            Layout.fillWidth: true
-                            spacing: root.s(4)
-                            Text { text: "Interactive Modules"; font.family: "JetBrains Mono"; font.weight: Font.Black; font.pixelSize: root.s(28); color: root.text }
-                            Text { text: "Use arrow keys or select below to preview. Double-click or press Enter to toggle."; font.family: "JetBrains Mono"; font.pixelSize: root.s(13); color: root.subtext0 }
-                        }
-                        
-                        Item { Layout.fillWidth: true } 
-                        
-                        Rectangle {
-                            Layout.preferredWidth: root.s(110)
-                            Layout.preferredHeight: root.s(44)
-                            radius: root.s(22)
-                            color: launchMa.containsMouse ? Qt.alpha(root.ambientBlue, 0.9) : Qt.alpha(root.ambientBlue, 0.7)
-                            border.color: root.ambientBlue
-                            border.width: 1
-                            scale: launchMa.pressed ? 0.95 : (launchMa.containsMouse ? 1.05 : 1.0)
-                            
-                            Behavior on scale { NumberAnimation { duration: 200; easing.type: Easing.OutBack } }
-                            Behavior on color { ColorAnimation { duration: 150 } }
-                            
-                            RowLayout { 
-                                anchors.centerIn: parent
-                                spacing: root.s(8)
-                                Text { text: "󰐊"; font.family: "Iosevka Nerd Font"; font.pixelSize: root.s(20); color: root.base } 
-                                Text { text: "PLAY"; font.family: "JetBrains Mono"; font.weight: Font.Black; font.pixelSize: root.s(14); color: root.base } 
-                            }
-                            
-                            MouseArea { 
-                                id: launchMa
-                                anchors.fill: parent
-                                hoverEnabled: true
-                                cursorShape: Qt.PointingHandCursor
-                                onClicked: Quickshell.execDetached(["bash", Quickshell.env("HOME") + "/.config/hypr/scripts/qs_manager.sh", "toggle", modulesDataModel.get(root.selectedModuleIndex).target]) 
-                            }
-                        }
-                    }
-
-                    Rectangle {
-                        id: previewContainer
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        radius: root.s(12)
-                        color: root.surface0
-                        border.color: root.surface2
-                        border.width: 1
-                        clip: true
-                        
-                        property string targetSource: modulesDataModel.get(root.selectedModuleIndex).preview ? Qt.resolvedUrl(modulesDataModel.get(root.selectedModuleIndex).preview) : ""
-                        
-                        onTargetSourceChanged: { 
-                            baseImage.source = overlayImage.source; 
-                            overlayImage.opacity = 0.0; 
-                            overlayImage.source = targetSource; 
-                            fadeAnim.restart(); 
-                        }
-                        
-                        Image { 
-                            id: baseImage
-                            anchors.fill: parent
-                            anchors.margins: 0
-                            fillMode: Image.PreserveAspectCrop
-                            verticalAlignment: Image.AlignTop
-                            horizontalAlignment: Image.AlignHCenter
-                            smooth: true
-                            mipmap: true
-                            asynchronous: true 
-                        }
-                        
-                        Image { 
-                            id: overlayImage
-                            anchors.fill: parent
-                            anchors.margins: 0
-                            fillMode: Image.PreserveAspectCrop
-                            verticalAlignment: Image.AlignTop
-                            horizontalAlignment: Image.AlignHCenter
-                            smooth: true
-                            mipmap: true
-                            asynchronous: true
-                            NumberAnimation on opacity { 
-                                id: fadeAnim
-                                to: 1.0
-                                duration: 350
-                                easing.type: Easing.InOutQuad 
-                            } 
-                        }
-                    }
-
-                    ListView {
-                        id: modulesList
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: root.s(90)
-                        orientation: ListView.Horizontal
-                        spacing: root.s(15)
-                        clip: true
-                        model: modulesDataModel
-                        currentIndex: root.selectedModuleIndex
-                        highlightMoveDuration: 250
-                        
-                        delegate: Rectangle {
-                            width: root.s(220)
-                            height: root.s(90)
-                            radius: root.s(12)
-                            property bool isSelected: index === root.selectedModuleIndex
-                            color: isSelected ? root.surface1 : (modMa.containsMouse ? Qt.alpha(root.surface1, 0.5) : Qt.alpha(root.surface0, 0.4))
-                            border.color: isSelected ? root.ambientBlue : (modMa.containsMouse ? root.surface2 : root.surface1)
-                            border.width: isSelected ? 2 : 1
-                            scale: isSelected ? 1.0 : (modMa.pressed ? 0.96 : (modMa.containsMouse ? 1.02 : 1.0))
-                            
-                            Behavior on scale { NumberAnimation { duration: 200; easing.type: Easing.OutBack } }
-                            Behavior on color { ColorAnimation { duration: 200 } }
-                            Behavior on border.color { ColorAnimation { duration: 200 } }
-                            
-                            ColumnLayout {
-                                anchors.fill: parent
-                                anchors.margins: root.s(12)
-                                spacing: root.s(5)
-                                RowLayout { 
-                                    spacing: root.s(10)
-                                    Rectangle { 
-                                        Layout.alignment: Qt.AlignVCenter
-                                        width: root.s(28)
-                                        height: root.s(28)
-                                        radius: root.s(6)
-                                        color: Qt.alpha(root.base, 0.5)
-                                        Text { anchors.centerIn: parent; text: model.icon; font.family: "Iosevka Nerd Font"; font.pixelSize: root.s(14); color: isSelected ? root.ambientBlue : root.text } 
-                                    } 
-                                    Text { 
-                                        text: model.title
-                                        font.family: "JetBrains Mono"
-                                        font.weight: Font.Bold
-                                        font.pixelSize: root.s(12)
-                                        color: root.text
-                                        Layout.fillWidth: true
-                                        Layout.alignment: Qt.AlignVCenter
-                                        elide: Text.ElideRight 
-                                    } 
-                                }
-                                Text { 
-                                    text: model.desc
-                                    font.family: "JetBrains Mono"
-                                    font.pixelSize: root.s(10)
-                                    color: root.subtext0
-                                    Layout.alignment: Qt.AlignLeft
-                                    Layout.fillWidth: true
-                                    Layout.fillHeight: true
-                                    wrapMode: Text.WordWrap
-                                    elide: Text.ElideRight 
-                                }
-                            }
-                            
-                            MouseArea { 
-                                id: modMa
-                                anchors.fill: parent
-                                hoverEnabled: true
-                                cursorShape: Qt.PointingHandCursor
-                                onClicked: { 
-                                    root.selectedModuleIndex = index; 
-                                    modulesList.positionViewAtIndex(index, ListView.Contain); 
-                                }
-                                onDoubleClicked: { 
-                                    root.selectedModuleIndex = index; 
-                                    Quickshell.execDetached(["bash", Quickshell.env("HOME") + "/.config/hypr/scripts/qs_manager.sh", "toggle", model.target]) 
-                                } 
-                            }
-                        }
-                    }
-                }
-            }
-
-            // ------------------------------------------
-            // TAB 3: MATUGEN ENGINE
-            // ------------------------------------------
-            Item {
-                anchors.fill: parent
-                visible: root.currentTab === 3
                 opacity: visible ? 1.0 : 0.0
                 property real slideY: visible ? 0 : root.s(10)
                 
@@ -1364,13 +1019,13 @@ Item {
                                             y: parent.height / 2 - root.s(3)
                                             SequentialAnimation on x { 
                                                 loops: Animation.Infinite
-                                                running: root.currentTab === 3
+                                                running: root.currentTab === 2
                                                 PauseAnimation { duration: index * 400 }
                                                 NumberAnimation { from: 0; to: parent.width; duration: 1200; easing.type: Easing.InOutSine } 
                                             } 
                                             SequentialAnimation on opacity { 
                                                 loops: Animation.Infinite
-                                                running: root.currentTab === 3
+                                                running: root.currentTab === 2
                                                 PauseAnimation { duration: index * 400 }
                                                 NumberAnimation { from: 0; to: 1; duration: 300 }
                                                 PauseAnimation { duration: 600 }
@@ -1391,7 +1046,7 @@ Item {
                                 
                                 SequentialAnimation on border.width { 
                                     loops: Animation.Infinite
-                                    running: root.currentTab === 3
+                                    running: root.currentTab === 2
                                     NumberAnimation { from: root.s(1); to: root.s(4); duration: 1000; easing.type: Easing.InOutSine }
                                     NumberAnimation { from: root.s(4); to: root.s(1); duration: 1000; easing.type: Easing.InOutSine } 
                                 }
@@ -1413,7 +1068,7 @@ Item {
                                                 color: modelData
                                                 SequentialAnimation on scale { 
                                                     loops: Animation.Infinite
-                                                    running: root.currentTab === 3
+                                                    running: root.currentTab === 2
                                                     PauseAnimation { duration: index * 150 }
                                                     NumberAnimation { to: 1.3; duration: 300; easing.type: Easing.OutQuart }
                                                     NumberAnimation { to: 1.0; duration: 400; easing.type: Easing.OutQuart }
@@ -1442,13 +1097,13 @@ Item {
                                             y: parent.height / 2 - root.s(3)
                                             SequentialAnimation on x { 
                                                 loops: Animation.Infinite
-                                                running: root.currentTab === 3
+                                                running: root.currentTab === 2
                                                 PauseAnimation { duration: index * 400 }
                                                 NumberAnimation { from: 0; to: parent.width; duration: 1200; easing.type: Easing.InOutSine } 
                                             } 
                                             SequentialAnimation on opacity { 
                                                 loops: Animation.Infinite
-                                                running: root.currentTab === 3
+                                                running: root.currentTab === 2
                                                 PauseAnimation { duration: index * 400 }
                                                 NumberAnimation { from: 0; to: 1; duration: 300 }
                                                 PauseAnimation { duration: 600 }
@@ -1525,11 +1180,11 @@ Item {
             }
 
             // ------------------------------------------
-            // TAB 4: ABOUT
+            // TAB 3: ABOUT
             // ------------------------------------------
             Item {
                 anchors.fill: parent
-                visible: root.currentTab === 4
+                visible: root.currentTab === 3
                 opacity: visible ? 1.0 : 0.0
                 property real slideY: visible ? 0 : root.s(10)
                 
