@@ -1,14 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 let
   wallpaperPath = "/home/maksim/Desktop/Projects/NixOS-Config/images/background.jpg";
+  quickshellPackage = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
 in
 {
-  xdg.configFile."eww" = {
-    source = ../configs/eww;
-    recursive = true;
-  };
-
   xdg.configFile."hypr/scripts" = {
     source = ../configs/hypr/scripts;
     recursive = true;
@@ -122,6 +118,38 @@ in
     enable = true;
     topMargin = 0.9;
     stylePath = "${config.home.homeDirectory}/.config/swayosd/style.css";
+  };
+
+  systemd.user.services.quickshell = {
+    Unit = {
+      Description = "Quickshell desktop shell";
+      After = [ "graphical-session.target" "hyprland-session.target" ];
+      PartOf = [ "graphical-session.target" "hyprland-session.target" ];
+    };
+
+    Service = {
+      ExecStart = "${quickshellPackage}/bin/quickshell -p ${config.home.homeDirectory}/.config/hypr/scripts/quickshell/Shell.qml";
+      Restart = "on-failure";
+      RestartSec = 2;
+    };
+
+    Install.WantedBy = [ "graphical-session.target" "hyprland-session.target" ];
+  };
+
+  systemd.user.services.quickshell-focustime = {
+    Unit = {
+      Description = "Quickshell focus time daemon";
+      After = [ "graphical-session.target" "hyprland-session.target" ];
+      PartOf = [ "graphical-session.target" "hyprland-session.target" ];
+    };
+
+    Service = {
+      ExecStart = "${pkgs.python3}/bin/python3 ${config.home.homeDirectory}/.config/hypr/scripts/quickshell/focustime/focus_daemon.py";
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
+
+    Install.WantedBy = [ "graphical-session.target" "hyprland-session.target" ];
   };
 
   services.hyprpaper = {
@@ -274,8 +302,6 @@ in
         "wl-paste --type image --watch cliphist store"
         "swww-daemon"
         "sh -c 'sleep 0.5; swww img ${wallpaperPath}'"
-        "quickshell -p ~/.config/hypr/scripts/quickshell/Shell.qml"
-        "python3 ~/.config/hypr/scripts/quickshell/focustime/focus_daemon.py"
       ];
     };
 

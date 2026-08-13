@@ -40,8 +40,6 @@
     kitty
     # Оконный переключатель
     rofi
-    # Панель состояния
-    eww
     # Демон для уведомлений
     mako
     # Утилита для работы с буфером обмена
@@ -68,21 +66,6 @@
     nmgui
     # Графический агент аутентификации
     polkit_gnome
-    # CLI для уведомлений eww/widgets
-    # libnotify
-    # Получение погодных данных для eww
-    # curl
-    # JSON parser для оригинальных eww weather/quotes scripts
-    # jq
-    # ALSA mixer, используется оригинальными eww volume scripts
-    # alsa-utils
-    # MPD client, используется оригинальным dashboard music widget
-    # mpc
-    # Обложки треков MPD в dashboard
-    # ffmpeg
-    # Блокировка и bspc-команды, ожидаемые оригинальным Tokyo eww
-    # betterlockscreen
-    # bspwm
     # Файловый менеджер
     nautilus
     # Управление блютузом
