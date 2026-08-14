@@ -17,15 +17,9 @@
 
     # Смарт очистка билдов системы
     nix-gc-env.url = "github:Julow/nix-gc-env";
-
-    # Quickshell для оформления пространства
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 	};
 
-	outputs = { nixpkgs, nixpkgs-stable, home-manager, aagl, nix-gc-env, ... }@inputs:
+	outputs = { nixpkgs, nixpkgs-stable, home-manager, aagl, nix-gc-env, ... }:
     let
       system = "x86_64-linux";
 
@@ -39,11 +33,9 @@
 
         # Передаем стабильный срез пакетов во все модули системы
         specialArgs = {
-          inherit inputs;
-
           pkgs-stable = import nixpkgs-stable {
             system = "x86_64-linux";
-            config.allowUnfree = true; # Разрешаем несвободные пакеты (MongoDB)
+            config.allowUnfree = true;
           };
         };
 
@@ -55,7 +47,6 @@
             home-manager.useUserPackages = true;
 
             home-manager.users.maksim = import ./hosts/maksim/default.${hostType}.nix;
-            home-manager.extraSpecialArgs = { inherit inputs; };
           }
 
           aagl.nixosModules.default

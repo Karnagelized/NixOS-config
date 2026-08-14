@@ -255,6 +255,7 @@ cp //etc/nixos/hardware-configuration.nix ~/Desktop/Projects/НАЗВАНИЕ П
 
         # Передаем стабильный срез пакетов во все модули системы
         specialArgs = {
+          # !!! Закомментировать
           inherit inputs;
 
           pkgs-stable = import nixpkgs-stable {
