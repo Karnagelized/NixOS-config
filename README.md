@@ -107,10 +107,12 @@ NixOS-Config/
 
 `hosts/maksim:`
 * `default.desktop.nix` - Пользовательские настройки для Desktop профиля
+* `default.desktop-gnome.nix` - Пользовательские настройки для Desktop профиля с DE GNOME
 * `default.laptop.nix` - Пользовательские настройки для Laptop профиля
 
 `hosts/root:`
 * `default.desktop.nix` - Системные настройки для Desktop профиля
+* `default.desktop-gnome.nix` - Системные настройки для Desktop профиля с DE GNOME
 * `default.laptop.nix` - Системные настройки для Laptop профиля
 
 `images:`
@@ -165,7 +167,7 @@ NixOS-Config/
 * [ConfigHub - приватный](https://github.com/Karnagelized/ConfigHub)
 
 Команда `nix-shell -p git` позволит создать изолированную среду с командами `git` для клонирования.
-После успешного клонирования репозитория, необходимо заменить файл `NixOS-config/(desktop|laptop)/base/hardware-configuration.nix` на
+После успешного клонирования репозитория, необходимо заменить файл `NixOS-config/(desktop|desktop-gnome|laptop)/base/hardware-configuration.nix` на
 актуальный из системы через команды. Учитываем тип системы `desktop или laptop`:
 
 ```shell

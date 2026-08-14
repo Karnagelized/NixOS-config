@@ -31,8 +31,8 @@
 
       # !!! Важно поменять тип системы
       # Ноутбук -> laptop
-      # ПК -> desktop
-      hostType = "desktop";
+      # ПК -> desktop | desktop-gnome
+      hostType = "desktop-gnome";
     in {
       nixosConfigurations.maksim = nixpkgs.lib.nixosSystem {
         inherit system;
