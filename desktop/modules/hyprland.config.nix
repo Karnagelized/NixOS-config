@@ -345,7 +345,6 @@ in
 
       bind = [
         "SUPER, T, exec, $terminal"
-        "SUPER, R, exec, $menu"
         "SUPER, E, exec, nautilus"
         "SUPER, Q, killactive"
         "SUPER, F, fullscreen"
@@ -383,7 +382,6 @@ in
         "SUPER, M, exec, ~/.config/hypr/scripts/qs_manager.sh toggle monitors"
         "SUPER SHIFT, S, exec, ~/.config/hypr/scripts/qs_manager.sh toggle settings"
         "SUPER, B, exec, ~/.config/hypr/scripts/qs_manager.sh toggle battery"
-        "SUPER, W, exec, ~/.config/hypr/scripts/qs_manager.sh toggle wallpaper"
         "SUPER, S, exec, ~/.config/hypr/scripts/qs_manager.sh toggle calendar"
         "SUPER, N, exec, ~/.config/hypr/scripts/qs_manager.sh toggle network"
         "SUPER SHIFT, T, exec, ~/.config/hypr/scripts/qs_manager.sh toggle focustime"
@@ -393,10 +391,12 @@ in
       ];
 
       bindl = [
-        ", Print, exec, bash ~/.config/hypr/scripts/screenshot.sh"
-        "SHIFT, Print, exec, bash ~/.config/hypr/scripts/screenshot.sh --edit"
-        "SUPER, Print, exec, bash ~/.config/hypr/scripts/screenshot.sh --full"
-        "SUPER SHIFT, Print, exec, bash ~/.config/hypr/scripts/screenshot.sh --full --edit"
+        "SUPER SHIFT, P, exec, bash ~/.config/hypr/scripts/screenshot.sh"
+        "SUPER, P, exec, bash ~/.config/hypr/scripts/screenshot.sh --full"
+        ", unknown, exec, true"
+        "SHIFT, unknown, exec, true"
+        "SUPER, unknown, exec, true"
+        "SUPER SHIFT, unknown, exec, true"
         ", XF86AudioMicMute, exec, swayosd-client --input-volume mute-toggle"
         ", XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
         ", XF86AudioPlay, exec, playerctl play-pause"

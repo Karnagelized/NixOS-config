@@ -963,7 +963,6 @@ Item {
                         color: "blue",
                         binds: [
                             { key: "Super + T", desc: "Открыть терминал Kitty" },
-                            { key: "Super + R", desc: "Открыть меню приложений Rofi" },
                             { key: "Super + E", desc: "Открыть файловый менеджер Nautilus" },
                             { key: "Super + Q", desc: "Закрыть активное окно" },
                             { key: "Super + F", desc: "Переключить полноэкранный режим" },
@@ -1007,7 +1006,6 @@ Item {
                             { key: "Super + M", desc: "Открыть панель мониторов" },
                             { key: "Super + Shift + S", desc: "Открыть настройки Quickshell" },
                             { key: "Super + B", desc: "Открыть панель батареи и питания" },
-                            { key: "Super + W", desc: "Открыть выбор обоев" },
                             { key: "Super + S", desc: "Открыть календарь" },
                             { key: "Super + N", desc: "Открыть сеть и Bluetooth" },
                             { key: "Super + Shift + T", desc: "Открыть Focus Time" },
@@ -1020,10 +1018,8 @@ Item {
                         icon: "󰄀",
                         color: "yellow",
                         binds: [
-                            { key: "Print", desc: "Открыть панель скриншота и записи" },
-                            { key: "Shift + Print", desc: "Открыть скриншот с режимом редактирования" },
-                            { key: "Super + Print", desc: "Сделать скриншот всего экрана" },
-                            { key: "Super + Shift + Print", desc: "Сделать скриншот всего экрана и открыть редактор" }
+                            { key: "Super + Shift + P", desc: "Открыть панель скриншота и записи" },
+                            { key: "Super + P", desc: "Сделать скриншот всего экрана" }
                         ]
                     },
                     {
