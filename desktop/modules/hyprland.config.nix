@@ -356,9 +356,14 @@ in
         "SUPER, 4, workspace, 4"
         "SUPER, 5, workspace, 5"
         "SUPER, 6, workspace, 6"
+        "SUPER, 7, workspace, 7"
+        "SUPER, 8, workspace, 8"
+        "SUPER, 9, workspace, 9"
 
         "SUPER CTRL, Left, workspace, e-1"
         "SUPER CTRL, Right, workspace, e+1"
+        "SUPER ALT, Left, workspace, e-1"
+        "SUPER ALT, Right, workspace, e+1"
 
         "SUPER, Left, movefocus, l"
         "SUPER, Down, movefocus, d"
