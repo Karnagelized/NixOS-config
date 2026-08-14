@@ -1023,6 +1023,16 @@ Item {
                         ]
                     },
                     {
+                        title: "Отключенные",
+                        icon: "󰜺",
+                        color: "red",
+                        binds: [
+                            { key: "Super + W", desc: "Отключено: выбор обоев" },
+                            { key: "Shift + unknown", desc: "Отключено: бывший Shift + Print для скриншота с редактором" },
+                            { key: "Super + Shift + unknown", desc: "Отключено: бывший Super + Shift + Print для скриншота всего экрана с редактором" }
+                        ]
+                    },
+                    {
                         title: "Медиа и устройства",
                         icon: "󰝚",
                         color: "pink",
