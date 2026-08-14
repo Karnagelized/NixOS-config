@@ -22,6 +22,8 @@
       ../../desktop-gnome/modules/hardware.nix
       ../../desktop-gnome/modules/packages.nix
       ../../desktop-gnome/modules/keyboard.nix
+      ../../desktop-gnome/modules/games.nix
+      ../../desktop-gnome/modules/steam.nix
     ];
 
   # Bootloader
