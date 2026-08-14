@@ -18,7 +18,7 @@ if ! command -v notify-send &> /dev/null; then
     exit 1
 fi
 
-REQUIRED_CMDS=("gpu-screen-recorder" "grim" "satty" "wl-copy" "pactl" "quickshell" "zbarimg" "python3")
+REQUIRED_CMDS=("gpu-screen-recorder" "grim" "satty" "wl-copy" "pactl" "quickshell" "zbarimg" "python3" "hyprctl")
 MISSING_CMDS=()
 
 for cmd in "${REQUIRED_CMDS[@]}"; do
@@ -32,6 +32,22 @@ if [ ${#MISSING_CMDS[@]} -ne 0 ]; then
     exit 1
 fi
 # ---------------------------------------------------------
+
+get_active_monitor() {
+    hyprctl -j activeworkspace 2>/dev/null | python3 -c '
+import json
+import sys
+
+try:
+    data = json.load(sys.stdin)
+except Exception:
+    data = {}
+
+monitor = data.get("monitor", "")
+if monitor:
+    print(monitor)
+'
+}
 
 # Directories
 SAVE_DIR="${XDG_PICTURES_DIR:-$HOME/Pictures}/Screenshots"
@@ -287,13 +303,20 @@ if [ "$FULL_MODE" = true ] || [ -n "$GEOMETRY" ]; then
     fi
 
     # Mode: Screenshot
-    GRIM_CMD="grim -"
-    [ -n "$GEOMETRY" ] && GRIM_CMD="grim -g \"$GEOMETRY\" -"
+    GRIM_CMD=(grim -)
+    if [ -n "$GEOMETRY" ]; then
+        GRIM_CMD=(grim -g "$GEOMETRY" -)
+    elif [ "$FULL_MODE" = true ]; then
+        ACTIVE_MONITOR=$(get_active_monitor)
+        if [ -n "$ACTIVE_MONITOR" ]; then
+            GRIM_CMD=(grim -o "$ACTIVE_MONITOR" -)
+        fi
+    fi
 
     if [ "$EDIT_MODE" = true ]; then
-        eval $GRIM_CMD | GSK_RENDERER=gl satty --filename - --output-filename "$FILENAME" --init-tool brush --copy-command wl-copy
+        "${GRIM_CMD[@]}" | GSK_RENDERER=gl satty --filename - --output-filename "$FILENAME" --init-tool brush --copy-command wl-copy
     else
-        eval $GRIM_CMD | tee "$FILENAME" | wl-copy
+        "${GRIM_CMD[@]}" | tee "$FILENAME" | wl-copy
     fi
 
     if [ -s "$FILENAME" ]; then

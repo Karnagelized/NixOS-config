@@ -1019,7 +1019,7 @@ Item {
                         color: "yellow",
                         binds: [
                             { key: "Super + Shift + P", desc: "Открыть панель скриншота и записи" },
-                            { key: "Super + P", desc: "Сделать скриншот всего экрана" }
+                            { key: "Super + P", desc: "Сделать скриншот активного экрана" }
                         ]
                     },
                     {
