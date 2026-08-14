@@ -65,6 +65,7 @@ desktop
 * `Создавать диск с папкой игры` - `g: On`
 
 2. Игра
+* `Game command` - `%command% -platform_type CLOUD_THIRD_PARTY_PC`
 * `HUD` - `Нет`
 * `FSR` - `Off`
 * `Gamemode` - `off`
