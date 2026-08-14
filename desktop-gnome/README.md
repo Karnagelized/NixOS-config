@@ -1,5 +1,4 @@
-# Laptop версия конфигурации NixOS
-Данная конфигурация рассчитана под ноутбук 14 дюймов.
+# Desktop версия конфигурации NixOS
 
 ## О системе
 DE: Gnome (Все из коробки)
@@ -7,33 +6,33 @@ DE: Gnome (Все из коробки)
 
 ## Архитектура
 ```text
-laptop
-├── base
+desktop-gnome/
+├── base/
 │   └── hardware-configuration.nix
-├── configs
+├── configs/
 │   ├── fastfetch.config.nix
 │   ├── git.config.nix
 │   ├── gnome-binds.config.nix
 │   └── zsh.config.nix
-├── exports
+├── exports/
 │   └── p10k.zsh
-├── modules
+├── modules/
 │   ├── gnome.nix
 │   ├── hardware.nix
 │   ├── keyboard.nix
 │   └── packages.nix
-├── scripts
+├── scripts/
 │   └── work-layout
 └── README.md
 ```
 
 `base:`
-* `hardware-configuration.nix` - Конфигурация томов ноутбука
+* `hardware-configuration.nix` - Конфигурация томов ПК
 
 `configs:`
 * `fastfetch.config.nix` - Конфигурация для fastfetch
 * `git.config.nix` - Конфигурация для Git
-* `gnome-binds.config.nix` - Конфигурация для кастомных шоркадов GNOME
+* `gnome-binds.config.nix` - Конфигурация для кастомных шорткадов GNOME
 * `zsh.config.nix` - Конфигурация для zsh
 
 `exports:`

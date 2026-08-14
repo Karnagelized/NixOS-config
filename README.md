@@ -16,9 +16,8 @@
 В качестве DE на ноутбуке используется GNOME, а на домашнем ПК всё строится вокруг менеджера Hyprland.
 ```
 NixOS-Config/
-NixOS-Config/
-├── common
-│   ├── happ
+├── common/
+│   ├── happ/
 │   │   ├── happ-module.nix
 │   │   └── happ.nix
 │   ├── bluetooth.nix
@@ -31,17 +30,24 @@ NixOS-Config/
 │   ├── printing.nix
 │   ├── services.nix
 │   └── sound.nix
-├── desktop
-│   ├── base
+├── desktop/
+│   ├── base/
 │   │   └── hardware-configuration.nix
-│   ├── configs
+│   ├── configs/
+│   │   ├── eww-old/
+│   │   │   ├── ...
+│   │   ├── hypr/
+│   │   │   ├── ...
+│   │   ├── matugen/
+│   │   │   ├── ...
+│   │   ├── sddm/
+│   │   │   └── ...
 │   │   ├── fastfetch.config.nix
 │   │   ├── git.config.nix
-│   │   ├── gnome-binds.config.nix
 │   │   └── zsh.config.nix
-│   ├── exports
+│   ├── exports/
 │   │   └── p10k.zsh
-│   ├── modules
+│   ├── modules/
 │   │   ├── games.nix
 │   │   ├── hardware.nix
 │   │   ├── hyprland.config.nix
@@ -49,40 +55,67 @@ NixOS-Config/
 │   │   ├── packages.nix
 │   │   └── steam.nix
 │   └── README.md
-├── hosts
-│   ├── maksim
-│   │   ├── default.desktop.nix
-│   │   └── default.laptop.nix
-│   └── root
-│       ├── default.desktop.nix
-│       └── default.laptop.nix
-├── images
-│   └── background.jpg
-├── laptop
-│   ├── base
+├── desktop-gnome/
+│   ├── base/
 │   │   └── hardware-configuration.nix
-│   ├── configs
+│   ├── configs/
 │   │   ├── fastfetch.config.nix
 │   │   ├── git.config.nix
 │   │   ├── gnome-binds.config.nix
 │   │   └── zsh.config.nix
-│   ├── exports
+│   ├── exports/
 │   │   └── p10k.zsh
-│   ├── modules
+│   ├── modules/
 │   │   ├── gnome.nix
 │   │   ├── hardware.nix
 │   │   ├── keyboard.nix
 │   │   └── packages.nix
-│   ├── scripts
+│   ├── scripts/
 │   │   └── work-layout
 │   └── README.md
-├── plugins
-│   └── exports
+├── hosts/
+│   ├── maksim/
+│   │   ├── default.desktop-gnome.nix
+│   │   ├── default.desktop.nix
+│   │   └── default.laptop.nix
+│   └── root/
+│       ├── default.desktop-gnome.nix
+│       ├── default.desktop.nix
+│       └── default.laptop.nix
+├── images/
+│   └── background.jpg
+├── laptop/
+│   ├── base/
+│   │   └── hardware-configuration.nix
+│   ├── configs/
+│   │   ├── fastfetch.config.nix
+│   │   ├── git.config.nix
+│   │   ├── gnome-binds.config.nix
+│   │   └── zsh.config.nix
+│   ├── exports/
+│   │   └── p10k.zsh
+│   ├── modules/
+│   │   ├── gnome.nix
+│   │   ├── hardware.nix
+│   │   ├── keyboard.nix
+│   │   └── packages.nix
+│   ├── scripts/
+│   │   └── work-layout
+│   └── README.md
+├── modules/
+│   ├── happ/
+│   │   ├── happ-module.nix
+│   │   └── happ.nix
+│   ├── games.nix
+│   └── steam.nix
+├── plugins/
+│   └── exports/
 │       ├── dashToPanel-config
 │       └── desktop-widget
 ├── README.md
 ├── flake.lock
 └── flake.nix
+
 ```
 
 `/:`
@@ -184,6 +217,8 @@ cp //etc/nixos/hardware-configuration.nix ~/Desktop/Projects/НАЗВАНИЕ П
 
 ```text
 {
+  ...
+  
   inputs = {
     ...
 
@@ -192,30 +227,56 @@ cp //etc/nixos/hardware-configuration.nix ~/Desktop/Projects/НАЗВАНИЕ П
     # aagl.url = "github:ezKEa/aagl-gtk-on-nix/release-26.05";
     # aagl.inputs.nixpkgs.follows = "nixpkgs";
 
-    # !!! Изменить выходные параметры, убрать `aagl`:
+    ...
+    
+    # !!! Закомментировать
+    # Quickshell для оформления пространства
+    # quickshell = {
+    #   url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+  };
+
+    # !!! Изменить выходные параметры, убрать `aagl` и @inputs:
     # Было:
-	outputs = { nixpkgs, nixpkgs-stable, home-manager, aagl, nix-gc-env, ... }:
+	outputs = { nixpkgs, nixpkgs-stable, home-manager, aagl, nix-gc-env, ... }@inputs:
     # Стало:
 	outputs = { nixpkgs, nixpkgs-stable, home-manager, nix-gc-env, ... }:
-	
     let
       ...
-      
+
       # !!! Важно поменять тип системы
       # Ноутбук -> laptop
-      # ПК -> desktop
-      hostType = "desktop";
+      # ПК -> desktop | desktop-gnome
+      hostType = "desktop-gnome";
     in {
       nixosConfigurations.maksim = nixpkgs.lib.nixosSystem {
         ...
 
+        # Передаем стабильный срез пакетов во все модули системы
+        specialArgs = {
+          inherit inputs;
+
+          pkgs-stable = import nixpkgs-stable {
+            system = "x86_64-linux";
+            config.allowUnfree = true; # Разрешаем несвободные пакеты (MongoDB)
+          };
+        };
+
         modules = [
-          ...
+          ./hosts/root/default.${hostType}.nix
+
+          home-manager.nixosModules.home-manager {
+            ...
+
+            # !!! Закомментировать
+            # home-manager.extraSpecialArgs = { inherit inputs; };
+          }
           
-          # !!! Закомментировать строчку
+          # !!! Закомментировать
           # aagl.nixosModules.default
 
-          ...
+          nix-gc-env.nixosModules.default
         ];
       };
     };
@@ -325,3 +386,4 @@ nix-rebuild-test
 ## Лицензии
 1. Для `Happ` модуля был использован и доработан код из репозитория [happ-nixos
 ](https://github.com/MrShitFox/happ-nixos)
+2. Для конфигурации с `Desktop - Hyprland` был использован за основу конфиг из репозитория [serpantinum](https://github.com/ilyamiro/serpantinum)
