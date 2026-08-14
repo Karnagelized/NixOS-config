@@ -1,5 +1,21 @@
 { pkgs, ... }:
 
+let
+  sddmTheme = pkgs.stdenvNoCC.mkDerivation {
+    pname = "qs-lock-sddm-theme";
+    version = "1.0";
+    src = ../configs/sddm/qs-lock;
+
+    dontBuild = true;
+
+    installPhase = ''
+      theme_dir="$out/share/sddm/themes/qs-lock"
+      mkdir -p "$theme_dir"
+      cp -r . "$theme_dir"
+      cp ${../../images/background.jpg} "$theme_dir/background.jpg"
+    '';
+  };
+in
 {
   programs.hyprland = {
     enable = true;
@@ -11,6 +27,11 @@
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
+    theme = "qs-lock";
+    settings = {
+      General.GreeterEnvironment = "QT_QML_DISABLE_DISK_CACHE=1";
+      Theme.ThemeDir = "${sddmTheme}/share/sddm/themes";
+    };
   };
 
   services.blueman.enable = true;
@@ -35,6 +56,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    sddmTheme
     obs-studio
     # Терминал
     kitty

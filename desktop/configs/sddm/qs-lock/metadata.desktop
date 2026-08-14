@@ -1,0 +1,12 @@
+[SddmGreeterTheme]
+Name=QS Lock
+Description=Lock-screen inspired SDDM theme for Maksim Hyprland
+Type=sddm-theme
+Author=Maksim
+License=MIT
+Version=1.0
+MainScript=Main.qml
+ConfigFile=theme.conf
+Theme-Id=qs-lock
+Theme-API=2.0
+QtVersion=6
