@@ -129,28 +129,31 @@ in
     '';
   };
 
-  xdg.configFile."swayosd/style.css".text = ''
-    window {
-      border-radius: 8px;
-      background: #1e1e2e;
-      border: 2px solid #89b4fa;
-    }
+  xdg.configFile."swayosd/style.css" = {
+    force = true;
+    text = ''
+      window {
+        border-radius: 8px;
+        background: #1e1e2e;
+        border: 2px solid #89b4fa;
+      }
 
-    progressbar {
-      border-radius: 6px;
-      background: #313244;
-    }
+      progressbar {
+        border-radius: 6px;
+        background: #313244;
+      }
 
-    progress {
-      border-radius: 6px;
-      background: #89b4fa;
-    }
+      progress {
+        border-radius: 6px;
+        background: #89b4fa;
+      }
 
-    label {
-      color: #cdd6f4;
-      font-family: "JetBrains Mono";
-    }
-  '';
+      label {
+        color: #cdd6f4;
+        font-family: "JetBrains Mono";
+      }
+    '';
+  };
 
   home.packages = with pkgs; [
     acpi
