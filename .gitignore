@@ -4,5 +4,4 @@
 result
 
 # Зависимости пакетов
-flake.nix
 flake.lock
