@@ -32,8 +32,8 @@ let
   	zoom-us
     # Клиент для Samsung Buds
     galaxy-buds-client
-    # Замена стандартного приложения с погодой
-    mousam
+    # Платформа для игр
+    lutris
   ];
 
   # Пакеты для работы с БД
@@ -137,8 +137,6 @@ in {
     gnome-characters
     # Музыка
     gnome-music
-    # Погода
-    gnome-weather
   ];
 
   # Отключение предустановленных пакетов Сервера

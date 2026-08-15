@@ -11,15 +11,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # AAGL Для лаунчера Genshin Impact
-    aagl.url = "github:ezKEa/aagl-gtk-on-nix/release-26.05";
-    aagl.inputs.nixpkgs.follows = "nixpkgs";
-
     # Смарт очистка билдов системы
     nix-gc-env.url = "github:Julow/nix-gc-env";
 	};
 
-	outputs = { nixpkgs, nixpkgs-stable, home-manager, aagl, nix-gc-env, ... }:
+	outputs = { nixpkgs, nixpkgs-stable, home-manager, nix-gc-env, ... }:
     let
       system = "x86_64-linux";
 
@@ -48,8 +44,6 @@
 
             home-manager.users.maksim = import ./hosts/maksim/default.${hostType}.nix;
           }
-
-          aagl.nixosModules.default
 
           nix-gc-env.nixosModules.default
         ];

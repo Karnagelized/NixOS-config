@@ -71,25 +71,6 @@ desktop-gnome/
 ### Hardware модуль (Опционально)
 В `modules/hardware.nix` необходимо настроить драйвера для видеокарты.
 
-### Games модуль
-Для Genshin Impact в `AAGL` необходимо выставить:
-
-1. Wine:
-* `Синхронизация` - `None`
-* `Enable timeout fix` - `On`
-* `Создавать диск C:` - `On`
-* `Создавать диск с папкой игры` - `g: On`
-
-2. Игра:
-* `Game command` - `%command% -platform_type CLOUD_THIRD_PARTY_PC`
-* `HUD` - `Нет`
-* `FSR` - `Off`
-* `Gamemode` - `off`
-* `Gamescope` - `off`
-
-3. FPS Unlocker:
-* `Включен` - `Off`
-
 
 ## Настройка расширений
 [//]: # (TODO сделать декларативным установку всех конфигураций расширений)
