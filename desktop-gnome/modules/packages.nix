@@ -67,6 +67,9 @@ let
   	elmPackages.nodejs
     # Lofi Музыка
     lowfi
+    # Архиватор/Разорхиватор
+    unzip
+    atool
   ];
 
   # Расширения
