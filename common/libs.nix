@@ -6,13 +6,18 @@ let
     # Базовые библиотеки компилятора
     stdenv.cc.cc.lib
     zlib
+    glib
 
-    # Библиотеки X11 для работы графического интерфейса (исправляет libXext.so.6)
+    # Библиотеки X11 и Wayland для графического интерфейса
+    libxkbcommon
+    wayland
     libXext
     libX11
     libXrender
     libXtst
     libXi
+    xorg.libXcursor
+    xorg.libXrandr
 
     # Шрифты и рендеринг текста
     freetype
@@ -23,6 +28,5 @@ in {
   programs.nix-ld.enable = true;
 
   # Слияние всех библиотек в одно окружение
-  programs.nix-ld.libraries =
-    nixLibs;
+  programs.nix-ld.libraries = nixLibs;
 }

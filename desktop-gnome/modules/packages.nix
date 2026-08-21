@@ -102,12 +102,12 @@ let
     gnomeExtensions.user-themes
   ];
 in {
-  imports = [
-    ../../common/happ/happ-module.nix
-  ];
+  # imports = [
+    # ../../common/happ/happ-module.nix
+  # ];
 
   # Happ клиент
-  services.happ.enable = true;
+  # services.happ.enable = true;
 
   # Разрешение на установку не бесплатных пакетов
   nixpkgs.config.allowUnfree = true;
