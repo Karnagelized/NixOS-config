@@ -107,7 +107,17 @@ in {
   # ];
 
   # Happ клиент
-  # services.happ.enable = true;
+  # services.happ = {
+    # enable = true;
+    # forceXwayland = true;
+    # forceSoftwareRendering = true;
+  # };
+
+  # Настройка модуля Throne с поддержкой TUN режима
+  programs.throne = {
+    enable = true;
+    tunMode.enable = true;
+  };
 
   # Разрешение на установку не бесплатных пакетов
   nixpkgs.config.allowUnfree = true;
