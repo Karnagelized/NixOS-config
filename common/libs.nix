@@ -16,8 +16,8 @@ let
     libXrender
     libXtst
     libXi
-    xorg.libXcursor
-    xorg.libXrandr
+    libXcursor
+    libXrandr
 
     # Шрифты и рендеринг текста
     freetype
