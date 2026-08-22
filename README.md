@@ -5,24 +5,20 @@
 Любая `правка системы, пакета и другого, должна быть отражена в конфигурационном файле` (Кроме моментов с пиратскими 
 или ломанными приложениями).
 
-Данная конфигурация рассчитана на 2 типа - ноутбук и домашний ПК. От этого типа зависит выбор сборки на GNOME или 
-на Hyprland.
+Данная конфигурация рассчитана для домашнего ПК с DE `GNOME`.
 
 
 # Архитектура файлов
-Актуальна на момент `09.08.2026`
 
-Данная архитектура предполагает использование 2-х разных пространств для ноутбука и домашнего ПК.
-В качестве DE на ноутбуке используется GNOME, а на домашнем ПК всё строится вокруг менеджера Hyprland.
+Актуальна на момент `22.08.2026`
+
 ```
 NixOS-Config/
 ├── common/
-│   ├── happ/
-│   │   ├── happ-module.nix
-│   │   └── happ.nix
 │   ├── bluetooth.nix
 │   ├── docker.nix
 │   ├── fonts.nix
+│   ├── hardware-configuration.nix
 │   ├── libs.nix
 │   ├── location.nix
 │   ├── network.nix
@@ -30,88 +26,32 @@ NixOS-Config/
 │   ├── printing.nix
 │   ├── services.nix
 │   └── sound.nix
-├── desktop/
-│   ├── base/
-│   │   └── hardware-configuration.nix
-│   ├── configs/
-│   │   ├── eww-old/
-│   │   │   ├── ...
-│   │   ├── hypr/
-│   │   │   ├── ...
-│   │   ├── matugen/
-│   │   │   ├── ...
-│   │   ├── sddm/
-│   │   │   └── ...
-│   │   ├── fastfetch.config.nix
-│   │   ├── git.config.nix
-│   │   └── zsh.config.nix
-│   ├── exports/
-│   │   └── p10k.zsh
-│   ├── modules/
-│   │   ├── games.nix
-│   │   ├── hardware.nix
-│   │   ├── hyprland.config.nix
-│   │   ├── hyprland.nix
-│   │   ├── packages.nix
-│   │   └── steam.nix
-│   └── README.md
-├── desktop-gnome/
-│   ├── base/
-│   │   └── hardware-configuration.nix
-│   ├── configs/
-│   │   ├── fastfetch.config.nix
-│   │   ├── git.config.nix
-│   │   ├── gnome-binds.config.nix
-│   │   └── zsh.config.nix
-│   ├── exports/
-│   │   └── p10k.zsh
-│   ├── modules/
-│   │   ├── gnome.nix
-│   │   ├── hardware.nix
-│   │   ├── keyboard.nix
-│   │   └── packages.nix
-│   ├── scripts/
-│   │   └── work-layout
-│   └── README.md
+├── configs/
+│   ├── fastfetch.config.nix
+│   ├── git.config.nix
+│   ├── gnome-binds.config.nix
+│   └── zsh.config.nix
+├── exports/
+│   └── p10k.zsh
 ├── hosts/
 │   ├── maksim/
-│   │   ├── default.desktop-gnome.nix
-│   │   ├── default.desktop.nix
-│   │   └── default.laptop.nix
+│   │   └── default.nix
 │   └── root/
-│       ├── default.desktop-gnome.nix
-│       ├── default.desktop.nix
-│       └── default.laptop.nix
+│       └── default.nix
 ├── images/
 │   └── background.jpg
-├── laptop/
-│   ├── base/
-│   │   └── hardware-configuration.nix
-│   ├── configs/
-│   │   ├── fastfetch.config.nix
-│   │   ├── git.config.nix
-│   │   ├── gnome-binds.config.nix
-│   │   └── zsh.config.nix
-│   ├── exports/
-│   │   └── p10k.zsh
-│   ├── modules/
-│   │   ├── gnome.nix
-│   │   ├── hardware.nix
-│   │   ├── keyboard.nix
-│   │   └── packages.nix
-│   ├── scripts/
-│   │   └── work-layout
-│   └── README.md
 ├── modules/
-│   ├── happ/
-│   │   ├── happ-module.nix
-│   │   └── happ.nix
 │   ├── games.nix
+│   ├── gnome.nix
+│   ├── hardware.nix
+│   ├── keyboard.nix
+│   ├── packages.nix
 │   └── steam.nix
-├── plugins/
-│   └── exports/
-│       ├── dashToPanel-config
-│       └── desktop-widget
+├── sounds/
+│   ├── ModernMinimal/
+│   │   └── ...
+│   └── ModernMinimalOriginal/
+│       └── ...
 ├── README.md
 ├── flake.lock
 └── flake.nix
@@ -126,6 +66,7 @@ NixOS-Config/
 * `bluetooth.nix` - Модуль настройки блютуза 
 * `docker.nix` - Модуль настройки докера
 * `fonts.nix` - Модуль настройки шрифтов
+* `hardware-configuration.nix` - Конфигурация разметки дисков
 * `libs.nix` - Модуль настройки библиотек
 * `location.nix` - Модуль настройки местоположения
 * `network.nix` - Модуль настройки параметров сети
@@ -134,26 +75,35 @@ NixOS-Config/
 * `services.nix` - Модуль настройки сервисов (FlatPak)
 * `sound.nix` - Модуль настройки звуков
 
-`common/happ:`
-* `happ-module.nix` - модуль Happ клиента
-* `happ.nix` - установщик Happ клиента
+`configs:`
+* `fastfetch.config.nix` - Конфигурация fastfetch
+* `git.config.nix` - Конфигурация Git
+* `gnome-binds.config.nix` - Бинды для GNOME оболочки
+* `zsh.config.nix` - Конфигурация zsh
+
+`exports:`
+* `p10k.zsh` - Конфигурация плагина p10k
 
 `hosts/maksim:`
-* `default.desktop.nix` - Пользовательские настройки для Desktop профиля
-* `default.desktop-gnome.nix` - Пользовательские настройки для Desktop профиля с DE GNOME
-* `default.laptop.nix` - Пользовательские настройки для Laptop профиля
+* `default.nix` - Пользовательские настройки для Laptop профиля с DE GNOME
 
 `hosts/root:`
-* `default.desktop.nix` - Системные настройки для Desktop профиля
-* `default.desktop-gnome.nix` - Системные настройки для Desktop профиля с DE GNOME
-* `default.laptop.nix` - Системные настройки для Laptop профиля
+* `default.nix` - Системные настройки для Laptop профиля с DE GNOME
 
 `images:`
 * `background.jpg` - Фотография на задний фон рабочего экрана
 
-`plugins/exports:`
-* `dashToPanel-config` - Бэкап конфигурации плагина `dashToPanel`
-* `desktop-widget` - Бэкап конфигурации плагина `desktop-widget`
+`modules:`
+* `games.nix` - Модуль настройки игр 
+* `gnome.nix` - Модуль настройки GNOME окружения 
+* `hardware.nix` - Модуль настройки графики/железа
+* `keyboard.nix` - Модуль настройки клавиатуры
+* `packages.nix` - Модуль настройки установленных пакетов
+* `steam.nix` - Модуль настройки Steam
+
+`sounds:`
+* `ModernMinimal` - переделанные под себя кастомные звуки системы  
+* `ModernMinimalOriginal` - оригинальные звуки системы  
 
 
 # Установка NixOS
@@ -163,9 +113,6 @@ NixOS-Config/
 
 В процессе установки необходимо подключение к интернету, иначе сборка системы не будет возможна. В процессе установки 
 требуется выбрать окружением GNOME, в остальном процесс установки не должен вызывать трудности.
-
-Если тип устройства будет домашним ПК, то после ребилда системы GNOME -> Hyprland.
-
 
 ## Шаг 2 - `Установщик NixOS`
 * Когда будет выполнен вход в установщик, если хотите прочитать надписи, нужно двигать стрелочками вверх-вниз, иначе система загрузится по первой строке.
@@ -189,9 +136,23 @@ NixOS-Config/
 * После загрузки системы, можно вытащить загрузочную флешку.
 
 
-## Шаг 4 - `Настройка GNOME | Hyprland`
-* `GNOME` - Для следующей настройки необходимо перейти на другую страницу [Настройка GNOME](./laptop/README.md)
-* `Hyprland` - Для следующей настройки необходимо перейти на другую страницу [Настройка Hyprland](./desktop/README.md)
+## Шаг 4 - `Настройка GNOME`
+
+* Переходим в настройки и включаем Английскую раскладку во вкладке `Клавиатура`.
+
+### Настройка модулей
+
+#### Binds модуль
+Позволяет делать кастомные бинды. Для этого необходимо добавить в `custom-keybindings` новую строку с `+1` индексом.
+Далее прописывается бинд по аналогии:
+
+```text
+"org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+  name = "Open Terminal";
+  command = "kgx";
+  binding = "<Super>t";
+};
+```
 
 
 ## Шаг 5 - `Клонирование репозиториев`
@@ -200,92 +161,15 @@ NixOS-Config/
 * [ConfigHub - приватный](https://github.com/Karnagelized/ConfigHub)
 
 Команда `nix-shell -p git` позволит создать изолированную среду с командами `git` для клонирования.
-После успешного клонирования репозитория, необходимо заменить файл `NixOS-config/(desktop|desktop-gnome|laptop)/base/hardware-configuration.nix` на
-актуальный из системы через команды. Учитываем тип системы `desktop или laptop`:
+После успешного клонирования репозитория, необходимо заменить файл `NixOS-config/common/hardware-configuration.nix` на
+актуальный из системы через команды:
 
 ```shell
-# Копирование базовой конфигурации настроек разметки дисков для Desktop версии
-cp //etc/nixos/hardware-configuration.nix ~/Desktop/Projects/НАЗВАНИЕ ПАПКИ/desktop/base/
-
-# Копирование базовой конфигурации настроек разметки дисков для Laptop версии
-cp //etc/nixos/hardware-configuration.nix ~/Desktop/Projects/НАЗВАНИЕ ПАПКИ/laptop/base/
+cp //etc/nixos/hardware-configuration.nix ~/Desktop/Projects/НАЗВАНИЕ ПАПКИ/common/
 ```
 
 
-## Шаг 6 - `Настройка flake под laptop`
-Для работы необходимо закомментировать строчки во `flake.nix`, связанные с `AAGL Для лаунчера Genshin Impact`.
-
-```text
-{
-  ...
-  
-  inputs = {
-    ...
-
-    # !!! Закомментировать
-    # AAGL Для лаунчера Genshin Impact
-    # aagl.url = "github:ezKEa/aagl-gtk-on-nix/release-26.05";
-    # aagl.inputs.nixpkgs.follows = "nixpkgs";
-
-    ...
-    
-    # !!! Закомментировать
-    # Quickshell для оформления пространства
-    # quickshell = {
-    #   url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-  };
-
-    # !!! Изменить выходные параметры, убрать `aagl` и @inputs:
-    # Было:
-	outputs = { nixpkgs, nixpkgs-stable, home-manager, aagl, nix-gc-env, ... }@inputs:
-    # Стало:
-	outputs = { nixpkgs, nixpkgs-stable, home-manager, nix-gc-env, ... }:
-    let
-      ...
-
-      # !!! Важно поменять тип системы
-      # Ноутбук -> laptop
-      # ПК -> desktop | desktop-gnome
-      hostType = "desktop-gnome";
-    in {
-      nixosConfigurations.maksim = nixpkgs.lib.nixosSystem {
-        ...
-
-        # Передаем стабильный срез пакетов во все модули системы
-        specialArgs = {
-          # !!! Закомментировать
-          inherit inputs;
-
-          pkgs-stable = import nixpkgs-stable {
-            system = "x86_64-linux";
-            config.allowUnfree = true; # Разрешаем несвободные пакеты (MongoDB)
-          };
-        };
-
-        modules = [
-          ./hosts/root/default.${hostType}.nix
-
-          home-manager.nixosModules.home-manager {
-            ...
-
-            # !!! Закомментировать
-            # home-manager.extraSpecialArgs = { inherit inputs; };
-          }
-          
-          # !!! Закомментировать
-          # aagl.nixosModules.default
-
-          nix-gc-env.nixosModules.default
-        ];
-      };
-    };
-}
-```
-
-
-## Шаг 7 - `Проверка flake файла и билд системы`
+## Шаг 6 - `Проверка flake файла и билд системы`
 Для проверки корректности конфигурации и последующего ребилда нужно вывести список всех flake в директории по 
 заданному пути. Для выполнения команд с конфигурацией flake, нужно чтобы Пользователь был в корневой директории 
 flake конфигурации.
@@ -310,7 +194,7 @@ Done. The new configuration is /nix/store/18ppbrvlhmjr8jba6gdp0ms58nis63s5-nixos
 Переключаемся на установленный профиль - `sudo nixos-rebuild switch --flake .#maksim`. Перезапускаем систему `reboot`.
 
 
-## Шаг 8 - `Настройка Flatpak`
+## Шаг 7 - `Настройка Flatpak`
 Дорабатываем Flatpak и его зависимости
 
 1. Проверить что включен Flatpak `services.flatpak.enable = true;` в `common/services.nix`
@@ -385,6 +269,4 @@ nix-rebuild-test
 
 
 ## Лицензии
-1. Для `Happ` модуля был использован и доработан код из репозитория [happ-nixos
-](https://github.com/MrShitFox/happ-nixos)
-2. Для конфигурации с `Desktop - Hyprland` был использован за основу конфиг из репозитория [serpantinum](https://github.com/ilyamiro/serpantinum)
+1. Кастомные звуки `ModernMinimal` - [LICENSE](sounds/ModernMinimalOriginal/LICENSE)
