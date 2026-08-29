@@ -7,11 +7,13 @@
   			source = "nixos";
   		};
   		modules = [
+  			"break"
+
   			"os"
   			"kernel"
   			"de"
   			"shell"
-        { type = "localip"; key = "Local IP"; format = "{ipv4}"; }
+        "localip"
   			"packages"
   			"uptime"
 
@@ -35,14 +37,14 @@
           key = "Disk (/)";
           keyColor = "green";
           folders = "/";
-          format = "{size-used} / {size-total} ({size-percentage} | {size-free})";
+          format = "{size-used} / {size-total} (Free {size-free}) ({size-percentage})";
         }
         {
           type = "disk";
           key = "Disk (/mnt/storage)";
           keyColor = "green";
           folders = "/mnt/storage";
-          format = "{size-used} / {size-total} ({size-percentage} | {size-free})";
+          format = "{size-used} / {size-total} (Free {size-free}) ({size-percentage})";
         }
 
   			"break"
@@ -54,10 +56,11 @@
 
           format = "{result}";
 
-          outputFormat = "%l:+%t+-+%C&u";
+          outputFormat = "%l:+%t+-+%C?m";
         }
         {
           type = "custom";
+          key = "";
           keyColor = "magenta";
           text = "Don't decrease the goal. Increase the effort.";
         }

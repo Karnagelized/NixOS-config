@@ -50,7 +50,7 @@
       nix-gens          = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
       nix-gens-del      = "sudo nix-collect-garbage -d";
       # Base console commands
-      cls   = "clear && printf \"\e[H\e[2J\e[3J\" && fastfetch && source ~/.p10k.zsh";
+      cls   = "kitty @ clear-terminal --reset && fastfetch";
       ls    = "eza --icons";
       # Eza
       la    = "eza --icons -a";
