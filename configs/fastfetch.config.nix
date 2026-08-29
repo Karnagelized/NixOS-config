@@ -59,9 +59,8 @@
         }
         {
           type = "custom";
-          format = "{1}";
+          format = "Don't decrease the goal. Increase the effort.";
           keyColor = "magenta";
-          text = "Don't decrease the goal. Increase the effort.";
         }
   		];
   	};
