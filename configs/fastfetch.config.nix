@@ -7,17 +7,13 @@
   			source = "nixos";
   		};
   		modules = [
-        { type = "title"; format = "{user-name} ~ {host-name}"; }
-        { type = "separator"; string = "─"; }
-
   			"os"
   			"kernel"
   			"de"
   			"shell"
-        { type = "localip"; key = "Local IP"; keyColor = "blue"; format = "{ipv4}"; }
+        { type = "localip"; key = "Local IP"; format = "{ipv4}"; }
   			"packages"
   			"uptime"
-        { type = "weather"; key = "Weather"; keyColor = "green"; format = "{location}: {temperature} - {status}"; }
 
   			"break"
 
@@ -39,14 +35,31 @@
           key = "Disk (/)";
           keyColor = "green";
           folders = "/";
-          format = "{size-used} / {size-total} ({size-percentage}) [Свободно: {size-free}]";
+          format = "{size-used} / {size-total} ({size-percentage} | {size-free})";
         }
         {
           type = "disk";
           key = "Disk (/mnt/storage)";
           keyColor = "green";
           folders = "/mnt/storage";
-          format = "{size-used} / {size-total} ({size-percentage}) [Свободно: {size-free}]";
+          format = "{size-used} / {size-total} ({size-percentage} | {size-free})";
+        }
+
+  			"break"
+
+        {
+          type = "weather";
+          key = "Weather";
+          keyColor = "green";
+
+          format = "{result}";
+
+          outputFormat = "%l:+%t+-+%C&u";
+        }
+        {
+          type = "custom";
+          keyColor = "magenta";
+          text = "Don't decrease the goal. Increase the effort.";
         }
   		];
   	};
