@@ -11,6 +11,8 @@ let
 
   # Пакеты программ
   programsPackages = with pkgs; [
+    # Терминал
+    kitty
   	zed-editor
   	filezilla
   	obsidian
@@ -26,7 +28,6 @@ let
   	gnome-frog
   	# Торрент
   	fragments
-  	# Хром
   	google-chrome
   	figma-linux
   	zoom-us
@@ -34,6 +35,10 @@ let
     galaxy-buds-client
     # Платформа для игр
     lutris
+    # Аналог paint
+    pinta
+    # Аналог фотошоп
+    krita
   ];
 
   # Пакеты для работы с БД
