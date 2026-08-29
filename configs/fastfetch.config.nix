@@ -54,12 +54,12 @@
           key = "Weather";
           keyColor = "green";
           format = "{result}";
-          location = "Chelyabinsk?m";
+          location = "Chelyabinsk";
           outputFormat = "%l:+%t+-+%C";
         }
         {
           type = "custom";
-          key = "{1}";
+          format = "{1}";
           keyColor = "magenta";
           text = "Don't decrease the goal. Increase the effort.";
         }
