@@ -135,6 +135,7 @@ in {
   environment.gnome.excludePackages = with pkgs; [
     # Терминал
     gnome-terminal
+    gnome-console
     # Экскурсии
     gnome-tour
     # Контакты

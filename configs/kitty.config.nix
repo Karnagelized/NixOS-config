@@ -1,5 +1,17 @@
 { pkgs, ... }:
 {
+  xdg.desktopEntries.kitty = {
+    name = "Kitty";
+    genericName = "Terminal Emulator";
+    comment = "Fast, feature-rich, GPU based terminal emulator";
+    exec = "kitty";
+    terminal = false;
+    categories = [ "System" "TerminalEmulator" "Utility" ];
+
+    # Указываем имя системного значка GNOME Console
+    icon = "org.gnome.Console";
+  };
+
   programs.kitty = {
     enable = true;
 

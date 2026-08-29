@@ -56,7 +56,7 @@
       la    = "eza --icons -a";
       tree  = "eza --tree --icons --level=2";
       # Быстрый поиск файлов/папок с красивым превью кода прямо в терминале Kitty
-      f = "fzf --preview 'bat --style=numbers --color=always --line-range :500 {} 2>/dev/null || eza --tree --icons --level=2 {}'";
+      f = "xdg-open $(fzf --preview 'bat --style=numbers --color=always --line-range :500 {} 2>/dev/null || eza --tree --icons --level=2 {}') &>/dev/null";
       # LazySSH
       s     = "lazyssh";
       # Bat
