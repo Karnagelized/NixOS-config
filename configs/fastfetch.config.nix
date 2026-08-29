@@ -7,41 +7,47 @@
   			source = "nixos";
   		};
   		modules = [
-  			"title"
-
-  			"separator"
+        { type = "title"; format = "{user-name} ~ {host-name}"; }
+        { type = "separator"; string = "─"; }
 
   			"os"
   			"kernel"
-  			"localip"
-  			"netio"
-  			"uptime"
-  			"packages"
-  			"shell"
-  			"display"
-  			"resolution"
   			"de"
+  			"shell"
+        { type = "localip"; key = "Local IP"; keyColor = "blue"; format = "{ipv4}"; }
+  			"packages"
+  			"uptime"
+        { type = "weather"; key = "Weather"; keyColor = "green"; format = "{location}: {temperature} - {status}"; }
+
+  			"break"
 
         # Железо
-        { type = "cpu"; key = "  CPU"; keyColor = "cyan"; }
-        { type = "gpu"; key = "  GPU"; keyColor = "cyan"; }
+        { type = "cpu"; key = "CPU"; keyColor = "green"; }
+        { type = "gpu"; key = "GPU"; keyColor = "green"; }
 
         "break"
 
         # Память
-        { type = "memory"; key = "  Memory"; keyColor = "green"; }
-        { type = "swap"; key = "  Swap"; keyColor = "green"; }
-        { type = "disk"; key = "  Disk (/)"; keyColor = "green"; folders = "/"; }
-        { type = "disk"; key = "  Storage"; keyColor = "green"; folders = "/mnt/storage"; }
+        { type = "memory"; key = "Memory"; keyColor = "green"; }
+        { type = "swap"; key = "Swap"; keyColor = "green"; }
 
         "break"
 
-        "colors"
-
-        "break"
-
-        "weather"
-        "song"
+        # Диски
+        {
+          type = "disk";
+          key = "Disk (/)";
+          keyColor = "green";
+          folders = "/";
+          format = "{size-used} / {size-total} ({size-percentage}) [Свободно: {size-free}]";
+        }
+        {
+          type = "disk";
+          key = "Disk (/mnt/storage)";
+          keyColor = "green";
+          folders = "/mnt/storage";
+          format = "{size-used} / {size-total} ({size-percentage}) [Свободно: {size-free}]";
+        }
   		];
   	};
   };
