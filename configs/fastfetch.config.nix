@@ -61,6 +61,8 @@
           type = "custom";
           format = "{#magenta}Don't decrease the goal. Increase the effort.{#}";
         }
+
+        "break"
   		];
   	};
   };
