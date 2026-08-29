@@ -50,13 +50,13 @@
       nix-gens          = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
       nix-gens-del      = "sudo nix-collect-garbage -d";
       # Base console commands
-      cls   = "printf \"\e[H\e[2J\e[3J\" clear && fastfetch && source ~/.p10k.zsh";
+      cls   = "printf \"\e[H\e[2J\e[3J\" && clear && fastfetch && source ~/.p10k.zsh";
       ls    = "eza --icons";
       # Eza
       la    = "eza --icons -a";
       tree  = "eza --tree --icons --level=2";
       # Быстрый поиск файлов/папок с красивым превью кода прямо в терминале Kitty
-      fn = "fzf --preview 'bat --style=numbers --color=always --line-range :500 {} 2>/dev/null || eza --tree --icons --level=2 {}'";
+      f = "fzf --preview 'bat --style=numbers --color=always --line-range :500 {} 2>/dev/null || eza --tree --icons --level=2 {}'";
       # LazySSH
       s     = "lazyssh";
       # Bat
