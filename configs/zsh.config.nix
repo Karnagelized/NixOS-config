@@ -45,15 +45,26 @@
     # Псевдонимы
     shellAliases = {
       # Nix
-      nix-rebuild = "sudo nixos-rebuild switch --flake .#maksim";
-      nix-rebuild-test = "sudo nixos-rebuild test --flake .#maksim";
-      nix-gens = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
-      nix-gens-del = "sudo nix-collect-garbage -d";
-      # Console
-      cls = "clear && fastfetch && source ~/.p10k.zsh";
+      nix-rebuild       = "sudo nixos-rebuild switch --flake .#maksim";
+      nix-rebuild-test  = "sudo nixos-rebuild test --flake .#maksim";
+      nix-gens          = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
+      nix-gens-del      = "sudo nix-collect-garbage -d";
+      # Base console commands
+      cls   = "printf \"\e[H\e[2J\e[3J\" clear && fastfetch && source ~/.p10k.zsh";
+      ls    = "eza --icons";
+      # Eza
+      la    = "eza --icons -a";
+      tree  = "eza --tree --icons --level=2";
+      # Быстрый поиск файлов/папок с красивым превью кода прямо в терминале Kitty
+      fn = "fzf --preview 'bat --style=numbers --color=always --line-range :500 {} 2>/dev/null || eza --tree --icons --level=2 {}'";
+      # LazySSH
+      s     = "lazyssh";
+      # Bat
       cat = "bat";
-      lofi = "cls && lowfi -s 10 -c -f 30 -m -t archive";
+      # Lofi
+      lofi  = "cls && lowfi -s 10 -c -f 30 -m -t archive";
       clofi = "cls && lowfi -s 10 -c -f 30 -m -t chillhop";
+      # Docker
       lzd = "lazydocker";
     };
   };

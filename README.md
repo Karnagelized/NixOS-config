@@ -149,7 +149,7 @@ NixOS-Config/
 ```text
 "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
   name = "Open Terminal";
-  command = "kgx";
+  command = "kitty";
   binding = "<Super>t";
 };
 ```
