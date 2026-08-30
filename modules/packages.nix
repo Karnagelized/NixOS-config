@@ -82,7 +82,6 @@ let
     ripgrep
     # Превью кода
     bat
-    # Лаунчер приложений
   ];
 
   # Расширения
@@ -91,8 +90,12 @@ let
     gnomeExtensions.copyous
     # Блюр панелей и т.д.
     gnomeExtensions.blur-my-shell
-    # Кастомная нижняя панель
-    gnomeExtensions.dash-to-panel
+    # Кастомная панель
+    gnomeExtensions.dash-to-dock
+    # Скрытие верхней панели GNOME
+    gnomeExtensions.hide-top-bar
+    # Слайд-шоу заднего фона
+    gnomeExtensions.wallpaper-slideshow
     # Настройки рабочего окружения
     gnomeExtensions.just-perfection
     # Отображение значения громкости
