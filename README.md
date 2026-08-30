@@ -28,8 +28,10 @@ NixOS-Config/
 │   └── sound.nix
 ├── configs/
 │   ├── fastfetch.config.nix
+│   ├── fzf.config.nix
 │   ├── git.config.nix
 │   ├── gnome-binds.config.nix
+│   ├── kitty.config.nix
 │   └── zsh.config.nix
 ├── exports/
 │   └── p10k.zsh
@@ -38,8 +40,6 @@ NixOS-Config/
 │   │   └── default.nix
 │   └── root/
 │       └── default.nix
-├── images/
-│   └── background.jpg
 ├── modules/
 │   ├── games.nix
 │   ├── gnome.nix
@@ -55,7 +55,6 @@ NixOS-Config/
 ├── README.md
 ├── flake.lock
 └── flake.nix
-
 ```
 
 `/:`
@@ -77,21 +76,20 @@ NixOS-Config/
 
 `configs:`
 * `fastfetch.config.nix` - Конфигурация fastfetch
+* `fzf.config.nix` - Конфигурация fzf для поиска файлов в терминале
 * `git.config.nix` - Конфигурация Git
 * `gnome-binds.config.nix` - Бинды для GNOME оболочки
+* `kitty.config.nix` - Конфигурация kitty терминала
 * `zsh.config.nix` - Конфигурация zsh
 
 `exports:`
 * `p10k.zsh` - Конфигурация плагина p10k
 
 `hosts/maksim:`
-* `default.nix` - Пользовательские настройки для Laptop профиля с DE GNOME
+* `default.nix` - Пользовательские настройки для Desktop профиля с DE GNOME
 
 `hosts/root:`
-* `default.nix` - Системные настройки для Laptop профиля с DE GNOME
-
-`images:`
-* `background.jpg` - Фотография на задний фон рабочего экрана
+* `default.nix` - Системные настройки для Desktop профиля с DE GNOME
 
 `modules:`
 * `games.nix` - Модуль настройки игр 
