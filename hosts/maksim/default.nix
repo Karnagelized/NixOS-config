@@ -4,7 +4,6 @@
     # Конфиги
     ../../configs/kitty.config.nix
     ../../configs/fzf.config.nix
-    ../../configs/rofi.config.nix
     ../../configs/git.config.nix
     ../../configs/zsh.config.nix
     ../../configs/fastfetch.config.nix
