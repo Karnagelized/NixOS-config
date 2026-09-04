@@ -1,8 +1,5 @@
 { pkgs, ... }:
 {
-  # Информация про xterm-kitty для подключения по SSH
-  environment.enableAllTerminfo = true;
-
   xdg.desktopEntries.kitty = {
     name = "Kitty";
     genericName = "Terminal Emulator";

@@ -58,7 +58,7 @@
       # Быстрый поиск файлов/папок с красивым превью кода прямо в терминале Kitty
       f = "xdg-open $(fzf --preview 'bat --style=numbers --color=always --line-range :500 {} 2>/dev/null || eza --tree --icons --level=2 {}') &>/dev/null";
       # LazySSH
-      s     = "lazyssh";
+      s     = "env TERM=xterm-256color lazyssh";
       # Bat
       cat = "bat";
       # Lofi
