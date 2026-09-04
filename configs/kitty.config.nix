@@ -80,8 +80,8 @@
       tab_bar_align       = "start";
 
       # Шаблоны заголовков вкладок
-      tab_title_template        = "{index} ~ {tab.active_wd.split('/')[-1]}";
-      active_tab_title_template = "{index} ~ {tab.active_wd.split('/')[-1]}";
+      tab_title_template = "{index} › {title if title != tab.active_exe and '/' not in title else (tab.active_wd.split('/')[-1] or '/')}";
+      active_tab_title_template = "{index} › {title if title != tab.active_exe and '/' not in title else (tab.active_wd.split('/')[-1] or '/')}";
 
       # Цвета панели вкладок
       active_tab_foreground   = "#2e3440";
