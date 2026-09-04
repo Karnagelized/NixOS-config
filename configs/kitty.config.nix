@@ -119,4 +119,6 @@
       "ctrl+l"            = "clear_terminal to_cursor_scroll active";
     };
   };
+
+  xdg.configFile."kitty/kitty.conf".force = true;
 }
