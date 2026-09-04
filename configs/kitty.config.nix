@@ -104,6 +104,7 @@
       "alt+w"             = "close_tab";
       "alt+shift+left"    = "move_tab_backward";
       "alt+shift+right"   = "move_tab_forward";
+      "alt+r"             = "set_tab_title";
 
       # Перемещение между окон-сплитами
       "alt+left"          = "neighboring_window left";
