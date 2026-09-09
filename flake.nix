@@ -3,8 +3,11 @@
 
   inputs = {
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
-    # Стабильную ветку 25.11
+    # Стабильная ветку 25.11
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
+
+    # Нестабильная ветка пакетов (Unstable)
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
@@ -15,7 +18,7 @@
     nix-gc-env.url = "github:Julow/nix-gc-env";
 	};
 
-	outputs = { nixpkgs, nixpkgs-stable, home-manager, nix-gc-env, ... }:
+	outputs = { nixpkgs, nixpkgs-stable, nixpkgs-unstable, home-manager, nix-gc-env, ... }:
     let
       system = "x86_64-linux";
     in {
@@ -26,6 +29,12 @@
         specialArgs = {
           pkgs-stable = import nixpkgs-stable {
             system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+
+          # Нестабильные пакеты
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
             config.allowUnfree = true;
           };
         };

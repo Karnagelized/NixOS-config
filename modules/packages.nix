@@ -1,4 +1,4 @@
-{ pkgs, pkgs-stable, ... }:
+{ pkgs, pkgs-stable, pkgs-unstable, ... }:
 
 let
   # Темы и иконки
@@ -15,21 +15,21 @@ let
     libreoffice-fresh
   ];
 
-  # Пакеты программ
+  # Пакеты программ (Стабильная ветка)
   programsPackages = with pkgs; [
   	zed-editor
   	filezilla
   	obsidian
   	postman
-    telegram-desktop
     jetbrains.pycharm
-  	onlyoffice-desktopeditors
+    # Отключен из-за учебного пакета libreoffice-fresh
+    # onlyoffice-desktopeditors
   	# Приложения для работы с паролями
   	authenticator
   	# Переводчик
   	dialect
   	# Извлечение текста со скрина
-  	gnome-frog
+  	normcap
   	# Торрент
   	fragments
   	google-chrome
@@ -43,6 +43,11 @@ let
     pinta
     # Аналог фотошоп
     krita
+  ];
+
+  # Пакеты программ (Нестабильная ветка)
+  unstablePackages = with pkgs-unstable; [
+    telegram-desktop
   ];
 
   # Пакеты для работы с БД
@@ -136,6 +141,7 @@ in {
     themeAndIcon
     ++ studyPackages
     ++ programsPackages
+    ++ unstablePackages
     ++ databasePackages
     ++ utilsPackages
     ++ extensionsPackages;
