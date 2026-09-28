@@ -12,7 +12,6 @@ let
   # Для учебы
   studyPackages = with pkgs; [
     rstudio
-    libreoffice-fresh
   ];
 
   # Пакеты программ (Стабильная ветка)
@@ -22,8 +21,7 @@ let
   	obsidian
   	postman
     jetbrains.pycharm
-    # Отключен из-за учебного пакета libreoffice-fresh
-    # onlyoffice-desktopeditors
+    onlyoffice-desktopeditors
   	# Приложения для работы с паролями
   	authenticator
   	# Переводчик
