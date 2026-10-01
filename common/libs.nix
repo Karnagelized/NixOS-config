@@ -6,6 +6,7 @@ let
     # Базовые библиотеки компилятора
     stdenv.cc.cc.lib
     zlib
+    libGL
     glib
 
     # Библиотеки X11 и Wayland для графического интерфейса
