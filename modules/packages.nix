@@ -106,8 +106,6 @@ let
     gnomeExtensions.blur-my-shell
     # Кастомная панель
     gnomeExtensions.dash-to-dock
-    # Скрытие верхней панели GNOME
-    gnomeExtensions.hide-top-bar
     # Слайд-шоу заднего фона
     gnomeExtensions.wallpaper-slideshow
     # Настройки рабочего окружения
