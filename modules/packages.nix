@@ -19,7 +19,6 @@ let
   	zed-editor
   	filezilla
   	obsidian
-  	postman
     jetbrains.pycharm
     onlyoffice-desktopeditors
   	# Приложения для работы с паролями
@@ -49,6 +48,7 @@ let
   # Пакеты программ (Нестабильная ветка)
   unstablePackages = with pkgs-unstable; [
     telegram-desktop
+    postman
   ];
 
   # Пакеты для работы с БД
