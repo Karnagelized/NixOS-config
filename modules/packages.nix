@@ -59,7 +59,6 @@ let
   	pkgs-stable.mongodb-compass
   	pkgs.sqlitestudio
     pkgs.postgresql
-    pkgs.pgadmin4
     pkgs.dbeaver-bin
   ];
 
