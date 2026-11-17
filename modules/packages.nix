@@ -132,6 +132,11 @@ let
     gnomeExtensions.user-themes
   ];
 in {
+  # Нестабильные пакеты - исключения
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-41.10.7"
+  ];
+
   # Настройка модуля Throne с поддержкой TUN режима
   programs.throne = {
     enable = true;
