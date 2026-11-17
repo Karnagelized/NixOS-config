@@ -50,14 +50,6 @@
   			"break"
 
         {
-          type = "weather";
-          key = "Weather";
-          keyColor = "green";
-          format = "{result}";
-          location = "Chelyabinsk";
-          outputFormat = "%l:+%t+-+%C";
-        }
-        {
           type = "custom";
           format = "{#magenta}Don't decrease the goal. Increase the effort.{#}";
         }
