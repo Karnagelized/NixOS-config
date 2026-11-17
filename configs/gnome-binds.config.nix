@@ -3,6 +3,12 @@
   dconf.enable = true;
 
   dconf.settings = {
+    # libgda 6 падает внутри GNOME Shell при запуске Copyous.
+    # JSON-backend хранит историю на диске, но не использует libgda.
+    "org/gnome/shell/extensions/copyous" = {
+      database-backend = "json";
+    };
+
     "org/gnome/settings-daemon/plugins/media-keys" = {
       custom-keybindings = [
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
