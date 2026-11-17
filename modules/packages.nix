@@ -140,6 +140,11 @@ in {
     tunMode.enable = true;
   };
 
+  programs.happ = {
+    enable = true;
+    tunMode.enable = true;
+  };
+
   # Разрешение на установку не бесплатных пакетов
   nixpkgs.config.allowUnfree = true;
 
