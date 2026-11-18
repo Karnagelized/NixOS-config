@@ -7,6 +7,8 @@
   home.packages = with pkgs; [
     fastfetch
     bat
+    duf
+    tldr
   ];
 
   # Альтернативный список lowfi через archive.org, если Chillhop/CDN недоступен.
@@ -52,20 +54,23 @@
       # Base console commands
       cls   = "printf '\\ec' && fastfetch";
       ls    = "eza --icons";
-      # Eza
+      # Eza - иконки в терминале напротив файлов
       la    = "eza --icons -a";
       tree  = "eza --tree --icons --level=2";
       # Быстрый поиск файлов/папок с красивым превью кода прямо в терминале Kitty
-      f = "xdg-open $(fzf --preview 'bat --style=numbers --color=always --line-range :500 {} 2>/dev/null || eza --tree --icons --level=2 {}') &>/dev/null";
-      # LazySSH
+      f     = "xdg-open $(fzf --preview 'bat --style=numbers --color=always --line-range :500 {} 2>/dev/null || eza --tree --icons --level=2 {}') &>/dev/null";
+      # LazySSH - быстрое подключение по SSH
       s     = "env TERM=xterm-256color lazyssh";
-      # Bat
-      cat = "bat";
+      # Bat - красивый вывод содержимого файла с подсветкой синтаксиса
+      cat   = "bat";
       # Lofi
       lofi  = "cls && lowfi -s 10 -c -f 30 -m -t archive";
       clofi = "cls && lowfi -s 10 -c -f 30 -m -t chillhop";
       # Docker
-      lzd = "lazydocker";
+      lzd   = "lazydocker";
+      # Duf - вывод занятости пространства
+      df    = "duf --only local";
+      dfs   = "duf --sort usage";
     };
   };
 }
