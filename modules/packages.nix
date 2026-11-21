@@ -14,6 +14,11 @@ let
     rstudio
   ];
 
+  # Для домашнего сервера
+  homeServerPackages = with pkgs; [
+    keepassxc
+  ];
+
   # Пакеты программ (Стабильная ветка)
   programsPackages = with pkgs; [
   	zed-editor
@@ -157,6 +162,7 @@ in {
   environment.systemPackages =
     themeAndIcon
     ++ studyPackages
+    ++ homeServerPackages
     ++ programsPackages
     ++ unstablePackages
     ++ databasePackages
